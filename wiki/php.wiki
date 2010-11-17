@@ -3,7 +3,7 @@
 
 = PHP =
 
-A PHP test has been added. You can now run PHP scripts with anchor.
+A PHP test has been added. You can now run PHP scripts with anchor. For information on using Anchor with the C language, please visit the [http://anch.org/anchor.html web site].
 
 Code may be run right from the terminal without saving any files. Just copy and paste:
 
