@@ -23,8 +23,9 @@
 %{
 #define DEBUG 0
 #define debug(...) if(DEBUG)printf(__VA_ARGS__)
+#define MAX_STRING 8192
     int indent=0,lastindent=0;
-    char *ss,last[2],endstr[8192]="";
+    char *ss,last[2],endstr[MAX_STRING]="";
     void countIndent(void){
         int i=0,spaces=0,tabs=0;
         char *s=yytext;
@@ -35,8 +36,22 @@
         }
         indent = spaces/4+tabs;
     }
+    
+    /* saner strcpy wrapper prevents comment buffer overflow */
+    char *scat (char *dest, const char *src){
+        int destlen,srclen,max;
+        if(dest){
+            destlen = strlen(dest);
+            srclen = strlen(src);
+            /* max characters will fit into string */
+            max = MAX_STRING - destlen - 1;
+            if (max > 0){ /* should never be negative, but j.i.c. */
+                strncat(dest, src, max);
+                dest[max] = '\0';
+            }
+        }return dest;
+    }
 %}
-
 
 %%
     /* Buffer comments and things so we can scan in one pass */
@@ -60,12 +75,15 @@
                 strcat(endstr,yytext);strcat(endstr,"\n");
                 debug("C7");
                 }
-                
+    
     /* pipe strings through so they don't interfere */
-\"                 ECHO;BEGIN(str);
-<str>\"           ECHO;BEGIN(INITIAL);
-<str>"\\"\"     printf("\\\"");
-<str>.          ECHO;
+    /* testing rule from pinfo flex A.4.3 Quoted Constructs */
+L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u([[:xdigit:]]{4}))|(\\U([[:xdigit:]]{8})))*\"    ECHO;
+    /* old rule here */            
+    /* \"                 ECHO;BEGIN(str);
+    <str>\"           ECHO;BEGIN(INITIAL);
+    <str>"\\"\"     printf("\\\"");
+    <str>.          ECHO; */
                 
     /* defines */
 [\t ]*"#"  {
@@ -86,6 +104,7 @@
                 printf("%s",endstr);strcpy(endstr,";\n");
                 ECHO;printf("{");
                 yyless(strstr(yytext,"enum")-yytext+5);
+                /* treat the rest of the enum like an array */
                 BEGIN(arra);
                 }
 
@@ -185,10 +204,10 @@
                 %}
 
     /* function definition detected */
-<codesection>^[[:alpha:]_/]+   %{debug("B1");
+<codesection>^[[:alpha:]_]+   %{debug("B1");
                 /* add ; endstr usually contains ";\n" */
                 if(strlen(endstr)<4)printf("%s",endstr);
-                else printf("%c\n",endstr[0]);
+                else printf("%c",endstr[0]);
                 if(indent>0){
                     indent=0;BEGIN(INITIAL);
                     printf("}");
@@ -205,7 +224,10 @@
        /* remove final spaces */
 <codesection>^[\t ]+    debug("S1");
 <codesection><<EOF>>   {debug("EOF");
-                printf("%s",endstr);printf("}\n");BEGIN(INITIAL);
+                printf("%s}",endstr);
+                for(int i=1;i<lastindent;i++)
+                        printf("   }");
+                printf("\n");BEGIN(INITIAL);
                 }
 
 
