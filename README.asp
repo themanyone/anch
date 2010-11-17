@@ -13,7 +13,7 @@
 
 <a>A</a>dvanced <a>N</a>egative <a>C</a>ompilation <a>H</a>euristic <a>O</a>ntological <a>R</a>efactorer</p><p>
 
-Version: 1.5</p>
+Version: 1.6</p>
 
 <img src="images/anchorcode.gif" alt="Anchor: for  i=5;i--;  C: for (i=5;i--;){"/><h3>
 
@@ -23,9 +23,13 @@ Why Anchor?</h3><p>
 
 Techies might refer to it as a language-independent pseudocode compiler or code decorator but all it does is fix missing brackets and punctuation.</p><h3>
 
+Where to get it</h3><p>
+
+Anchor now is hosted on <a href="http://code.google.com/p/anch/">Google Code</a>. Subversion, user wiki and issue trackers available.</p><h3>
+
 Installation</h3><p>
 
-A windows .exe is provided already. Just copy it somewhere in the computer&apos;s path. Compilation on Linux and other systems requires <a href="http://flex.sourceforge.net/">flex</a> and a C compiler. <a href="http://anch.org/anchor.zip">Download</a> and extract the archive.</p>
+A windows .exe is provided already. Just copy it somewhere in the computer&apos;s path. Compilation on Linux and other systems requires <a href="http://flex.sourceforge.net/">flex</a> and a C compiler. <a href="http://code.google.com/p/anch/">Download</a> and extract the archive.</p>
 <pre>
 unzip anchor.zip
 cd anchor
@@ -66,7 +70,7 @@ unanchor example.c > editme.a.c # create a file</pre><p>
 
 Optional TinyCC integration</a></h3><p>
 
-The latest version of TinyCC may be gotten from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> and compiled separately. A pre-release Linux (RPM) version of TCC may be found <a href="http://thenerdshow.com/rpm/tinycc-0.9.26-0.1.20101029git.fc14.src.rpm">here</a>.</p><p>
+The latest version of TinyCC may be gotten from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or mob branch and compiled separately. A mob-release Linux (RPM) version of TCC may be found <a href="http://thenerdshow.com/rpm/tinycc-0.9.26-0.1.20101029git.fc14.src.rpm">here</a>.<a href="http://repo.or.cz/h/mob.html">What is mob?</a></p><p>
 
 With TinyCC (<a href="http://bellard.org/tcc/">TCC</a>) installed, Anchor can execute pseudocode directly from the command line.</p>
 <pre>
@@ -94,23 +98,9 @@ Other compilers or interpreters may be invoked through pipes as well:</p>
 <pre>
 xsel|anchor|gcc -Wall -g -xc -</pre><h3>
 
-Changelog</h3><p>
+Bugs, wiki, changelog</h3><p>
 
-
-Wed Nov 10 2010 1.5 -run now accepts linker options like -lm.</p><p>
-
-Mon Oct 25 2010 1.4 Now works as a code decorator.</p><p>
-
-Tue Apr 27 2010 1.3 String arrays may be defined like this:</p>
-<pre>
-<span class="S0">    </span><span class="S5">char</span><span class="S0"> </span>a<span class="S10">[</span><span class="S4">6</span><span class="S10">][</span><span class="S4">10</span><span class="S10">]=</span><span class="S0"> </span><span class="S6">"rain gear"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"boots"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"nets"</span><span class="S10">,</span>
-<span class="S0">        </span><span class="S6">"skiff"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"outboard"</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span></pre><p>
-
-Thu Apr 15 2010 1.2 <a href="http://bellard.org/tcc/">TCC</a> Integration.</p><p>
-
-Wed Apr 14 2010 1.1 Buffered comments. Quoted strings. Support for structs &amp; arrays. Lots of bug fixes.</p><p>
-
-Mon Apr 12 2010 1.0 Completely re-written using <a href="http://flex.sourceforge.net/">flex</a>, a lexical analyzer and parser generator.</p><h3><a name="legal">
+The bugs, wiki, and changelog have moved to <a href="https://code.google.com/p/anch/">Google Code</a>. Bugs may be reported using the issue tracker. The latest version may be checked out from svn, and the wiki may contain updates, tips, and suggestions from users.</p><h3><a name="legal">
 
 Limitations and Copyright</a></h3><p>
 
@@ -137,7 +127,7 @@ CONTACT</a></div>
      <div class="b" style="top:11em;"> <a href="http://anch.org/" title="Main Page">
 AUTHOR</a></div>
 
-    <div class="b" style="top:13em;"> <a href="http://anch.org/anchor.zip" title="Get Anchor">
+    <div class="b" style="top:13em;"> <a href="http://code.google.com/p/anch/" title="Get Anchor">
 DOWNLOAD</a></div>
 
     <div class="b" style="top:13em;"> <a href="#legal" title="License">
@@ -165,9 +155,7 @@ FAVORITE</a></div>
             <br />  <a href="http://digg.com/submit?phase=2">Digg it</a>
             <br />  <a href="http://www.furl.net/storeIt.jsp">Furl</a>
             <br />  <a href="http://www.netvouz.com/action/submitBookmark?popup=no">Netvouz</a>
-            <br />  <a href="http://www.rawsugar.com/pages/tagger.faces">RawSugar</a>
             <br />  <a href="http://www.shadows.com/features/tcr.htm">Shadows</a>
-            <br />  <a href="http://simpy.com/simpy/LinkAdd.do">Simpy</a>
             <br />  <a href="http://www.spurl.net/spurl.php">Spurl</a>
             <br />  <a href="http://myweb2.search.yahoo.com/myresults/bookmarklet">Yahoo MyWeb</a>
             <br />  <a href="http://www.google.com/bookmarks/mark?op=edit">Google</a>

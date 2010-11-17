@@ -2,7 +2,7 @@ anch.org: Anchor
 
    Advanced Negative Compilation Heuristic Ontological Refactorer
 
-   Version: 1.5
+   Version: 1.6
 
    Anchor: for  i=5;i--;  C: for (i=5;i--;){
 
@@ -13,6 +13,11 @@ anch.org: Anchor
 
    Techies might refer to it as a language-independent pseudocode compiler or
    code decorator but all it does is fix missing brackets and punctuation.
+
+  Where to get it
+
+   Anchor now is hosted on Google Code. Subversion, user wiki and issue
+   trackers available.
 
   Installation
 
@@ -39,9 +44,19 @@ anch.org: Anchor
 
   Compilation
 
-   Use anchor.exe to convert example.a.c to C:
+   Example usage: converting example.a.c to C:
 
  anchor example.a.c > example.c
+
+   Compiling the result with gcc (or any C compiler).
+
+ gcc example.c -o example.exe
+
+   If the indent style Anchor produces is undesirable for some reason, simply
+   run GNU indent on it. The default GNU indent style should work for most
+   people. See man indent for more GNU indent styles.
+
+ indent example.c
 
    Anchor knows nothing about the underlying language, so it should process a
    variety of curly bracket languages. The author uses it on C code, but it
@@ -55,17 +70,20 @@ anch.org: Anchor
  make example
  anch gcc example.a.c -o example
 
-   Experimental "un-anchoring" of code is provided. (requires GNU indent)
+   Lossy "un-anchoring" of code is provided by a really crappy bash script
+   (requires GNU indent). It needs to be re-written in flex. This frequently
+   breaks code so use at your own risk!
 
- unanchor example.c #see how it would look
+ unanchor example.c #see how it might look
  unanchor example.c > editme.a.c # create a file
 
    see an unanchored C windows program
 
   Optional TinyCC integration
 
-   The latest version of TinyCC may be gotten from the git repo and compiled
-   separately. A pre-release Linux (RPM) version of TCC may be found here.
+   The latest version of TinyCC may be gotten from the git repo or mob branch
+   and compiled separately. A mob-release Linux (RPM) version of TCC may be
+   found here.What is mob?
 
    With TinyCC (TCC) installed, Anchor can execute pseudocode directly from
    the command line.
@@ -98,24 +116,12 @@ anch.org: Anchor
 
  xsel|anchor|gcc -Wall -g -xc -
 
-  Changelog
+  Bugs, wiki, changelog
 
-   Wed Nov 10 2010 1.5 -run now accepts linker options like -lm.
-
-   Mon Oct 25 2010 1.4 Now works as a code decorator.
-
-   Tue Apr 27 2010 1.3 String arrays may be defined like this:
-
-     char a[6][10]= "rain gear", "boots", "nets",
-         "skiff", "outboard", 0
-
-   Thu Apr 15 2010 1.2 TCC Integration.
-
-   Wed Apr 14 2010 1.1 Buffered comments. Quoted strings. Support for structs
-   & arrays. Lots of bug fixes.
-
-   Mon Apr 12 2010 1.0 Completely re-written using flex, a lexical analyzer
-   and parser generator.
+   The bugs, wiki, and changelog have moved to Google Code. Bugs may be
+   reported using the issue tracker. The latest version may be checked out
+   from svn, and the wiki may contain updates, tips, and suggestions from
+   users.
 
   Limitations and Copyright
 
@@ -128,7 +134,7 @@ anch.org: Anchor
    a temp file and invokes whatever compiler is normally used. These tools
    may be freely adapted under the terms of the Gnu Public License.
 
-   Anchor and accompanying documentation is Copyright (c) 2010 Henry Kroll
+   Anchor and accompanying documentation are Copyright (c) 2010 Henry Kroll
    III. This page may be freely modified and shared under the terms of the
    Creative Commons SA license inasmuch as it agrees with the terms of the
    GPL. Any of the above conditions can be waived by getting permission from
@@ -150,9 +156,7 @@ anch.org: Anchor
    Digg it
    Furl
    Netvouz
-   RawSugar
    Shadows
-   Simpy
    Spurl
    Yahoo MyWeb
    Google
