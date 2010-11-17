@@ -40,18 +40,26 @@ Programming with Anchor</h3><p>
 The rules are very simple. A double-space, &quot;&nbsp; &quot; (tells anchor to enclose the rest of the line in parenthesis). Indentation of 4 spaces {controls the placement of curly brackets}. The remaining lines are automatically terminated with semicolons; any of these rules may be overridden by placing whitespace or a <span class="S1">/* comment */</span> or <span class="S1">//</span> at the end of the line, causing the precompiler to skip the line in question.</p><h3>
 Compilation</h3><p>
 
-Use anchor.exe to convert example.a.c to C:</p>
+Example usage: converting example.a.c to C:</p>
 <pre>
 anchor example.a.c > example.c</pre><p>
+
+Compiling the result with gcc (or any C compiler).</p>
+<pre>
+gcc example.c -o example.exe</pre><p>
+
+If the indent style Anchor produces is undesirable for some reason, simply run <a href="http://www.gnu.org/software/indent/">GNU indent</a> on it. The default <a href="http://www.gnu.org/software/indent/">GNU indent</a> style should work for most people. See <a href="http://www.linuxmanpages.com/man1/indent.1.php">man indent</a> for more <a href="http://www.gnu.org/software/indent/">GNU indent</a> styles.</p>
+<pre>
+indent example.c</pre><p>
 
 Anchor knows nothing about the underlying language, so it should process a variety of curly bracket languages. The author uses it on C code, but it should work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of bracketed configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> to interpret the included &quot;anch&quot; script.</p>
 <pre>
 make example
 anch gcc example.a.c -o example</pre><p>
 
-Experimental &quot;un-anchoring&quot; of code is provided. (requires <a href="http://www.gnu.org/software/indent/">GNU indent</a>)</p>
+Lossy &quot;un-anchoring&quot; of code is provided by a really crappy bash script (requires <a href="http://www.gnu.org/software/indent/">GNU indent</a>). It needs to be re-written in flex. This frequently breaks code so use at your own risk!</p>
 <pre>
-unanchor example.c #see how it would look
+unanchor example.c #see how it might look
 unanchor example.c > editme.a.c # create a file</pre><p>
 
 <a href="windows.a.html">see an unanchored C windows program</a></p><h3><a href="http://bellard.org/tcc/">
@@ -110,7 +118,7 @@ No warrantee! Anchor was created as a learning toy for hobbies and fun; it might
 
 <p class="small">
 
-Anchor and accompanying documentation is Copyright &copy; 2010 Henry Kroll III. This page may be freely modified and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the GPL. Any of the above conditions can be waived by getting permission from the copyright holder.</p>
+Anchor and accompanying documentation are Copyright &copy; 2010 Henry Kroll III. This page may be freely modified and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the GPL. Any of the above conditions can be waived by getting permission from the copyright holder.</p>
 
 
 

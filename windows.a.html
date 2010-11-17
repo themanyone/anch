@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>windows.p.c</title>
+<title>windows.a.c</title>
 <meta name="Generator" content="SciTE - www.Scintilla.org" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
@@ -9,10 +9,14 @@
 	color: #808080;
 }
 .S1 {
+	font-family: mono, '!Bitstream Vera Sans Mono';
 	color: #007F00;
+	font-size: 10pt;
 }
 .S2 {
+	font-family: mono, '!Bitstream Vera Sans Mono';
 	color: #007F00;
+	font-size: 10pt;
 }
 .S4 {
 	color: #007F7F;
@@ -29,103 +33,95 @@
 }
 .S10 {
 	font-weight: bold;
-	color: #808080;
+	color: #000000;
 }
 .S19 {
+	font-family: mono, '!Bitstream Vera Sans Mono';
 	color: #204080;
+	font-size: 10pt;
 }
 span {
+	font-family: mono, '!Bitstream Vera Sans Mono';
 	color: #000000;
+	font-size: 10pt;
 }
 </style>
 </head>
 <body bgcolor="#FFFFFF">
-<pre><span class="S1">/* windows.a.c is hereby released into the Public Domain</span>
-<span class="S1"> * </span>
-<span class="S1"> * adapted from http://www.winprog.org/tutorial/simple_window.html</span>
-<span class="S1"> * by Henry Kroll III, http://www.thenerdshow.com</span>
-<span class="S1"> *</span>
-<span class="S1"> * This program can be compiled by <a href="anchor.html">anch</a></span>
-<span class="S1"> * and your regular compiler like so:</span>
-<span class="S1"> * </span>
-<span class="S1"> * anch i686-pc-mingw32-gcc -m32 -mwindows windows.a.c -o windows.exe</span>
-<span class="S1"> */</span>
-
-<span class="S9">#include &lt;windows.h&gt;</span>
-
-<span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span>g_szClassName<span class="S10">[]</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S6">"myWindowClass"</span>
-
-<span class="S2">// My Window Procedure</span>
-LRESULT<span class="S0"> </span>CALLBACK<span class="S0"> </span>myWndProc<span class="S0">  </span>HWND<span class="S0"> </span>hwnd<span class="S10">,</span><span class="S0"> </span>UINT<span class="S0"> </span>msg<span class="S10">,</span>
-WPARAM<span class="S0"> </span>wParam<span class="S10">,</span><span class="S0"> </span>LPARAM<span class="S0"> </span>lParam
-
-<span class="S0">    </span><span class="S5">switch</span><span class="S0">  </span>msg
-
-<span class="S0">        </span><span class="S5">case</span><span class="S0"> </span>WM_LBUTTONDOWN<span class="S10">:</span>
-<span class="S0">            </span><span class="S5">char</span><span class="S0"> </span>szFileName<span class="S10">[</span>MAX_PATH<span class="S10">]</span>
-<span class="S0">            </span>HINSTANCE<span class="S0"> </span>hInstance<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S19">GetModuleHandle</span><span class="S0">  </span>NULL
-<span class="S0">            </span><span class="S19">GetModuleFileName</span><span class="S0">  </span>hInstance<span class="S10">,</span><span class="S0"> </span>szFileName<span class="S10">,</span><span class="S0"> </span>MAX_PATH
-<span class="S0">            </span><span class="S19">MessageBox</span><span class="S0">  </span>hwnd<span class="S10">,</span><span class="S0"> </span>szFileName<span class="S10">,</span><span class="S0"> </span><span class="S6">"Thank you!"</span><span class="S10">,</span>
-<span class="S0">            </span>MB_OK<span class="S0"> </span><span class="S10">|</span><span class="S0"> </span>MB_ICONINFORMATION
-<span class="S0">            </span><span class="S5">break</span>
-
-<span class="S0">        </span><span class="S5">case</span><span class="S0"> </span>WM_DESTROY<span class="S10">:</span>
-<span class="S0">            </span><span class="S19">PostQuitMessage</span><span class="S0">  </span><span class="S4">0</span>
-<span class="S0">            </span><span class="S5">break</span>
-<span class="S0">        </span>
-<span class="S0">        </span><span class="S5">case</span><span class="S0"> </span>WM_PASTE<span class="S10">:</span>
-<span class="S0">            </span><span class="S19">DestroyWindow</span><span class="S0">  </span>hwnd
-<span class="S0">            </span><span class="S5">break</span>
-<span class="S0">        </span>
-<span class="S0">        </span><span class="S5">default</span><span class="S10">:</span>
-<span class="S0">            </span><span class="S5">return</span><span class="S0"> </span><span class="S19">DefWindowProc</span><span class="S0">  </span>hwnd<span class="S10">,</span><span class="S0"> </span>msg<span class="S10">,</span><span class="S0"> </span>wParam<span class="S10">,</span><span class="S0"> </span>lParam
-<span class="S0">    </span>
-<span class="S0">    </span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span>
-
-
-<span class="S5">int</span><span class="S0"> </span>WINAPI<span class="S0"> </span><span class="S19">WinMain</span><span class="S0">  </span>HINSTANCE<span class="S0"> </span>hInstance<span class="S10">,</span><span class="S0"> </span>HINSTANCE<span class="S0"> </span>hPrevInstance<span class="S10">,</span>
-LPSTR<span class="S0"> </span>lpCmdLine<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>nCmdShow
-
-<span class="S0">    </span>WNDCLASSEX<span class="S0"> </span>wc
-<span class="S0">    </span>HWND<span class="S0"> </span>hwnd
-<span class="S0">    </span>MSG<span class="S0"> </span>Msg
-
-<span class="S0">    </span><span class="S2">// Subclass Default Window Structure (#32769)</span>
-<span class="S0">    </span><span class="S19">GetClassInfoEx</span><span class="S0">  </span><span class="S4">0</span><span class="S10">,</span><span class="S6">"#32769"</span><span class="S10">,&amp;</span>wc
-<span class="S0">    </span>wc<span class="S10">.</span>cbSize<span class="S0">           </span><span class="S10">=</span><span class="S0"> </span><span class="S5">sizeof</span><span class="S0">  </span>WNDCLASSEX
-<span class="S0">    </span>wc<span class="S10">.</span>lpfnWndProc<span class="S0">      </span><span class="S10">=</span><span class="S0"> </span>myWndProc
-<span class="S0">    </span>wc<span class="S10">.</span>hInstance<span class="S0">        </span><span class="S10">=</span><span class="S0"> </span>hInstance
-<span class="S0">    </span>wc<span class="S10">.</span>lpszClassName<span class="S0">    </span><span class="S10">=</span><span class="S0"> </span>g_szClassName
-<span class="S0">        </span>
-<span class="S0">    </span><span class="S2">// Register it</span>
-<span class="S0">    </span><span class="S5">if</span><span class="S0">  </span><span class="S10">!</span><span class="S19">RegisterClassEx</span><span class="S10">(&amp;</span>wc<span class="S10">)</span>
-<span class="S0">        </span><span class="S19">MessageBox</span><span class="S0">  </span>NULL<span class="S10">,</span><span class="S0"> </span><span class="S6">"RegisterClassEx Failed!"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Error!"</span><span class="S10">,</span>
-<span class="S0">        </span>MB_ICONEXCLAMATION<span class="S0"> </span><span class="S10">|</span><span class="S0"> </span>MB_OK
-<span class="S0">        </span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span>
-<span class="S0">    </span>
-<span class="S0">    </span><span class="S2">// Create a Window</span>
-<span class="S0">    </span>hwnd<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S19">CreateWindowEx</span><span class="S0">  </span>WS_EX_CLIENTEDGE<span class="S10">,</span>
-<span class="S0">    </span>g_szClassName<span class="S10">,</span><span class="S0"> </span><span class="S6">"Window Title"</span><span class="S10">,</span>
-<span class="S0">    </span>WS_OVERLAPPEDWINDOW<span class="S10">,</span>
-<span class="S0">    </span>CW_USEDEFAULT<span class="S10">,</span><span class="S0"> </span>CW_USEDEFAULT<span class="S10">,</span><span class="S0"> </span><span class="S4">240</span><span class="S10">,</span><span class="S0"> </span><span class="S4">120</span><span class="S10">,</span>
-<span class="S0">    </span>NULL<span class="S10">,</span><span class="S0"> </span>NULL<span class="S10">,</span><span class="S0"> </span>hInstance<span class="S10">,</span><span class="S0"> </span>NULL
-
-<span class="S0">    </span><span class="S5">if</span><span class="S0">  </span>hwnd<span class="S0"> </span><span class="S10">==</span><span class="S0"> </span>NULL
-<span class="S0">        </span><span class="S19">MessageBox</span><span class="S0">  </span>NULL<span class="S10">,</span><span class="S0"> </span><span class="S6">"CreateWindowEx Failed!"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Error!"</span><span class="S10">,</span>
-<span class="S0">        </span>MB_ICONEXCLAMATION<span class="S0"> </span><span class="S10">|</span><span class="S0"> </span>MB_OK
-<span class="S0">        </span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span>
-
-<span class="S0">    </span><span class="S19">ShowWindow</span><span class="S0">  </span>hwnd<span class="S10">,</span><span class="S0"> </span>nCmdShow
-<span class="S0">    </span><span class="S19">UpdateWindow</span><span class="S0">  </span>hwnd
-
-<span class="S0">    </span><span class="S2">// Main Message Loop</span>
-<span class="S0">    </span><span class="S5">while</span><span class="S0">  </span><span class="S19">GetMessage</span><span class="S10">(&amp;</span>Msg<span class="S10">,</span><span class="S0"> </span>NULL<span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">)</span><span class="S0"> </span><span class="S10">&gt;</span><span class="S0"> </span><span class="S4">0</span>
-
-<span class="S0">        </span><span class="S19">TranslateMessage</span><span class="S0">  </span><span class="S10">&amp;</span>Msg
-<span class="S0">        </span><span class="S19">DispatchMessage</span><span class="S0">  </span><span class="S10">&amp;</span>Msg
-<span class="S0">    </span>
-<span class="S0">    </span><span class="S5">return</span><span class="S0"> </span>Msg<span class="S10">.</span>wParam
-
-<span class="S0"></span></pre>
+<span><span class="S1">/* windows.a.c is hereby released into the Public Domain</span><br />
+<span class="S1">&nbsp;* </span><br />
+<span class="S1">&nbsp;* adapted from http://www.winprog.org/tutorial/simple_window.html</span><br />
+<span class="S1">&nbsp;* by Henry Kroll III, http://www.thenerdshow.com</span><br />
+<span class="S1">&nbsp;*</span><br />
+<span class="S1">&nbsp;* This program can be compiled by <a href="anchor.html">anch</a></span><br />
+<span class="S1">&nbsp;* and your regular compiler like so:</span><br />
+<span class="S1">&nbsp;* </span><br />
+<span class="S1">&nbsp;* anch i686-pc-mingw32-gcc -m32 -mwindows windows.a.c -o windows.exe</span><br />
+<span class="S1">&nbsp;*/</span><br />
+<span class="S9">#include &lt;windows.h&gt;</span><br />
+<br />
+<span class="S5">const</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span>g_szClassName<span class="S10">[]</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S6">"myWindowClass"</span><br />
+<span class="S2">// My Window Procedure</span><br />
+LRESULT<span class="S0"> </span>CALLBACK<span class="S0"> </span>myWndProc<span class="S0"> &nbsp;</span>HWND<span class="S0"> </span>hwnd<span class="S10">,</span><span class="S0"> </span>UINT<span class="S0"> </span>msg<span class="S10">,</span><br />
+WPARAM<span class="S0"> </span>wParam<span class="S10">,</span><span class="S0"> </span>LPARAM<span class="S0"> </span>lParam<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">switch</span><span class="S0"> &nbsp;</span>msg<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">case</span><span class="S0"> </span>WM_LBUTTONDOWN<span class="S10">:</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">char</span><span class="S0"> </span>szFileName<span class="S10">[</span>MAX_PATH<span class="S10">]</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>HINSTANCE<span class="S0"> </span>hInstance<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S19">GetModuleHandle</span><span class="S0"> &nbsp;</span>NULL<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">GetModuleFileName</span><span class="S0"> &nbsp;</span>hInstance<span class="S10">,</span><span class="S0"> </span>szFileName<span class="S10">,</span><span class="S0"> </span>MAX_PATH<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">MessageBox</span><span class="S0"> &nbsp;</span>hwnd<span class="S10">,</span><span class="S0"> </span>szFileName<span class="S10">,</span><span class="S0"> </span><span class="S6">"Thank you!"</span><span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MB_OK<span class="S0"> </span><span class="S10">|</span><span class="S0"> </span>MB_ICONINFORMATION<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">break</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">case</span><span class="S0"> </span>WM_DESTROY<span class="S10">:</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">PostQuitMessage</span><span class="S0"> &nbsp;</span><span class="S4">0</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">break</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">case</span><span class="S0"> </span>WM_PASTE<span class="S10">:</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">DestroyWindow</span><span class="S0"> &nbsp;</span>hwnd<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">break</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">default</span><span class="S10">:</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">return</span><span class="S0"> </span><span class="S19">DefWindowProc</span><span class="S0"> &nbsp;</span>hwnd<span class="S10">,</span><span class="S0"> </span>msg<span class="S10">,</span><span class="S0"> </span>wParam<span class="S10">,</span><span class="S0"> </span>lParam<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span><br />
+<br />
+<span class="S5">int</span><span class="S0"> </span>WINAPI<span class="S0"> </span><span class="S19">WinMain</span><span class="S0"> &nbsp;</span>HINSTANCE<span class="S0"> </span>hInstance<span class="S10">,</span><span class="S0"> </span>HINSTANCE<span class="S0"> </span>hPrevInstance<span class="S10">,</span><br />
+LPSTR<span class="S0"> </span>lpCmdLine<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>nCmdShow<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>WNDCLASSEX<span class="S0"> </span>wc<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>HWND<span class="S0"> </span>hwnd<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>MSG<span class="S0"> </span>Msg<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Subclass Default Window Structure (#32769)</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">GetClassInfoEx</span><span class="S0"> &nbsp;</span><span class="S4">0</span><span class="S10">,</span><span class="S6">"#32769"</span><span class="S10">,&amp;</span>wc<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>wc<span class="S10">.</span>cbSize<span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">=</span><span class="S0"> </span><span class="S5">sizeof</span><span class="S0"> &nbsp;</span>WNDCLASSEX<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>wc<span class="S10">.</span>lpfnWndProc<span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">=</span><span class="S0"> </span>myWndProc<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>wc<span class="S10">.</span>hInstance<span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">=</span><span class="S0"> </span>hInstance<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>wc<span class="S10">.</span>lpszClassName<span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S10">=</span><span class="S0"> </span>g_szClassName<span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Register it</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> &nbsp;</span><span class="S10">!</span><span class="S19">RegisterClassEx</span><span class="S10">(&amp;</span>wc<span class="S10">)</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">MessageBox</span><span class="S0"> &nbsp;</span>NULL<span class="S10">,</span><span class="S0"> </span><span class="S6">"RegisterClassEx Failed!"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Error!"</span><span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MB_ICONEXCLAMATION<span class="S0"> </span><span class="S10">|</span><span class="S0"> </span>MB_OK<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create a Window</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>hwnd<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S19">CreateWindowEx</span><span class="S0"> &nbsp;</span>WS_EX_CLIENTEDGE<span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>g_szClassName<span class="S10">,</span><span class="S0"> </span><span class="S6">"Window Title"</span><span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>WS_OVERLAPPEDWINDOW<span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>CW_USEDEFAULT<span class="S10">,</span><span class="S0"> </span>CW_USEDEFAULT<span class="S10">,</span><span class="S0"> </span><span class="S4">240</span><span class="S10">,</span><span class="S0"> </span><span class="S4">120</span><span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>NULL<span class="S10">,</span><span class="S0"> </span>NULL<span class="S10">,</span><span class="S0"> </span>hInstance<span class="S10">,</span><span class="S0"> </span>NULL<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> &nbsp;</span>hwnd<span class="S0"> </span><span class="S10">==</span><span class="S0"> </span>NULL<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">MessageBox</span><span class="S0"> &nbsp;</span>NULL<span class="S10">,</span><span class="S0"> </span><span class="S6">"CreateWindowEx Failed!"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Error!"</span><span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>MB_ICONEXCLAMATION<span class="S0"> </span><span class="S10">|</span><span class="S0"> </span>MB_OK<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">ShowWindow</span><span class="S0"> &nbsp;</span>hwnd<span class="S10">,</span><span class="S0"> </span>nCmdShow<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">UpdateWindow</span><span class="S0"> &nbsp;</span>hwnd<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Main Message Loop</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">while</span><span class="S0"> &nbsp;</span><span class="S19">GetMessage</span><span class="S10">(&amp;</span>Msg<span class="S10">,</span><span class="S0"> </span>NULL<span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">)</span><span class="S0"> </span><span class="S10">&gt;</span><span class="S0"> </span><span class="S4">0</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">TranslateMessage</span><span class="S0"> &nbsp;</span><span class="S10">&amp;</span>Msg<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S19">DispatchMessage</span><span class="S0"> &nbsp;</span><span class="S10">&amp;</span>Msg<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">return</span><span class="S0"> </span>Msg<span class="S10">.</span>wParam<br />
+<span class="S0"></span></span>
 </body>
 </html>
