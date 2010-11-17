@@ -1,0 +1,19 @@
+#summary Using Anchor with PHP files
+#labels Featured,Phase-Implementation,Phase-QA
+
+= PHP =
+
+A PHP test has been added. You can now run PHP scripts with anchor.
+
+Code may be run right from this web page without saving any files. Just copy and paste into a terminal:
+
+anchor <<"EOF"|php -a
+for  $i = 3; $i--;
+    echo  "outer loop $i\n"
+    for  $x = 0;$x < 3; $x++
+        echo("    inner loop $x\n");
+EOF
+
+= Details =
+
+The above is what's known as a [http://tldp.org/LDP/abs/html/here-docs.html here document].
