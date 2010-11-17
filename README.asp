@@ -61,7 +61,7 @@ Anchor knows nothing about the underlying language, so it should process a varie
 make example
 anch gcc example.a.c -o example</pre><p>
 
-Lossy &quot;un-anchoring&quot; of code is provided by a really crappy bash script (requires <a href="http://www.gnu.org/software/indent/">GNU indent</a>). It needs to be re-written in flex. This frequently breaks code so use at your own risk!</p>
+Lossy &quot;un-anchoring&quot; of code is provided by a really crappy bash script (requires <a href="http://www.gnu.org/software/indent/">GNU indent</a>). It needs to be re-written in flex.</p>
 <pre>
 unanchor example.c #see how it might look
 unanchor example.c > editme.a.c # create a file</pre><p>
@@ -70,7 +70,7 @@ unanchor example.c > editme.a.c # create a file</pre><p>
 
 Optional TinyCC integration</a></h3><p>
 
-The latest version of TinyCC may be gotten from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or mob branch and compiled separately. A mob-release Linux (RPM) version of TCC may be found <a href="http://thenerdshow.com/rpm/tinycc-0.9.26-0.1.20101029git.fc14.src.rpm">here</a>.<a href="http://repo.or.cz/h/mob.html">What is mob?</a></p><p>
+The latest version of TinyCC may be gotten from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or mob branch and compiled separately. A mob-release Linux (RPM) version of TCC may be found <a href="http://thenerdshow.com/rpm/tinycc-0.9.26-0.1.20101029git.fc14.src.rpm">here</a>.</p><p>
 
 With TinyCC (<a href="http://bellard.org/tcc/">TCC</a>) installed, Anchor can execute pseudocode directly from the command line.</p>
 <pre>

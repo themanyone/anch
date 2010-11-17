@@ -71,8 +71,7 @@ anch.org: Anchor
  anch gcc example.a.c -o example
 
    Lossy "un-anchoring" of code is provided by a really crappy bash script
-   (requires GNU indent). It needs to be re-written in flex. This frequently
-   breaks code so use at your own risk!
+   (requires GNU indent). It needs to be re-written in flex.
 
  unanchor example.c #see how it might look
  unanchor example.c > editme.a.c # create a file
@@ -83,7 +82,7 @@ anch.org: Anchor
 
    The latest version of TinyCC may be gotten from the git repo or mob branch
    and compiled separately. A mob-release Linux (RPM) version of TCC may be
-   found here.What is mob?
+   found here.
 
    With TinyCC (TCC) installed, Anchor can execute pseudocode directly from
    the command line.
