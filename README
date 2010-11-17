@@ -1,0 +1,161 @@
+anch.org: Anchor
+
+   Advanced Negative Compilation Heuristic Ontological Refactorer
+
+   Version: 1.5
+
+   Anchor: for  i=5;i--;  C: for (i=5;i--;){
+
+  Why Anchor?
+
+   If (code == indented) {brackets = redundant}. Refactoring with Anchor
+   saves typing and makes programs easier to read. Best of all, it's free!
+
+   Techies might refer to it as a language-independent pseudocode compiler or
+   code decorator but all it does is fix missing brackets and punctuation.
+
+  Installation
+
+   A windows .exe is provided already. Just copy it somewhere in the
+   computer`s path. Compilation on Linux and other systems requires flex and
+   a C compiler. Download and extract the archive.
+
+ unzip anchor.zip
+ cd anchor
+
+   Run "make" from within the newly extracted directory.
+
+ make
+ su -c `make install`
+
+  Programming with Anchor
+
+   The rules are very simple. A double-space, "  " (tells anchor to enclose
+   the rest of the line in parenthesis). Indentation of 4 spaces {controls
+   the placement of curly brackets}. The remaining lines are automatically
+   terminated with semicolons; any of these rules may be overridden by
+   placing whitespace or a /* comment */ or // at the end of the line,
+   causing the precompiler to skip the line in question.
+
+  Compilation
+
+   Use anchor.exe to convert example.a.c to C:
+
+ anchor example.a.c > example.c
+
+   Anchor knows nothing about the underlying language, so it should process a
+   variety of curly bracket languages. The author uses it on C code, but it
+   should work with little or no change on C++, Java, .NET, PHP, Perl, awk
+   and other types of bracketed configuration files or scripts. Programs may
+   be compiled on Linux or unix by putting "anch" in front of the existing
+   compiler or interpreter. Windows users would need to install something
+   like MingW, cygwin, or some other unix-like bourne shell to interpret the
+   included "anch" script.
+
+ make example
+ anch gcc example.a.c -o example
+
+   Experimental "un-anchoring" of code is provided. (requires GNU indent)
+
+ unanchor example.c #see how it would look
+ unanchor example.c > editme.a.c # create a file
+
+   see an unanchored C windows program
+
+  Optional TinyCC integration
+
+   The latest version of TinyCC may be gotten from the git repo and compiled
+   separately. A pre-release Linux (RPM) version of TCC may be found here.
+
+   With TinyCC (TCC) installed, Anchor can execute pseudocode directly from
+   the command line.
+
+ anch -run example.a.c
+
+   Or put the following line
+
+ #!/usr/local/bin/anch -run [args]
+
+   at the top of files to make executable C scripts:
+
+ #!/usr/local/bin/anch -run
+ #include <stdio.h>
+ int main  int c, char **v
+     while  c--
+         printf  "Argument %i is \"%s\"\n",c,v[c]
+     return 0
+
+  Direct execution
+
+   The anch script can use TCC to execute through a pipe. For example, if
+   both xsel and TCC are installed, the above code may be highlighted with
+   the mouse and executed directly from the selection buffer, with arguments
+   (and without even saving to disk).
+
+ xsel | anch -run - [args]
+
+   Other compilers or interpreters may be invoked through pipes as well:
+
+ xsel|anchor|gcc -Wall -g -xc -
+
+  Changelog
+
+   Wed Nov 10 2010 1.5 -run now accepts linker options like -lm.
+
+   Mon Oct 25 2010 1.4 Now works as a code decorator.
+
+   Tue Apr 27 2010 1.3 String arrays may be defined like this:
+
+     char a[6][10]= "rain gear", "boots", "nets",
+         "skiff", "outboard", 0
+
+   Thu Apr 15 2010 1.2 TCC Integration.
+
+   Wed Apr 14 2010 1.1 Buffered comments. Quoted strings. Support for structs
+   & arrays. Lots of bug fixes.
+
+   Mon Apr 12 2010 1.0 Completely re-written using flex, a lexical analyzer
+   and parser generator.
+
+  Limitations and Copyright
+
+   No warrantee! Anchor was created as a learning toy for hobbies and fun; it
+   might lack the swagger of commercial projects. The algorithm is
+   potentially lossy and subject to change, so don't distribute important
+   software that depends on it (convert it to the target language first).
+   Programming is a difficult task and Anchor is not guaranteed to make it
+   easier. Our "precompiler", anch is just a simple bash script that creates
+   a temp file and invokes whatever compiler is normally used. These tools
+   may be freely adapted under the terms of the Gnu Public License.
+
+   Anchor and accompanying documentation is Copyright (c) 2010 Henry Kroll
+   III. This page may be freely modified and shared under the terms of the
+   Creative Commons SA license inasmuch as it agrees with the terms of the
+   GPL. Any of the above conditions can be waived by getting permission from
+   the copyright holder.
+
+   Anchor
+   CONTACT
+   AUTHOR
+   DOWNLOAD
+   LISCENSE
+   FAVORITE
+   [ PayPal - The safer, easier way to pay online! ]
+   Follow me on Twitter, YouTube Blogspot
+
+   Announce to:
+
+   BlinkList
+   del.icio.us
+   Digg it
+   Furl
+   Netvouz
+   RawSugar
+   Shadows
+   Simpy
+   Spurl
+   Yahoo MyWeb
+   Google
+   DZone
+   StumbleUpon
+   Create Social Bookmark Links
