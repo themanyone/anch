@@ -1,0 +1,46 @@
+#summary Anchor's double space macro
+
+This
+{{{
+#include <stdio.h>
+/* Print command line arguments and exit. */
+int main  int c, char **v
+    while  c--
+        printf  "Argument %i is \"%s\"\n",c,v[c]
+    return 0
+}}}
+
+becomes this:
+
+{{{
+#include <stdio.h>
+/* Print command line arguments and exit. */
+int main (int c, char **v){
+    while (c--){
+        printf ("Argument %i is \"%s\"\n",c,v[c]);
+    }
+    return 0;
+}
+}}}
+
+It might not be obvious, but there are two spaces between main and int.
+
+The following will also work because there are two trailing spaces after main.
+
+{{{
+int main  
+}}}
+
+This, however, will fail:
+
+{{{
+int main
+}}}
+
+It looks the same, but there are no spaces after main.
+
+This macro is not perfect and sometimes acts up.
+
+If extra () are appearing in your code you probably have "double spaces in odd places."
+
+If the double space macro is confusing, just put your own parenthesis around things and avoid whitespace at the end of lines.
