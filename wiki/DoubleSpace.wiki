@@ -43,4 +43,4 @@ This macro is not perfect and sometimes acts up.
 
 If extra () are appearing in your code you probably have "double spaces in odd places."
 
-If the double space macro is confusing, just put your own parenthesis around things and avoid whitespace at the end of lines.
+If the double space macro is confusing, just put your own parenthesis around things and avoid double spaces.
