@@ -21,3 +21,8 @@ The above code will also run as a perl script.
 = Details =
 
 The above is what's known as a [http://tldp.org/LDP/abs/html/here-docs.html here document].
+
+The same code could be run on Windows by saving the part between for... and not including EOF to a file and then running anchor on it before running php on it:
+
+anchor file > file.php
+php -r file.php
