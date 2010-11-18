@@ -1,4 +1,5 @@
 #summary Declaring a struct with Anchor
+#labels Featured,Phase-Implementation,Phase-Support
 
 Most of the time Anchor does a good job, but there are exceptions. Here is how to use "an extra space" to trick it into accepting an extra semicolon.
 
