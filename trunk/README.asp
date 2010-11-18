@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Fix missing brackets with Anchor</title>
+<title>Advanced Negative Compilation Heuristic Ontological Refactorer</title>
 <meta name="Generator" content="SciTE - www.Scintilla.org" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="c programming fix missing brackets refactoring refactor anchor pseudocode api compiler anch run other make windows tinycc terms linux line like input editor ide" />
@@ -11,9 +11,7 @@
 
 <a href="http://anch.org">anch.org</a>: Anchor</h2><p>
 
-<a>A</a>dvanced <a>N</a>egative <a>C</a>ompilation <a>H</a>euristic <a>O</a>ntological <a>R</a>efactorer</p><p>
-
-Version: 1.6</p>
+<a>A</a>dvanced <a>N</a>egative <a>C</a>ompilation <a>H</a>euristic <a>O</a>ntological <a>R</a>efactorer</p>
 
 <img src="images/anchorcode.gif" alt="Anchor: for  i=5;i--;  C: for (i=5;i--;){"/><h3>
 
@@ -41,7 +39,7 @@ su -c &apos;make install&apos;</pre><h3>
 
 Programming with Anchor</h3><p>
 
-The rules are very simple. A double-space, &quot;&nbsp; &quot; (tells anchor to enclose the rest of the line in parenthesis). Indentation of 4 spaces {controls the placement of curly brackets}. The remaining lines are automatically terminated with semicolons; any of these rules may be overridden by placing whitespace or a <span class="S1">/* comment */</span> or <span class="S1">//</span> at the end of the line, causing the precompiler to skip the line in question.</p><h3>
+The rules are very simple. A double-space, &quot;&nbsp; &quot; (tells anchor to enclose the rest of the line in parenthesis). Indentation of 4 spaces {controls the placement of curly brackets}. The remaining lines are automatically terminated with semicolons; any of these rules may be overridden by placing a space at the end of the line, causing the precompiler to skip the line in question. Conversely, if the output is not what is expected there is probably extra whitespace at the end of a line somewhere. Comments are ignored, but it is a good idea to put them on a separate line.</p><h3>
 Compilation</h3><p>
 
 Example usage: converting example.a.c to C:</p>
@@ -52,16 +50,16 @@ Compiling the result with gcc (or any C compiler).</p>
 <pre>
 gcc example.c -o example.exe</pre><p>
 
-If the indent style Anchor produces is undesirable for some reason, simply run <a href="http://www.gnu.org/software/indent/">GNU indent</a> on it. The default <a href="http://www.gnu.org/software/indent/">GNU indent</a> style should work for most people. See <a href="http://www.linuxmanpages.com/man1/indent.1.php">man indent</a> for more <a href="http://www.gnu.org/software/indent/">GNU indent</a> styles.</p>
+If the indent style Anchor produces is undesirable for some reason, simply run <a href="http://www.gnu.org/software/indent/">GNU indent</a> on it. The default <a href="http://www.gnu.org/software/indent/">GNU indent</a> style works for most people. See <a href="http://www.linuxmanpages.com/man1/indent.1.php">man indent</a> for more <a href="http://www.gnu.org/software/indent/">GNU indent</a> styles.</p>
 <pre>
 indent example.c</pre><p>
 
-Anchor knows nothing about the underlying language, so it should process a variety of curly bracket languages. The author uses it on C code, but it should work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of bracketed configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> to interpret the included &quot;anch&quot; script.</p>
+Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> to interpret the included &quot;anch&quot; script.</p>
 <pre>
 make example
 anch gcc example.a.c -o example</pre><p>
 
-Lossy &quot;un-anchoring&quot; of code is provided by a really crappy bash script (requires <a href="http://www.gnu.org/software/indent/">GNU indent</a>). It needs to be re-written in flex.</p>
+Quick and dirty &quot;un-anchoring&quot; of code is provided by a bash script (requires <a href="http://www.gnu.org/software/indent/">GNU indent</a>). Be aware that it mangles some strings and needs to be re-written in flex.</p>
 <pre>
 unanchor example.c #see how it might look
 unanchor example.c > editme.a.c # create a file</pre><p>
@@ -104,7 +102,7 @@ The bugs, wiki, and changelog have moved to <a href="https://code.google.com/p/a
 
 Limitations and Copyright</a></h3><p>
 
-No warrantee! Anchor was created as a learning toy for hobbies and fun; it might lack the swagger of commercial projects. The algorithm is potentially lossy and subject to change, so don't distribute important software that depends on it (convert it to the target language first). Programming is a difficult task and Anchor is not guaranteed to make it easier. Our &quot;precompiler&quot;, anch is just a simple bash script that creates a temp file and invokes whatever compiler is normally used. These tools may be freely adapted under the terms of the <a href="http://www.gnu.org/licenses/gpl.html">Gnu Public License</a>.</p>
+No warrantee! Anchor was created as a learning toy for hobbies and fun; it might lack the swagger of commercial projects. The algorithm is potentially lossy and subject to change, so don't distribute important software that depends on it (convert it to the target language first). Programming is a difficult task and Anchor is not guaranteed to make it easier. These tools may be freely adapted under the terms of the <a href="http://www.gnu.org/licenses/gpl.html">Gnu Public License</a>.</p>
 
 <p class="small">
 
