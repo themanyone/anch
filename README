@@ -2,8 +2,6 @@ anch.org: Anchor
 
    Advanced Negative Compilation Heuristic Ontological Refactorer
 
-   Version: 1.6
-
    Anchor: for  i=5;i--;  C: for (i=5;i--;){
 
   Why Anchor?
@@ -39,8 +37,11 @@ anch.org: Anchor
    the rest of the line in parenthesis). Indentation of 4 spaces {controls
    the placement of curly brackets}. The remaining lines are automatically
    terminated with semicolons; any of these rules may be overridden by
-   placing whitespace or a /* comment */ or // at the end of the line,
-   causing the precompiler to skip the line in question.
+   placing a space at the end of the line, causing the precompiler to skip
+   the line in question. Conversely, if the output is not what is expected
+   there is probably extra whitespace at the end of a line somewhere.
+   Comments are ignored, but it is a good idea to put them on a separate
+   line.
 
   Compilation
 
@@ -53,15 +54,15 @@ anch.org: Anchor
  gcc example.c -o example.exe
 
    If the indent style Anchor produces is undesirable for some reason, simply
-   run GNU indent on it. The default GNU indent style should work for most
-   people. See man indent for more GNU indent styles.
+   run GNU indent on it. The default GNU indent style works for most people.
+   See man indent for more GNU indent styles.
 
  indent example.c
 
-   Anchor knows nothing about the underlying language, so it should process a
+   Anchor knows nothing about the underlying language, so it processes a
    variety of curly bracket languages. The author uses it on C code, but it
-   should work with little or no change on C++, Java, .NET, PHP, Perl, awk
-   and other types of bracketed configuration files or scripts. Programs may
+   will most likely work with little or no change on C++, Java, .NET, PHP,
+   Perl, awk and other types of configuration files or scripts. Programs may
    be compiled on Linux or unix by putting "anch" in front of the existing
    compiler or interpreter. Windows users would need to install something
    like MingW, cygwin, or some other unix-like bourne shell to interpret the
@@ -70,8 +71,9 @@ anch.org: Anchor
  make example
  anch gcc example.a.c -o example
 
-   Lossy "un-anchoring" of code is provided by a really crappy bash script
-   (requires GNU indent). It needs to be re-written in flex.
+   Quick and dirty "un-anchoring" of code is provided by a bash script
+   (requires GNU indent). Be aware that it mangles some strings and needs to
+   be re-written in flex.
 
  unanchor example.c #see how it might look
  unanchor example.c > editme.a.c # create a file
@@ -129,9 +131,8 @@ anch.org: Anchor
    potentially lossy and subject to change, so don't distribute important
    software that depends on it (convert it to the target language first).
    Programming is a difficult task and Anchor is not guaranteed to make it
-   easier. Our "precompiler", anch is just a simple bash script that creates
-   a temp file and invokes whatever compiler is normally used. These tools
-   may be freely adapted under the terms of the Gnu Public License.
+   easier. These tools may be freely adapted under the terms of the Gnu
+   Public License.
 
    Anchor and accompanying documentation are Copyright (c) 2010 Henry Kroll
    III. This page may be freely modified and shared under the terms of the
