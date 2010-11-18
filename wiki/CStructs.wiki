@@ -22,7 +22,7 @@ struct list_e
 mylist
 }}}
 
-The extra semicolon and space is not necessary anymore because Anchor sees the variable and automatically puts a semicolon after it. The output looks like this:
+The extra semicolon and space are not necessary anymore because Anchor sees the variable and automatically puts a semicolon after it. The output looks like this:
 
 {{{
 struct list_e{
@@ -31,5 +31,3 @@ struct list_e{
     }
 mylist;
 }}}
-
-See? We have created a variable of type "struct list_e" that could be used, oh I don't know, for storing part of a list during a swap of elements?
