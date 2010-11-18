@@ -10,7 +10,7 @@ struct list_e
 }}}
 Notice that there is a space after the ";" in the above code.
 
-The extra space prevents Anchor from seeing the extra ; and removing it.
+The extra space prevents Anchor from seeing the extra semicolon and removing it.
 
 You could also create a variable of type "struct list_e" instead:
 
@@ -22,7 +22,7 @@ struct list_e
 mylist;
 }}}
 
-The extra space is not necessary now because Anchor sees the variable. The output looks like this:
+The extra semicolon and space is not necessary anymore because Anchor sees the variable and automatically puts a semicolon after it. The output looks like this:
 
 {{{
 struct list_e{
