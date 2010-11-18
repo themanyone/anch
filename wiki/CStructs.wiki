@@ -1,0 +1,33 @@
+#summary Declaring a struct with Anchor
+
+{{{
+struct list_e
+    struct list_e *next
+    char *data
+; 
+}}}
+Notice that there is a space after the ";" in the above code.
+
+The extra space prevents Anchor from seeing the extra ; and removing it.
+
+You could also create a variable of type "struct list_e" instead:
+
+{{{
+struct list_e
+    struct list_e *next
+    char *data
+
+mylist;
+}}}
+
+The extra space is not necessary now because Anchor sees the variable. The output looks like this:
+
+{{{
+struct list_e{
+    struct list_e *next;
+    char *data;
+    }
+mylist;
+}}}
+
+See? We have created a variable of type "struct list_e" that could be used, oh I don't know, for storing part of a list during a swap of elements?
