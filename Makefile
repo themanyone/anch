@@ -12,8 +12,9 @@ LEX=flex
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-test: $(BUILD)
+test: $(BUILD) un$(BUILD)
 	$(CC) $(BUILD) -o $(NAME)$(EXT) $(LDFLAGS)
+	$(CC) un$(BUILD) -o un$(NAME)$(EXT) $(LDFLAGS)
 
 s:
 	scite Makefile README.asp *.l&
@@ -31,9 +32,12 @@ uninstall:
 	$(RM) "$(INSTALLDIR)/unanchor"
 
 clean:
-	$(RM) "$(BUILD)" "$(NAME)"
+	$(RM) "$(BUILD)" "un$(BUILD)" "$(NAME)" "un$(NAME)"
 	$(RM) tmp.* lex* *.o
 	$(RM) example
+
+mingw:
+	$(MAKE) CC=/usr/bin/i686-pc-mingw32-gcc EXT=.exe
 
 example:
 	./pycc gcc tests/example.a.c -o example

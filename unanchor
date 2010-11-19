@@ -1,6 +1,0 @@
-#! /bin/bash
-: ${1?"Usage: `basename $0` FILES..."}
-indent $1 -linux -i 4 -nut -bls -brf -cli4 -st | \
-sed -e 's/\([a-z)]\)[ ]*(/\1  /' -e 's/[ ]*{//g' \
-    -e 's/[ ]*;$//' -e 's/)$//' -e 's/}//g' \
-    -e 's/\t/        /g'
