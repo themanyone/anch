@@ -53,6 +53,7 @@
                 if (!strncmp(dest,"/*",2)){
                     dest[max-2]='*';
                     dest[max-1]='/';
+                    dest[max] = '\0';
                 }
             }
         }return dest;

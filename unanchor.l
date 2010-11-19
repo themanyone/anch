@@ -72,15 +72,13 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
 
                 /* conservatively remove parenthesis */
 ^[\t ]*[[:alnum:]_\) ]+"("[\t ]* { debug("P0");
-                    p = strchr(yytext,'(');
-                /* if '(' is not at the left margin */
-                if (p > yytext)
-                    for (;--p;)
-                        /* remove preceding spaces */
-                        if (*p!=' '){
-                            ++p;break;
-                        }
-                /* remove '(' and insert two spaces */
+                p = strchr(yytext,'(');
+                for (;--p;)
+                    /* remove extra spaces around '(' */
+                    if (*p!=' '){
+                        ++p;break;
+                    }
+                /* replace '(' with two spaces */
                 *p = 0; printf("%s  ",yytext); *p=' ';
                 BEGIN(paren);
                 }
@@ -92,18 +90,21 @@ int main(int argc, char **argv ){
     ++argv, --argc;  /* skip over self name */
     char *s;
     if (argc > 0){ /* c allows us to read 1 past end of array */
-        if (!strcmp(argv[0],"-i") && argv[1]){
+        if ((!strcmp(argv[0],"-indent") || !strcmp(argv[0],"-i"))
+            && argv[1]){
             s = malloc(strlen(argv[1])+99);
             sprintf(s,"indent \"%s\" -linux -i 4 -nut -bls -brf -cli4 -st",argv[1]);
             yyin = popen(s, "r" );free(s);
-        } else if (!strcmp(argv[0],"-h")) {
-            printf("usage: unanchor [-i] file\n");
-            return 0;
-        } else {
+        } else if (argv[0][0]!='-') {
             yyin = fopen(argv[0],"r");
             if (!yyin) { perror("fopen");
                 exit (1);
             }
+        } else {
+            printf("Usage: unanchor [-i | -indent] file\n");
+            printf("The -indent option requires GNU indent\n");
+            printf("exists somewhere in $PATH.\n");
+            return 1;
         }
     }
     else yyin = stdin;
