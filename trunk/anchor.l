@@ -48,6 +48,12 @@
             if (max > 0){ /* should never be negative, but j.i.c. */
                 strncat(dest, src, max);
                 dest[max] = '\0';
+            } else {
+                fprintf(stderr,"Error: String length exceeded.\n");
+                if (!strncmp(dest,"/*",2)){
+                    dest[max-2]='*';
+                    dest[max-1]='/';
+                }
             }
         }return dest;
     }
@@ -60,19 +66,19 @@
 ^[\t ]*"/*"           {
                 debug("C1");
                 BEGIN(comment);
-                strcat(endstr,yytext);
+                scat(endstr,yytext);
                 debug("C2");
                 }
 <comment>"*/"   {
                 BEGIN(codesection);
-                strcat(endstr,yytext);strcat(endstr,"\n");
+                scat(endstr,yytext);scat(endstr,"\n");
                 debug("C5");
                 }
-<comment>[^*]+  strcat(endstr,yytext);
-<comment>"*"[^/] strcat(endstr,yytext);
+<comment>[^*]+  scat(endstr,yytext);
+<comment>"*"[^/] scat(endstr,yytext);
 ^[\t ]*"//".*$  {
                 debug("C6");
-                strcat(endstr,yytext);strcat(endstr,"\n");
+                scat(endstr,yytext);scat(endstr,"\n");
                 debug("C7");
                 }
     
