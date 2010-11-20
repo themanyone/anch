@@ -15,7 +15,7 @@ ax=($@);c=0;nofile=1
 for x in $@; do
     # "-" by itself is a signal to pipe stdin on through
     if [[ $x == - ]]; then
-	anchor | $gcc $(eval echo ${ax[@]}) 
+	anchor -p | $gcc $(eval echo ${ax[@]}) 
 	exit 0
     fi
     # skip any target following the "-o" option
@@ -40,7 +40,7 @@ tmp=$(mktemp -p ./ -u).${cxx##*.}
 ax[$replace]=$tmp
 
 # precompile and dump contents into temp file
-anchor $cxx > $tmp
+anchor -p $cxx > $tmp
 
 # compile the temp file with options. remove if successful
 $gcc $(eval echo ${ax[@]}) && rm $tmp
