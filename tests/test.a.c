@@ -55,6 +55,7 @@ int test_func  int val
 int main  int argc,
     char **argv
     int i
+    argv[0][0] = argv[0][0]
     char name[]="Anchor"
     printf  "%s is C.\n",name
     /* nice */
