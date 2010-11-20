@@ -44,7 +44,7 @@ int test_func  int val
             printf  "test "
         printf  "\n"
     printf  "struct test\n" 
-        "be //careful /* with */ \"this string\""
+        "be //careful {/* with *//*); \"this string\""
 #endif
     do
         printf("\n%s\n",fool);

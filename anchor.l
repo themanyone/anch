@@ -24,7 +24,7 @@
 #define DEBUG 0
 #define debug(...) if(DEBUG)printf(__VA_ARGS__)
 #define MAX_STRING 8192
-    int indent=0,lastindent=0;
+    int indent=0,lastindent=0,pull=0,chain=0;
     char *ss,last[2],endstr[MAX_STRING]="";
     void countIndent(void){
         int i=0,spaces=0,tabs=0;
@@ -160,28 +160,26 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 }
                 }
 
-    /* indented code found. add { } */
+
+                /* indented code found. add { } */
 ^([\t]|[ ]{4})*[^ \t\n] %{
-    
-                /* Left indent */
                 BEGIN(codesection); 
                 countIndent();
+    
+                /* Left indent */
                 if(indent<lastindent){debug("L1");
                     if(strlen(endstr)<4)printf("%s ",endstr);
                     else printf("%c\n ",endstr[0]);
                     for(int i=1;i<indent;i++) printf("    ");
-                    /* if(!strpbrk(yytext,"}")) */
                     for(int i=indent;i<lastindent;i++)
                         printf("   }");
                     /* print any stored comments */
                     if(strlen(endstr)>3){
                         printf("%s",endstr+1);
                     } else {
-                        /* fixme: how to skip the next line? */
-                        
-                        if(yytext[yyleng-1]!='}') printf("\n");
+                        if (pull) chain = 1;
+                        else printf("\n");
                     }
-                    if(yytext[yyleng-1]=='/')unput('/');
                     debug("L2");
                 }
                 
@@ -204,8 +202,13 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                     if(!indent)printf("%c",yytext[strlen(yytext)-1]);
                     debug("N3");
                 }
-                
-                yyless(1);
+                /* pull up next line } after brace? */
+                if(chain){
+                    yyless(strspn(yytext,"\t "));
+                    chain=0;
+                }
+                /* nope, do not pull up next line */
+                else yyless(1);
                 if(indent)printf(" ");
                 lastindent=indent;strcpy(endstr,";\n");
                 %}
@@ -214,7 +217,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
 <codesection>^[[:alpha:]_]+   %{debug("B1");
                 /* add ; endstr usually contains ";\n" */
                 if(strlen(endstr)<4)printf("%s",endstr);
-                else printf("%c",endstr[0]);
+                else printf("%c\n",endstr[0]);
                 if(indent>0){
                     indent=0;BEGIN(INITIAL);
                     printf("}");
@@ -240,8 +243,20 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
 
 %%
 int main(int argc, char **argv ){
-    ++argv, --argc;  /* skip over program name */
-    if (argc > 0) yyin = fopen( argv[0], "r" );
-    else yyin = stdin;
-    yylex();
+    char *fname;
+    if (argc > 1){ /* c allows us to read 1 past end of array */
+        for (--argc;argc;argc--){
+            if(argv[argc][0]=='-'){
+                if (!strcmp(argv[argc],"-pull") || !strcmp(argv[argc],"-p")){
+                    pull = 1;
+                } else if (strcmp(argv[argc],"-")) {
+                    printf("Usage: anchor [-p | -pull] file\n");
+                    return 1;
+                }
+            } else fname = argv[argc];
+        } yyin = fopen(fname,"r");
+        if (!yyin) { perror("fopen");
+            exit (1);
+        }
+    } else yyin = stdin; yylex();
 }
