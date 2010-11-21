@@ -29,13 +29,13 @@ It might not be obvious, but there are two spaces between main and int.
 The following will also work because there are two trailing spaces after main.
 
 {{{
-int main  
+int main  void
 }}}
 
 This, however, will fail:
 
 {{{
-int main
+int main void
 }}}
 
 It looks the same, but there are no spaces after main.
@@ -44,4 +44,4 @@ This macro is not perfect and sometimes acts up.
 
 If extra () are appearing in your code you probably have "double spaces in odd places."
 
-If the double space macro is confusing, just put your own parenthesis around things and avoid double spaces.
+If the double space macro is confusing, just put your own parenthesis around things and avoid double spaces. It will all make sense eventually...
