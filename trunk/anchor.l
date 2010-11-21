@@ -240,8 +240,11 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 printf("\n");BEGIN(INITIAL);
                 }
 
-
 %%
+void intro(){
+    fprintf (stderr,"Anchor (C) 2010 Henry Kroll www.anch.org\n");
+    fprintf (stderr,"See anchor -h for help.\n\n");
+}
 int main(int argc, char **argv ){
     char *fname;
     if (argc > 1){ /* c allows us to read 1 past end of array */
@@ -250,13 +253,30 @@ int main(int argc, char **argv ){
                 if (!strcmp(argv[argc],"-pull") || !strcmp(argv[argc],"-p")){
                     pull = 1;
                 } else if (strcmp(argv[argc],"-")) {
-                    printf("Usage: anchor [-p | -pull] file\n");
-                    return 1;
+                    printf(
+"Usage: anchor [options] file\n"
+"-pull | -p Pull up code after closing brace.\n\n"
+
+"Other uses:\n"
+"   Pipe code through anchor to a file...\n"
+"   cat tests/test.a.c | anchor > test_out.c\n"
+"   ...or to a compiler that supports reading from pipes:\n"
+"   cat tests/test.a.c | anchor | tcc -run -\n\n"
+
+"Type 'more README' for additional suggestions.\n");
+return 0;
                 }
             } else fname = argv[argc];
-        } yyin = fopen(fname,"r");
+        }
+        intro();
+        yyin = fopen(fname,"r");
         if (!yyin) { perror("fopen");
             exit (1);
         }
-    } else yyin = stdin; yylex();
+    } else {
+        intro();
+        yyin = stdin;
+        fprintf (stderr,"No file specified. Reading stdin... Press CTRL-C to cancel.\n");
+    }
+    yylex();
 }

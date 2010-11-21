@@ -86,6 +86,11 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
 <paren>.        ECHO;
 
 %%
+void intro(){
+    fprintf (stderr,"UnAnchor (C) 2010 Henry Kroll www.anch.org\n");
+    fprintf (stderr,"See unanchor -h for help.\n\n");
+}
+
 int main(int argc, char **argv ){
     ++argv, --argc;  /* skip over self name */
     char *s;
@@ -101,13 +106,24 @@ int main(int argc, char **argv ){
                 exit (1);
             }
         } else {
-            printf("Usage: unanchor [-i | -indent] file\n");
-            printf("The -indent option requires GNU indent\n");
-            printf("exists somewhere in $PATH.\n");
+            printf(
+"Usage: unanchor [-i | -indent] file\n"
+"The -indent option requires GNU indent\n"
+"resides somewhere in PATH.\n\n"
+     
+"Other uses:\n"
+"   Pipe code through unanchor to a file...\n"
+"   cat test_out.c | unanchor -i > test.a.c\n\n"
+
+"Type 'more README' for additional suggestions.\n");
             return 1;
         }
     }
-    else yyin = stdin;
+    else{
+        intro();
+        yyin = stdin;
+        fprintf (stderr,"No file specified. Reading stdin... Press CTRL-C to cancel.\n");
+    }
     yylex();
     if (argc > 0) pclose (yyin);
 }
