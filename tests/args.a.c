@@ -1,5 +1,5 @@
-#!/usr/local/bin/anch -run
-/* This will run as a bash script if TCC and Anchor is installed */
+/* #!/usr/local/bin/anch -run */
+/* uncomment the above line to make "executable source" */
 
 #include <stdio.h>
 /* Print command line arguments and exit. */

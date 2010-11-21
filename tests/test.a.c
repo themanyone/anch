@@ -1,4 +1,6 @@
-#!/usr/local/bin/anch -run
+/* #!/usr/local/bin/anch -run */
+/* uncomment the above line to make "executable source" */
+   
 /* test.a.c is hereby released into the Public Domain
  *
  * This program can be compiled by anch
