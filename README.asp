@@ -54,21 +54,21 @@ If the indent style Anchor produces is undesirable for some reason, simply run <
 <pre>
 indent example.c</pre><p>
 
-Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> to interpret the included &quot;anch&quot; script.</p>
+Removing brackets from existing code is made possible with "unanchor." Install <a href="http://www.gnu.org/software/indent/">GNU indent</a> and use use the -i or -indent option for best results.</p>
+<pre>
+unanchor -i example.c #see how it might look
+unanchor -i example.c > editme.a.c # create a file</pre><p>
+
+Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> like <a href="http://win-bash.sourceforge.net/">win bash</a> to interpret the included &quot;anch&quot; script.</p>
 <pre>
 make example
 anch gcc example.a.c -o example</pre><p>
-
-Quick and dirty &quot;un-anchoring&quot; of code is provided by a bash script (requires <a href="http://www.gnu.org/software/indent/">GNU indent</a>). Be aware that it mangles some strings and needs to be re-written in flex.</p>
-<pre>
-unanchor example.c #see how it might look
-unanchor example.c > editme.a.c # create a file</pre><p>
 
 <a href="windows.a.html">see an unanchored C windows program</a></p><h3><a href="http://bellard.org/tcc/">
 
 Optional TinyCC integration</a></h3><p>
 
-The latest version of TinyCC may be gotten from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or mob branch and compiled separately. A mob-release Linux (RPM) version of TCC may be found <a href="http://thenerdshow.com/rpm/tinycc-0.9.26-0.1.20101029git.fc14.src.rpm">here</a>.</p><p>
+The latest version of TinyCC may be obtained from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or the <a href="http://repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob branch</a> if living dangerously. A mob-release Linux (RPM) version of TCC may be found <a href="http://thenerdshow.com/rpm/tinycc-0.9.26-0.1.20101029git.fc14.src.rpm">here</a>.</p><p>
 
 With TinyCC (<a href="http://bellard.org/tcc/">TCC</a>) installed, Anchor can execute pseudocode directly from the command line.</p>
 <pre>
@@ -94,7 +94,9 @@ xsel | anch -run - [args]</pre><p>
 
 Other compilers or interpreters may be invoked through pipes as well:</p>
 <pre>
-xsel|anchor|gcc -Wall -g -xc -</pre><h3>
+xsel|anchor|gcc -Wall -g -xc -
+   -or-
+anchor some_file|tcc -run -</pre><h3>
 
 Bugs, wiki, changelog</h3><p>
 

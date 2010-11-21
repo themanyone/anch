@@ -8,6 +8,7 @@
  * 
  * anch i686-pc-mingw32-gcc -m32 -mwindows windows.a.c -o windows.exe
  */
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
 const char g_szClassName[] = "myWindowClass"
@@ -22,18 +23,14 @@ WPARAM wParam, LPARAM lParam
             MessageBox  hwnd, szFileName, "Thank you!",
             MB_OK | MB_ICONINFORMATION
             break
-
         case WM_DESTROY:
             PostQuitMessage  0
             break
-        
         case WM_PASTE:
             DestroyWindow  hwnd
             break
-        
         default:
             return DefWindowProc  hwnd, msg, wParam, lParam
-    
     return 0
 
 int WINAPI WinMain  HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -52,7 +49,6 @@ LPSTR lpCmdLine, int nCmdShow
         MessageBox  NULL, "RegisterClassEx Failed!", "Error!",
         MB_ICONEXCLAMATION | MB_OK
         return 0
-    
     // Create a Window
     hwnd = CreateWindowEx  WS_EX_CLIENTEDGE,
     g_szClassName, "Window Title",
@@ -63,12 +59,10 @@ LPSTR lpCmdLine, int nCmdShow
         MessageBox  NULL, "CreateWindowEx Failed!", "Error!",
         MB_ICONEXCLAMATION | MB_OK
         return 0
-
     ShowWindow  hwnd, nCmdShow
     UpdateWindow  hwnd
     // Main Message Loop
     while  GetMessage(&Msg, NULL, 0, 0) > 0
         TranslateMessage  &Msg
-        DispatchMessage  &Msg
-    
+        DispatchMessage  &Msg    
     return Msg.wParam
