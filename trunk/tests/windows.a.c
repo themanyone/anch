@@ -64,5 +64,5 @@ LPSTR lpCmdLine, int nCmdShow
     // Main Message Loop
     while  GetMessage(&Msg, NULL, 0, 0) > 0
         TranslateMessage  &Msg
-        DispatchMessage  &Msg    
+        DispatchMessage  &Msg
     return Msg.wParam

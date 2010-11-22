@@ -40,7 +40,7 @@ tmp=$(mktemp -p ./ -u).${cxx##*.}
 ax[$replace]=$tmp
 
 # precompile and dump contents into temp file
-anchor -p $cxx > $tmp
+anchor -qp $cxx > $tmp
 
 # compile the temp file with options. remove if successful
 $gcc $(eval echo ${ax[@]}) && rm $tmp
