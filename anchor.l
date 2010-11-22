@@ -24,12 +24,16 @@
 #define DEBUG 0
 #define debug(...) if(DEBUG)printf(__VA_ARGS__)
 #define MAX_STRING 8192
-    int indent=0,lastindent=0,pull=0,chain=0;
-    char *ss,last[2],endstr[MAX_STRING]="";
+    int i,indent=0,lastindent=0,pull=0,chain=0;
+    char *ss,last[2],endstr[MAX_STRING+1]="";
+
+    /* count indents ignoring labels */
     void countIndent(void){
-        int i=0,spaces=0,tabs=0;
+        int i=0,spaces=0,tabs=0,label=1;
         char *s=yytext;
-        while(s[i]&&(s[i]==' '||s[i]=='\t')){
+        while(s[i]&&(s[i]==' '||s[i]=='\t'||label)){
+            if(s[i]==' '||s[i]=='\t')label=0;
+            else spaces++;
             if(s[i]=='\t')tabs++;
             if(s[i]==' ')spaces++;
             i++;
@@ -40,20 +44,20 @@
     /* saner strcpy wrapper prevents comment buffer overflow */
     char *scat (char *dest, const char *src){
         int destlen,srclen,max;
-        if(dest){
+        if(dest&&src){
             destlen = strlen(dest);
             srclen = strlen(src);
             /* max characters will fit into string */
-            max = MAX_STRING - destlen - 1;
-            if (max > 0){ /* should never be negative, but j.i.c. */
+            max = MAX_STRING - srclen;
+            if (max > 0){
                 strncat(dest, src, max);
                 dest[max] = '\0';
             } else {
-                fprintf(stderr,"Error: String length exceeded.\n");
-                if (!strncmp(dest,"/*",2)){
-                    dest[max-2]='*';
-                    dest[max-1]='/';
-                    dest[max] = '\0';
+                fprintf(stderr,"Error: Comment length > 8K exceeded.\n");
+                if (strstr(dest,"/*")){
+                    dest[MAX_STRING-2]='*';
+                    dest[MAX_STRING-1]='/';
+                    dest[MAX_STRING] = '\0';
                 }
             }
         }return dest;
@@ -93,9 +97,11 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
     <str>.          ECHO; */
                 
     /* defines */
-[\t ]*"#"  {
+[\t ]*"#"       {
                 debug("D1");
-                printf("%s",endstr);ECHO;BEGIN(define);strcpy(endstr,"\n");
+                printf("%s",endstr);
+                ECHO;
+                BEGIN(define);strcpy(endstr,"\n");
                 }
 <define>.*"\\"   ECHO;
 <define>.*[^\\]$ { ECHO;BEGIN(codesection);
@@ -162,7 +168,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
 
 
                 /* indented code found. add { } */
-^([\t]|[ ]{4})*[^ \t\n] %{
+^([[:alnum:]]+:){0,1}[\t ]+[^ \t\n] %{
                 BEGIN(codesection); 
                 countIndent();
     
@@ -170,8 +176,8 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 if(indent<lastindent){debug("L1");
                     if(strlen(endstr)<4)printf("%s ",endstr);
                     else printf("%c\n ",endstr[0]);
-                    for(int i=1;i<indent;i++) printf("    ");
-                    for(int i=indent;i<lastindent;i++)
+                    for(i=1;i<indent;i++) printf("    ");
+                    for(i=indent;i<lastindent;i++)
                         printf("   }");
                     /* print any stored comments */
                     if(strlen(endstr)>3){
@@ -186,7 +192,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 /* Right indent */
                 else if(indent>lastindent){ debug("R1");
                     if (!strpbrk(last,"{"))
-                        for(int i=lastindent;i<indent;i++)
+                        for(i=lastindent;i<indent;i++)
                             printf("{");
                     yyless(1);printf("\n");
                     if(strlen(endstr)>3)printf("%s",endstr+2);
@@ -206,36 +212,38 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 if(chain){
                     yyless(strspn(yytext,"\t "));
                     chain=0;
-                }
-                /* nope, do not pull up next line */
-                else yyless(1);
-                if(indent)printf(" ");
+                } else yyless(1);
+                
+                if(indent)printf("%c",yytext[0]);
                 lastindent=indent;strcpy(endstr,";\n");
                 %}
 
     /* function definition detected */
 <codesection>^[[:alpha:]_]+   %{debug("B1");
-                /* add ; endstr usually contains ";\n" */
-                if(strlen(endstr)<4)printf("%s",endstr);
-                else printf("%c\n",endstr[0]);
+                /* endstr contains ";\n" or ";\n comment \n" */
+                int has_comment=(strlen(endstr)>3);
+                if (has_comment) printf("%c\n",endstr[0]);
+                else printf("%s",endstr);
                 if(indent>0){
-                    indent=0;BEGIN(INITIAL);
+                    indent=0;
                     printf("}");
-                    for(int i=indent+1;i<lastindent;i++)
+                    for(i=indent+1;i<lastindent;i++)
                         printf("   }");
-                    printf("\n");
+                    if((!pull)||has_comment)printf("\n");
+                    else printf(" ");
                     lastindent=0;
                 }
-                /* endstr>3 is a buffered comment. print it */
-                if(strlen(endstr)>3)printf("%s",endstr+1);
-                ECHO;
+                /* print comments */
+                if(has_comment) printf("%s",endstr+1+pull);
+                
+                printf("%s",yytext);
                 strcpy(endstr,";\n");debug("B2");
                 %}
        /* remove final spaces */
 <codesection>^[\t ]+    debug("S1");
 <codesection><<EOF>>   {debug("EOF");
                 printf("%s}",endstr);
-                for(int i=1;i<lastindent;i++)
+                for(i=1;i<lastindent;i++)
                         printf("   }");
                 printf("\n");BEGIN(INITIAL);
                 }
@@ -245,38 +253,49 @@ void intro(){
     fprintf (stderr,"Anchor (C) 2010 Henry Kroll www.anch.org\n");
     fprintf (stderr,"See anchor -h for help.\n\n");
 }
-int main(int argc, char **argv ){
-    char *fname;
-    if (argc > 1){ /* c allows us to read 1 past end of array */
-        for (--argc;argc;argc--){
-            if(argv[argc][0]=='-'){
-                if (!strcmp(argv[argc],"-pull") || !strcmp(argv[argc],"-p")){
-                    pull = 1;
-                } else if (strcmp(argv[argc],"-")) {
-                    printf(
+void help(){ printf(
 "Usage: anchor [options] file\n"
-"-pull | -p Pull up code after closing brace.\n\n"
+"-pull  | -p Pull up code after closing brace.\n"
+"-quiet | -q Suppress informational messages.\n\n"
 
 "Other uses:\n"
 "   Pipe code through anchor to a file...\n"
 "   cat tests/test.a.c | anchor > test_out.c\n"
 "   ...or to a compiler that supports reading from pipes:\n"
-"   cat tests/test.a.c | anchor | tcc -run -\n\n"
+"   cat tests/test.a.c | anchor -q | tcc -run -\n\n"
 
 "Type 'more README' for additional suggestions.\n");
-return 0;
+}
+#define IS(a) !strcmp(argv[argc],#a)
+int main(int argc, char **argv ){
+    char *fname=NULL;
+    int loud=1;
+    if (argc > 1){ /* parse command line options */
+        for (--argc;argc;argc--){
+            if (argv[argc][0]=='-'){
+                if (IS(-pull)||IS(-p)){
+                    pull = 1;
+                } else if (IS(-quiet)||IS(-q)){
+                    loud = 0;
+                } else if (IS(-pq)||IS(-qp)){
+                    pull = 1; loud = 0;
+                } else if (!IS(-)) {
+                    help();
+                    return 0;
                 }
             } else fname = argv[argc];
-        }
-        intro();
+        } if (loud) intro();
+        if (!fname)goto instd;
         yyin = fopen(fname,"r");
         if (!yyin) { perror("fopen");
             exit (1);
         }
     } else {
-        intro();
+instd:  if(loud){ intro();
+            fprintf (stderr,
+            "No file specified. Reading stdin... Press CTRL-C to cancel.\n");
+        }
         yyin = stdin;
-        fprintf (stderr,"No file specified. Reading stdin... Press CTRL-C to cancel.\n");
     }
     yylex();
 }

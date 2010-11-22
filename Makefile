@@ -36,11 +36,11 @@ clean:
 	$(RM) tmp.* lex* *.o
 	$(RM) example
 
-mingw:
+exe:
 	$(MAKE) CC=$(MINGW) EXT=$(EXE)
 
 example:
-	@./anchor tests/example.a.c|tail -n +2| $(CC) -xc -o example -
+	@./anchor tests/example.a.c | $(CC) -xc -o example -
 	@./example
 	@$(RM) example
 
