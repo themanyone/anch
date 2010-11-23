@@ -24,7 +24,7 @@
 #define DEBUG 0
 #define debug(...) if(DEBUG)printf(__VA_ARGS__)
 #define MAX_STRING 8192
-    int i,indent=0,lastindent=0,pull=0,chain=0;
+    int i,indent=0,lastindent=0,pull=0,drop=0,tabs=0,chain=0;
     char *ss,last[2],endstr[MAX_STRING+1]="";
 
     /* count indents ignoring labels */
@@ -68,7 +68,7 @@
     /* Buffer comments and things so we can scan in one pass */
     /* Confusing? We can "look ahead" by looking at */
     /* what has already been read into the buffer... */
-^[\t ]*"/*"           {
+^[\t ]*"/*"     {
                 debug("C1");
                 BEGIN(comment);
                 scat(endstr,yytext);
@@ -175,10 +175,10 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 /* Left indent */
                 if(indent<lastindent){debug("L1");
                     if(strlen(endstr)<4)printf("%s ",endstr);
-                    else printf("%c\n ",endstr[0]);
-                    for(i=1;i<indent;i++) printf("    ");
+                    else printf("%c\n%s",endstr[0],tabs?"":" ");
+                    for(i=1;i<indent;i++) printf("%s",tabs?"\t":"    ");
                     for(i=indent;i<lastindent;i++)
-                        printf("   }");
+                        printf("%s",tabs?"\t}":"   }");
                     /* print any stored comments */
                     if(strlen(endstr)>3){
                         printf("%s",endstr+1);
@@ -191,9 +191,14 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 
                 /* Right indent */
                 else if(indent>lastindent){ debug("R1");
-                    if (!strpbrk(last,"{"))
-                        for(i=lastindent;i<indent;i++)
+                    if (!strpbrk(last,"{")){
+                        if(drop){
+                            printf("\n");
+                            for(i=1;i<indent;i++)
+                                printf("%s",tabs?"\t":"    ");
+                        } for(i=lastindent;i<indent;i++)
                             printf("{");
+                    }
                     yyless(1);printf("\n");
                     if(strlen(endstr)>3)printf("%s",endstr+2);
                     debug("R2");
@@ -205,7 +210,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                     }else {debug("N2");
                         printf("\n");
                     }
-                    if(!indent)printf("%c",yytext[strlen(yytext)-1]);
+                    if(!indent)printf("%c",yytext[yyleng-1]);
                     debug("N3");
                 }
                 /* pull up next line } after brace? */
@@ -222,20 +227,20 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
 <codesection>^[[:alpha:]_]+   %{debug("B1");
                 /* endstr contains ";\n" or ";\n comment \n" */
                 int has_comment=(strlen(endstr)>3);
-                if (has_comment) printf("%c\n",endstr[0]);
+                if (has_comment) printf("%c%c",endstr[0],endstr[1]);
                 else printf("%s",endstr);
                 if(indent>0){
                     indent=0;
                     printf("}");
                     for(i=indent+1;i<lastindent;i++)
-                        printf("   }");
+                        printf("%s",tabs?"\t}":"   }");
                     if((!pull)||has_comment)printf("\n");
                     else printf(" ");
                     lastindent=0;
                 }
                 /* print comments */
-                if(has_comment) printf("%s",endstr+1+pull);
-                
+                if(has_comment) printf("%s",endstr+2);
+                /* print type */
                 printf("%s",yytext);
                 strcpy(endstr,";\n");debug("B2");
                 %}
@@ -244,7 +249,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
 <codesection><<EOF>>   {debug("EOF");
                 printf("%s}",endstr);
                 for(i=1;i<lastindent;i++)
-                        printf("   }");
+                         printf("%s",tabs?"\t}":"   }");
                 printf("\n");BEGIN(INITIAL);
                 }
 
@@ -255,8 +260,10 @@ void intro(){
 }
 void help(){ printf(
 "Usage: anchor [options] file\n"
-"-pull  | -p Pull up code after closing brace.\n"
-"-quiet | -q Suppress informational messages.\n\n"
+"-pull  | -p  Pull up code after closing brace.\n"
+"-drop  | -d  Drop braces down, expanding listing.\n"
+"-quiet | -q  Suppress informational messages.\n"
+"-tabs  | -t  Use tabs. Does not convert spaces.\n\n"
 
 "Other uses:\n"
 "   Pipe code through anchor to a file...\n"
@@ -266,20 +273,18 @@ void help(){ printf(
 
 "Type 'more README' for additional suggestions.\n");
 }
-#define IS(a) !strcmp(argv[argc],#a)
+#define HAS(a) strstr(argv[argc],#a)
 int main(int argc, char **argv ){
     char *fname=NULL;
     int loud=1;
     if (argc > 1){ /* parse command line options */
         for (--argc;argc;argc--){
             if (argv[argc][0]=='-'){
-                if (IS(-pull)||IS(-p)){
-                    pull = 1;
-                } else if (IS(-quiet)||IS(-q)){
-                    loud = 0;
-                } else if (IS(-pq)||IS(-qp)){
-                    pull = 1; loud = 0;
-                } else if (!IS(-)) {
+                if (HAS(p)&&!HAS(drop)) pull = 1;
+                if (HAS(q)) loud = 0;
+                if (HAS(d)) drop = 1;
+                if (HAS(t)) tabs = 1;
+                if (!(pull|drop|tabs|!loud)) {
                     help();
                     return 0;
                 }
