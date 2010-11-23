@@ -1,6 +1,5 @@
 /* #!/usr/local/bin/anch -run */
 /* uncomment the above line to make "executable source" */
-   
 /* test.a.c is hereby released into the Public Domain
  *
  * This program can be compiled by anch
@@ -30,10 +29,10 @@ foo
 char shifted[] = "~!@#$%^&*()_+|\":?><ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 /* Now automatically encloses these arrays in brackets { } */
 char pig[6]= 'b','a','c','o','n',0
-char fool[] = '2', '0', '1', '0', ' ', 'H', 'e', 'n', 'r', 'y', ' ', 'K', 'r', 'o', 'l', 'l',
+char fool[] ='2', '0', '1', '0', ' ', 'H', 'e', 'n', 'r', 'y', ' ', 'K', 'r', 'o', 'l', 'l',
     ' ', 'I', 'I', 'I', '\n', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 'w', 'w', '.', 'T', 'h', 'e',
     'N', 'e', 'r', 'd', 'S', 'h', 'o', 'w', '.', 'c', 'o', 'm', 0
-int test_func  int val
+void test_func  int val
     int i,j
     struct bar
         int a;
@@ -51,18 +50,19 @@ int test_func  int val
     do
 inzx:   printf("\n%s\n",fool);
     while  0
+
 /* This should be ignored
  */
 int main  int argc,
     char **argv
     int i
-    argv[0][0] = argv[0][0]
     char name[]="Anchor"
     printf  "%s is C.\n",name
     /* nice */
     for  i=5;i--;
     /* Can we put a comment inside the loop? */
         printf  "%i\n",i
+    
                         /* How about here? */
     test_func  1
     printf  "done!\n"
