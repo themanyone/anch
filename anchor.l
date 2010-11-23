@@ -110,7 +110,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 }
 
     /* enum fun */
-^[\t ]*"enum"[ \t]  {
+^[\t ]*"enum"[ \t]+[[:alpha:]_]  {
                 debug("E1");
                 /* printf("%s",endstr);
                 yytext[4]='{';printf("%s}",yytext);strcpy(endstr,";\n"); */
@@ -122,7 +122,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 }
 
     /* put brackets around arrays */
-[\t ]+[[:alnum:]_*]+[\t ]*(\[[^\]]*\])+[\t ]*[=][^;\n]*,[^;\n]*, {
+[\t ]+[[:alnum:]_*]+[\t ]*(\[[^\]]*\])+[\t ]*[=][^{;\n]*,[^{;\n]*, {
                 debug("A1");BEGIN(arra);
                 yyless(0);
                 }
@@ -176,9 +176,11 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 if(indent<lastindent){debug("L1");
                     if(strlen(endstr)<4)printf("%s ",endstr);
                     else printf("%c\n%s",endstr[0],tabs?"":" ");
-                    for(i=1;i<indent;i++) printf("%s",tabs?"\t":"    ");
-                    for(i=indent;i<lastindent;i++)
-                        printf("%s",tabs?"\t}":"   }");
+                    if(!strpbrk(yytext,"}")||pull){
+                        for(i=1;i<indent;i++) printf("%s",tabs?"\t":"    ");
+                        for(i=indent;i<lastindent;i++)
+                            printf("%s",tabs?"\t}":"   }");
+                    }
                     /* print any stored comments */
                     if(strlen(endstr)>3){
                         printf("%s",endstr+1);
