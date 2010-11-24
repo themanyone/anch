@@ -226,7 +226,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 %}
 
     /* function definition detected */
-<codesection>^[[:alpha:]_]+   %{debug("B1");
+<codesection>^[[:alpha:]_*]+   %{debug("B1");
                 /* endstr contains ";\n" or ";\n comment \n" */
                 int has_comment=(strlen(endstr)>3);
                 if (has_comment) printf("%c%c",endstr[0],endstr[1]);
