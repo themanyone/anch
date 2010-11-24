@@ -25,7 +25,7 @@ int flav
 struct foo
     int a
     int b;
-foo
+*foo
 char shifted[] = "~!@#$%^&*()_+|\":?><ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 /* Now automatically encloses these arrays in brackets { } */
 char pig[6]= 'b','a','c','o','n',0
