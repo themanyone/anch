@@ -17,7 +17,7 @@
  */
 %option noyywrap
 %option never-interactive
-%x paren comment define arra str
+%x paren comment define arra enu str
 %s codesection
 
 %{
@@ -118,7 +118,7 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 yyless(strstr(yytext,"enum")-yytext+5);
                 ECHO;printf("{");
                 /* treat the rest of the enum like an array */
-                BEGIN(arra);
+                BEGIN(enu);
                 }
 
     /* put brackets around arrays */
@@ -128,8 +128,8 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 }
 <arra>=          ECHO;printf("{");
 <arra>=" "       printf("={");
-<arra>.          ECHO;
-<arra>[^=, \t]"\n"    {
+<arra,enu>.          ECHO;
+<arra,enu>[^=, \t]"\n"    {
                 /* eat \n */
                 yytext[yyleng-1]='\0';
                 printf("%s}",yytext);
