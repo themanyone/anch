@@ -115,8 +115,8 @@ L?\"([^\"\\\n]|(\\['\"?\\abfnrtv])|(\\([0123456]{1,3}))|(\\x[[:xdigit:]]+)|(\\u(
                 /* printf("%s",endstr);
                 yytext[4]='{';printf("%s}",yytext);strcpy(endstr,";\n"); */
                 printf("%s",endstr);strcpy(endstr,";\n");
-                ECHO;printf("{");
                 yyless(strstr(yytext,"enum")-yytext+5);
+                ECHO;printf("{");
                 /* treat the rest of the enum like an array */
                 BEGIN(arra);
                 }
