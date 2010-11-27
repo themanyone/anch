@@ -5,7 +5,7 @@ Parenthesis shall open and _close_ whenever *two consecutive spaces* are encount
 -----------------
 {{{
 void myFunc{space}{space}
-}}
+}}}
 becomes
 {{{
 void myFunc () {
