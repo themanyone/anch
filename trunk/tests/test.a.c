@@ -1,5 +1,5 @@
 /* #!/usr/local/bin/anch -run */
-/* uncomment the above line to make "executable source" */
+/* uncomment the above line to make Anchor executable */
 /* test.a.c is hereby released into the Public Domain
  *
  * This program can be compiled by anch
@@ -44,7 +44,7 @@ void test_func  int val
             printf  "test "
         printf  "\n"
     printf  "struct test %i %i\n" 
-        "be //careful {/* with *//*); \"this string\"",bar.a,bar.b
+        "be //careful {/* with *//*); \"this  string\"",bar.a,bar.b
 #endif
     goto inzx
     do
@@ -56,14 +56,14 @@ inzx:   printf("\n%s\n",fool);
 int main  int argc,
     char **argv
     int i
+    /* test */
     char name[]="Anchor"
-    printf  "%s is C.\n",name
+    printf  "%s is C.\n",name    /* test */
     /* nice */
-    for  i=5;i--;
-    /* Can we put a comment inside the loop? */
-        printf  "%i\n",i
-    
-                        /* How about here? */
+    for  i=5;i--;  //comment after loop
+    /* Can we put a comment here? */
+        printf  "%i\n",i  //c99 comment at end of line
+/* How about here? */
     test_func  1
     printf  "done!\n"
     return 0

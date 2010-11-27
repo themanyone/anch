@@ -2,17 +2,16 @@
    The port number is passed as an argument */
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <strings.h>
-#include <sys/types.h> 
-#include <sys/socket.h>
-#include <netinet/in.h>
+#include <arpa/inet.h>
 void error  char *msg
     perror  msg
     exit  1
 
 int main  int argc, char *argv[]
-
-    int sockfd,newsockfd,portno,clilen
+    int sockfd,newsockfd,portno
+    socklen_t clilen;
     char buffer[256]
     struct sockaddr_in serv_addr, cli_addr
     int n

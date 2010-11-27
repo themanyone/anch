@@ -6,15 +6,12 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
-
 /* void error  char *msg
     perror  msg
     exit  1 */
-
 #define error(x) \
     perror (x); \
     exit (1);
-
 int main  int argc, char **argv
     int sockfd, portno, n
     struct sockaddr_in serv_addr
