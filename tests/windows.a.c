@@ -10,7 +10,6 @@
  */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-
 const char g_szClassName[] = "myWindowClass"
 // My Window Procedure
 LRESULT CALLBACK myWndProc  HWND hwnd, UINT msg,
@@ -26,13 +25,10 @@ WPARAM wParam, LPARAM lParam
         case WM_DESTROY:
             PostQuitMessage  0
             break
-        case WM_PASTE:
-            DestroyWindow  hwnd
-            break
         default:
             return DefWindowProc  hwnd, msg, wParam, lParam
     return 0
-
+/* winmain */
 int WINAPI WinMain  HINSTANCE hInstance, HINSTANCE hPrevInstance,
 LPSTR lpCmdLine, int nCmdShow
     WNDCLASSEX wc
@@ -43,12 +39,12 @@ LPSTR lpCmdLine, int nCmdShow
     wc.cbSize           = sizeof  WNDCLASSEX
     wc.lpfnWndProc      = myWndProc
     wc.hInstance        = hInstance
-    wc.lpszClassName    = g_szClassName        
+    wc.lpszClassName    = g_szClassName
     // Register it
     if  !RegisterClassEx(&wc)
         MessageBox  NULL, "RegisterClassEx Failed!", "Error!",
         MB_ICONEXCLAMATION | MB_OK
-        return 0
+        return 1 //well that didn't work
     // Create a Window
     hwnd = CreateWindowEx  WS_EX_CLIENTEDGE,
     g_szClassName, "Window Title",

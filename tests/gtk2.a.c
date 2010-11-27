@@ -29,15 +29,6 @@ void create_image  GtkWidget *window
 /* main */
 int main  int argc, char *argv[]
     GtkWidget *window
-#if defined(__GNUC__)
-# if defined(__i386__)
-    /* Enable Alignment Checking on x86 */
-    __asm__("pushf\norl $0x40000,(%esp)\npopf");
-# elif defined(__x86_64__)
-     /* Enable Alignment Checking on x86_64 */
-    __asm__("pushf\norl $0x40000,(%rsp)\npopf");
-# endif
-#endif
     gtk_init  &argc, &argv
     window = gtk_window_new  GTK_WINDOW_TOPLEVEL
     g_signal_connect  window, "delete-event", G_CALLBACK(delete_event), NULL
