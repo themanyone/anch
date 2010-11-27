@@ -19,16 +19,14 @@ You could also create a variable of type "struct list_e" instead:
 struct list_e
     struct list_e *next
     char *data
-
 mylist
 }}}
 
-The extra semicolon and space are not necessary anymore because Anchor sees the variable and automatically puts a semicolon after it. The output looks like this:
+The extra semicolon and space are not necessary anymore because Anchor automatically puts a semicolon after what it thinks might be variable declarations. The output looks like this:
 
 {{{
 struct list_e{
     struct list_e *next;
     char *data;
-    }
-mylist;
+} mylist;
 }}}
