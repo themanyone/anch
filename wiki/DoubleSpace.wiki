@@ -1,11 +1,13 @@
 #summary Anchor's double space macro
 #labels Featured,Phase-Implementation,Phase-Support
 
+Parenthesis shall open and _close_ whenever *two consecutive spaces* are encountered or until the end of a line that _does not_ end in a comma or space.
+-----------------
 This
 {{{
 #include <stdio.h>
 /* Print command line arguments and exit. */
-int main  int c, char **v
+int main<span style="background-color:yellow">  </span>int c, char **v
     while  c--
         printf  "Argument %i is \"%s\"\n",c,v[c]
     return 0
@@ -24,24 +26,44 @@ int main (int c, char **v){
 }
 }}}
 
-It might not be obvious, but there are two spaces between main and int.
+It might not be obvious, but there are *two spaces* between main and int.
 
-The following will also work because there are two trailing spaces after main.
+The following will also work. Note the two trailing spaces:
 
+`void myFunc<span style="background-color:yellow">  </span>`
+becomes `void myFunc () {`
+
+This however does not work:
 {{{
-int main  void
-}}}
-
-This, however, will fail:
-
-{{{
+/* before */
 int main void
+/* after :( */
+int main void;
 }}}
 
-It looks the same, but there are no spaces after main.
+There needs to be *2 spaces* between 'main' and 'void'!
 
-This macro is not perfect and sometimes acts up.
+This works:
+{{{
+/* before */
+if<span style="background-color:yellow">  </span>j==4<span style="background-color:yellow">  </span>printf<span style="background-color:yellow">  </span>"Hi!"
+/* after */
+if (j==4)printf ("Hi!");
+}}}
+
+Tricks:
+
+A *single space* at the end of the line will cause ')' to be put on the next line:
+
+{{{
+/* before */
+printf  "Hello "> </span>
+        "World!"
+/* after */
+printf ("Hello " 
+        "World!");
+}}}
+
+Enjoy...
 
 If extra () are appearing in your code you probably have "double spaces in odd places."
-
-If the double space macro is confusing, just put your own parenthesis around things and avoid double spaces. It will all make sense eventually...
