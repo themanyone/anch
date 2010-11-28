@@ -41,7 +41,8 @@ void test_func  int val
 #ifndef nothing
     for  i=5;i--;
         for  j=5;j--;
-            printf  "test "
+            if  j==4  printf  "Hi!"
+            else printf  " test"
         printf  "\n"
     printf  "struct test %i %i\n" 
         "be //careful {/* with *//*); \"this  string\"",bar.a,bar.b
