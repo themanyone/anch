@@ -203,11 +203,12 @@
                 }else {debug("N1");
                 int has_comment=(strlen(endstr)>3);
                 if (has_comment){i=strspn(endstr+1,"\n");
-                    if (!strpbrk(last,"/,=!@#$%^&*}"))
+                    if (i==1)i++;
+                    if (!strpbrk(last,"/,=!@#$%^&*}\\"))
                         printf("%c",endstr[0]);
                     printf("%s",endstr+i);
                 }
-                else if (!strpbrk(last,"/,=!@#$%^&*}"))printf("%s",endstr);
+                else if (!strpbrk(last,"/,=!@#$%^&*}\\"))printf("%s",endstr);
                     else printf("%s",endstr+1);
                 if(!indent)printf("%c",yytext[yyleng-1]);
                     debug("N3");

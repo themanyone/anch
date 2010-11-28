@@ -5,9 +5,9 @@
 static gboolean delete_event  GtkWidget * widget,
                              GdkEvent * event, gpointer data
     g_print  "delete event occurred\n"
-    /* Change TRUE to FALSE and the main window will be destroyed */
+    /* Change TRUE to FALSE and destroy will be called */
     return FALSE
-/* Another callback */
+/* Called when delete_event returns FALSE */
 static void destroy  GtkWidget * widget, gpointer data
     gtk_main_quit  
 /* click callback */
