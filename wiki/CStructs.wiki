@@ -7,13 +7,13 @@ Most of the time Anchor does a good job, but there are exceptions. Here is how t
 struct list_e
     struct list_e *next
     char *data
-; 
+ ;
 }}}
-Notice that there is a space after the ";" in the above code.
+Notice that there is a space before the ";" in the above code.
 
 The extra space prevents Anchor from seeing the extra semicolon and removing it.
 
-You could also create a variable of type "struct list_e" instead:
+You could also create a variable "mylist" of type "struct list_e" instead:
 
 {{{
 struct list_e
