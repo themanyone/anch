@@ -200,7 +200,7 @@
                     }
                     yyless(1);
                     if(strlen(endstr)>3)
-                        printf("%s",endstr[1]=='\n'?endstr+2:endstr+1);
+                        printf("%s",endstr+1);
                     else printf("\n");
                     debug("R2");
                     
