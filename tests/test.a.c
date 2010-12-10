@@ -1,4 +1,4 @@
-/* #!/usr/local/bin/anch -run */
+#!/usr/local/bin/anch -run
 /* uncomment the above line to make Anchor executable */
 /* test.a.c is hereby released into the Public Domain
  *
