@@ -52,6 +52,7 @@ void test_func  int val
 inzx:   printf("\n%s\n",fool);
     while  0
 
+#ifndef GEOMETRY
 /* This should be ignored
  */
 int main  int argc,
@@ -59,14 +60,13 @@ int main  int argc,
     int i
     /* test */
     char name[]="Anchor"
-    printf  "%s is C.\n",name    /* test */
+    printf  "%s is C.\n",name  /* test */
     /* nice */
-    for  i=5;i--;  //comment after loop
-    /* Can we put a comment here? */
-        printf  "%i\n",i  //c99 comment at end of line
-/* How about here? */
+    for  i=5;i--;
+        printf  "%i\n",i  /* can comments go here? */
+    /* How about here? */
     test_func  1
     printf  "done!\n"
-    return 0
-    /* and we're done! */
-    
+    return 0 /*test*/
+/* and we're done! */
+#endif
