@@ -98,13 +98,13 @@
             }
                 
     /* defines */
-<INITIAL,paren,codesection>[\n]{0,1}[\t ]*"#"       {
+<INITIAL,paren,codesection>^[\t ]*"#"       {
                 debug("D1");
                 BEGIN(define);
                 scat(endstr,yytext);
                 }
 <define>.*"\\\n"   scat(endstr,yytext);
-<define>.*[^\\]"\n" { 
+<define>.*[^\\][\n]{0,1} { 
                 BEGIN(codesection);
                 scat(endstr,yytext);
                 debug("D2");
@@ -149,9 +149,7 @@
 <paren>.       ECHO;
 <paren>[^=,/ \t][\n]|[^=,/\n \t]"  "    {
                 /* put ) here */
-                printf("%c)",yytext[0]);yyless(2);
-                if(yytext[yyleng-1]=='\n')
-                    unput('\n');
+                printf("%c)",yytext[0]);yyless(yyleng-1);
                 BEGIN(codesection); debug("P2");
                 }
 
@@ -175,15 +173,20 @@
                 /* Left indent */
                 if(indent<lastindent){debug("L1");
                     int has_comment=(strlen(endstr)>3);
-                    if (has_comment) printf("%c%s",endstr[0],endstr+2);
-                    else printf("%s",endstr);printf("%s",tabs?"":" ");
+                    printf("%.*s\n",x=strcspn(endstr,"\n"),endstr);
+                    printf("%s",tabs?"":" ");
                     if(!strpbrk(yytext,"}")){
                         for(i=1;i<indent;i++) printf("%s",tabs?"\t":"    ");
                         for(i=indent;i<lastindent;i++)
                             printf("%s",tabs?"\t}":"   }");
                     }
                     if (pull) chain = 1;
-                    else printf("\n");
+                    else { printf("\n");
+                    }
+                    if(has_comment) { printf("%s",
+                        strspn(endstr+x,"\n")+endstr+x);
+                        yyless(1);
+                    }
                     debug("L2");
                 }
                 
@@ -225,20 +228,19 @@
 <codesection>^[[:alpha:]_*]+   %{debug("B1");
                 /* endstr contains ";\n" or ";\n comment \n" */
                 int has_comment=(strlen(endstr)>3);
-                if (!has_comment) printf("%c%c",endstr[0],endstr[1]);
-                else printf("%.*s",x=strcspn(endstr+1,"\n")+2,endstr);
+                printf("%.*s\n",x=strcspn(endstr,"\n"),endstr);
                 if(indent>0){
                     indent=0;
                     printf("}");
                     for(i=indent+1;i<lastindent;i++)
                         printf("%s",tabs?"\t}":"   }");
-                    if(!pull){printf("\n");
-                    }
+                    if(!pull||has_comment)printf("\n");
                     else printf(" ");
                     lastindent=0;                    
                 } else if (!has_comment) printf("%s",endstr+2);
                 /* print comments */
-                if(has_comment) printf("%s",endstr+x);
+                if(has_comment) printf("%s",
+                    endstr+strspn(endstr+x,"\n")+x);
                 
                 /* print type */
                 printf("%s",yytext);
@@ -246,15 +248,17 @@
                 %}
        /* remove final spaces */
 <codesection>^[\t ]+    debug("S1");
-<codesection><<EOF>>   {debug("EOF");
+<codesection,comment,define><<EOF>>   {debug("EOF");
                 int has_comment=(strlen(endstr)>3);
-                if (!has_comment) printf("%c",endstr[0]);
-                else printf("%.*s",x=strcspn(endstr,"\n"),endstr);
-                printf ("\n}");
+                printf("%.*s\n",x=strcspn(endstr,"\n"),endstr);
+                printf ("}");
                 for(i=1;i<lastindent;i++)
                          printf("%s",tabs?"\t}":"   }");
-                BEGIN(INITIAL);
+                if(!pull||has_comment)printf("\n");
+                else printf(" ");
                 if(has_comment) printf("%s",endstr+x+1);
+                else printf("%s",endstr+2);
+                BEGIN(INITIAL);
                 }
 
 %%
