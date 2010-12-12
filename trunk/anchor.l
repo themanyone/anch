@@ -285,13 +285,14 @@ void help(){ printf(
 int main(int argc, char **argv ){
     char *fname=NULL;
     int loud=1;
+#define HAS(a) strstr(argv[argc],#a)
     if (argc > 1){ /* parse command line options */
         for (--argc;argc;argc--){
             if (argv[argc][0]=='-'){
                 if (HAS(p)&&!HAS(drop)) pull = 1;
                 if (HAS(q)) loud = 0;
                 if (HAS(d)) drop = 1;
-                if (HAS(t)) tabs = 1;
+                if (HAS(t)&&!HAS(quiet)) tabs = 1;
                 if (!(pull|drop|tabs|!loud)) {
                     help();
                     return 0;
