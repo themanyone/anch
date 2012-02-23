@@ -124,7 +124,7 @@ No warrantee! Anchor was created as a learning toy for hobbies and fun; it might
 
 <p class="small">
 
-Anchor and accompanying documentation are Copyright &copy; 2010 Henry Kroll III. This page may be freely modified and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the GPL. Any of the above conditions can be waived by getting permission from the copyright holder.</p>
+Anchor and accompanying documentation are Copyright &copy; 2012 Henry Kroll III. This page may be freely modified and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the GPL. Any of the above conditions can be waived by getting permission from the copyright holder.</p>
 
 
 
