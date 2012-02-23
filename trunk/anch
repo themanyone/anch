@@ -9,20 +9,20 @@ else
 	gcc=$1
 	shift
 fi
-ax=($@);c=0;nofile=1
+ax=("$@");c=0;nofile=1
 # expects a command line like -fPIC -m32 foo.c -o foo
 # cxx is first argument without a "-" (is foo.c)
-for x in $@; do
+for x in "$@"; do
     # "-" by itself is a signal to pipe stdin on through
     if [[ $x == - ]]; then
-	anchor -p | $gcc $(eval echo ${ax[@]}) 
+	anchor -qp | $gcc "${ax[@]}"
 	exit 0
     fi
     # skip any target following the "-o" option
     if [[ $x == -o ]]; then ((c++))
     # otherwise look for a valid file to compile=cxx
-    elif [[ -f $x && $nofile == 1 ]]; then
-        cxx=${ax[$c]#./} #cxx=foo.c
+    elif [[ -f "$x" && $nofile == 1 ]]; then
+        cxx="${ax[$c]#./}" #cxx=foo.c
         replace=$c
         nofile=0
     fi
@@ -34,14 +34,14 @@ if [[ $nofile == 1 ]]; then
 fi
 
 # make a tmp file with same extension as blah.c
-tmp=.${cxx%%.*}.c
+tmp=".${cxx%%.*}.c"
 
 # replace blah.c in the command line with temp file
 ax[$replace]=$tmp
 
 # precompile and dump contents into temp file
-anchor -qp $cxx > $tmp
+anchor -qp "$cxx" > "$tmp"
 
 # compile the temp file with options. remove if successful
-$gcc $(eval echo ${ax[@]}) && rm $tmp
+$gcc "${ax[@]}" && rm "$tmp"
 # if build fails, tmp file remains for debugging
