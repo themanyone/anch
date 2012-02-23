@@ -34,7 +34,7 @@ if [[ $nofile == 1 ]]; then
 fi
 
 # make a tmp file with same extension as blah.c
-tmp=$(mktemp -p ./ -u).${cxx##*.}
+tmp=.${cxx%%.*}.c
 
 # replace blah.c in the command line with temp file
 ax[$replace]=$tmp

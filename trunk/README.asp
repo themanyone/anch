@@ -58,9 +58,9 @@ Programming with Anchor</h3><p>
 The rules are very simple. A double-space, &quot;&nbsp; &quot; (tells anchor to enclose the rest of the line in parenthesis). Indentation of 4 spaces {controls the placement of curly brackets}. The remaining lines are automatically terminated with semicolons; any of these rules may be overridden by placing a space at the end of the line, causing the precompiler to skip the line in question. Conversely, if the output is not what is expected there is probably extra whitespace at the end of a line somewhere. Comments are ignored, but it is a good idea to put them on a separate line.</p><h3>
 Compilation</h3><p>
 
-Example usage: converting example.a.c to C:</p>
+Example usage: converting example.anch to C:</p>
 <pre>
-anchor example.a.c > example.c</pre><p>
+anchor example.anch > example.c</pre><p>
 
 Compiling the result with gcc (or any C compiler).</p>
 <pre>
@@ -73,12 +73,12 @@ indent example.c</pre><p>
 Removing brackets from existing code is made possible with "unanchor." Install <a href="http://www.gnu.org/software/indent/">GNU indent</a> and use use the -i or -indent option for best results.</p>
 <pre>
 unanchor -i example.c #see how it might look
-unanchor -i example.c > editme.a.c # create a file</pre><p>
+unanchor -i example.c > editme.anch # create a file</pre><p>
 
 Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> like <a href="http://win-bash.sourceforge.net/">win bash</a> to interpret the included &quot;anch&quot; script.</p>
 <pre>
 make example
-anch gcc example.a.c -o example</pre><p>
+anch gcc example.anch -o example</pre><p>
 
 <a href="windows.a.html">see an unanchored C windows program</a></p><h3><a href="http://bellard.org/tcc/">
 
@@ -88,7 +88,7 @@ The latest version of TinyCC may be obtained from the <a href="http://repo.or.cz
 
 With TinyCC (<a href="http://bellard.org/tcc/">TCC</a>) installed, Anchor can execute pseudocode directly from the command line.</p>
 <pre>
-anch -run example.a.c
+anch -run example.anch
 </pre><p>
 Or put the following line</p>
 
