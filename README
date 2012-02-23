@@ -51,9 +51,9 @@ anch.org: Anchor
 
   Compilation
 
-   Example usage: converting example.a.c to C:
+   Example usage: converting example.anch to C:
 
- anchor example.a.c > example.c
+ anchor example.anch > example.c
 
    Compiling the result with gcc (or any C compiler).
 
@@ -69,7 +69,7 @@ anch.org: Anchor
    Install GNU indent and use use the -i or -indent option for best results.
 
  unanchor -i example.c #see how it might look
- unanchor -i example.c > editme.a.c # create a file
+ unanchor -i example.c > editme.anch # create a file
 
    Anchor knows nothing about the underlying language, so it processes a
    variety of curly bracket languages. The author uses it on C code, but it
@@ -81,7 +81,7 @@ anch.org: Anchor
    interpret the included "anch" script.
 
  make example
- anch gcc example.a.c -o example
+ anch gcc example.anch -o example
 
    see an unanchored C windows program
 
@@ -94,7 +94,7 @@ anch.org: Anchor
    With TinyCC (TCC) installed, Anchor can execute pseudocode directly from
    the command line.
 
- anch -run example.a.c
+ anch -run example.anch
 
    Or put the following line
 

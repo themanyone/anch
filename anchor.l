@@ -145,7 +145,6 @@
                 yyless(0);
                 }
     /* look down for a place to put ) */
-<paren>[, \\]  ECHO;
 <paren>.       ECHO;
 <paren>[^=,/ \t][\n]|[^=,/\n \t]"  "    {
                 /* put ) here */
@@ -275,9 +274,9 @@ void help(){ printf(
 
 "Other uses:\n"
 "   Pipe code through anchor to a file...\n"
-"   cat tests/test.a.c | anchor > test_out.c\n"
+"   cat tests/test.anch | anchor > test_out.c\n"
 "   ...or to a compiler that supports reading from pipes:\n"
-"   cat tests/test.a.c | anchor -q | tcc -run -\n\n"
+"   cat tests/test.anch | anchor -q | tcc -run -\n\n"
 
 "Type 'more README' for additional suggestions.\n");
 }

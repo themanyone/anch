@@ -40,7 +40,7 @@ exe:
 	$(MAKE) CC=$(MINGW) EXT=$(EXE)
 
 example:
-	@./anchor tests/example.a.c | $(CC) -xc -o example -
+	@./anchor tests/example.anch | $(CC) -xc -o example -
 	@./example
 	@$(RM) example
 
