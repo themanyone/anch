@@ -13,23 +13,7 @@
 
 <a>A</a>dvanced <a>N</a>egative <a>C</a>ompilation <a>H</a>euristic <a>O</a>ntological <a>R</a>efactorer</p>
 
-<img src="images/anchorcode.gif" alt="Anchor: for  i=5;i--;  C: for (i=5;i--;){"/><div style="float:right; text-align: center;">
-<form method="get"
-      action="http://groups.yahoo.com/subscribe/anchor_code"
-      style="background-color: #ffc; width: 254px; padding: 2px 4px">
-  <h6 style="font-weight: bold; margin-bottom: 5px; text-align: center">
-      Subscribe to anchor_code</h6>
-  <input style="vertical-align: top"
-      type="text"
-      name="user"
-      value="enter email address"
-      size="20" />
-  <input type="image" alt="Click to join anchor_code"
-      name="Click to join anchor_code"
-      src="http://us.i1.yimg.com/us.yimg.com/i/yg/img/i/us/ui/join.gif" />
-  <p style="text-align: center;">
-  Powered by <a href="http://us.groups.yahoo.com/">us.groups.yahoo.com</a></p>
-</form></div><h3>
+<img src="images/anchorcode.gif" alt="Anchor: for  i=5;i--;  C: for (i=5;i--;){"/><h3>
 
 Why Anchor?</h3><p>
 

@@ -1,5 +1,13 @@
-/* #!/usr/local/bin/anch -run */
-/* uncomment the above line to make "executable source" */
+#if 0
+# runnable bash script compiles to c source
+# requires http://anch.org/anchor.html (anchor)
+if [[ $1 ]]; then
+    anch -run "$0" "$@"
+else
+    anch -run "$0" "try running this program with arguments" "Args test"
+fi
+exit
+#endif
 #include <stdio.h>
 /* Print command line arguments and exit. */
 int main  int c, char **v

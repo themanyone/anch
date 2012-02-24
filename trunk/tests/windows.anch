@@ -1,4 +1,4 @@
-/* windows.a.c is hereby released into the Public Domain
+/* windows.anch is hereby released into the Public Domain
  * 
  * adapted from http://www.winprog.org/tutorial/simple_window.html
  * by Henry Kroll III, http://www.thenerdshow.com
@@ -6,7 +6,7 @@
  * This program can be compiled by anch
  * and your regular compiler like so:
  * 
- * anch i686-pc-mingw32-gcc -m32 -mwindows windows.a.c -o windows.exe
+ * anch i686-pc-mingw32-gcc -m32 -mwindows windows.anch -o windows.exe
  */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

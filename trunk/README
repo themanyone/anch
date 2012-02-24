@@ -4,12 +4,6 @@ anch.org: Anchor
 
    Anchor: for  i=5;i--;  C: for (i=5;i--;){
 
-        Subscribe to anchor_code
-
-   _____________________ [ Click to join anchor_code ]
-
-   Powered by us.groups.yahoo.com
-
   Why Anchor?
 
    If (code == indented) {brackets = redundant}. Refactoring with Anchor
@@ -141,7 +135,7 @@ anch.org: Anchor
    easier. These tools may be freely adapted under the terms of the Gnu
    Public License.
 
-   Anchor and accompanying documentation are Copyright (c) 2010 Henry Kroll
+   Anchor and accompanying documentation are Copyright (c) 2012 Henry Kroll
    III. This page may be freely modified and shared under the terms of the
    Creative Commons SA license inasmuch as it agrees with the terms of the
    GPL. Any of the above conditions can be waived by getting permission from

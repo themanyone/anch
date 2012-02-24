@@ -1,5 +1,8 @@
-/* #!/usr/local/bin/anch -run $(pkg-config --cflags --libs gtk+-2.0) */
-/* Convert to C with Anchor http://freshmeat.net/projects/anchor */
+#if 0
+# runnable bash script compiles to c source
+# requires http://anch.org/anchor.html (anchor)
+anch -run $(pkg-config --cflags --libs gtk+-2.0) "$0" "$@";exit
+#endif
 #include <gtk/gtk.h>
 #define IMAGE "../images/anchor.jpg"
 static gboolean delete_event  GtkWidget * widget,
