@@ -36,7 +36,7 @@ clean:
 	$(RM) tmp.* lex* *.o
 	$(RM) example
 
-exe:
+win:
 	$(MAKE) CC=$(MINGW) EXT=$(EXE)
 
 example:

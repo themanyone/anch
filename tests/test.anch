@@ -1,11 +1,11 @@
 #!/usr/local/bin/anch -run
 /* uncomment the above line to make Anchor executable */
-/* test.a.c is hereby released into the Public Domain
+/* test.anch is hereby released into the Public Domain
  *
  * This program can be compiled by anch
  * and your regular compiler like so:
  *
- * anch gcc test.a.c -o test
+ * anch gcc test.anch -o test
  
     This should be ignored by the parser.
         puts  "hi"
