@@ -24,6 +24,7 @@
 #define DEBUG 0
 #define debug(...) if(DEBUG)printf(__VA_ARGS__)
 #define MAX_STRING 8192
+#include <strings.h>
     int i,x,indent=0,lastindent=0,pull=0,drop=0,tabs=0,chain=0;
     char *ss,last[2],endstr[MAX_STRING+1]="";
 
@@ -111,10 +112,9 @@
                 }
 
     /* enum fun */
-^[\t ]*"enum"[ \t]+[[:alpha:]_]  {
+^[\t ]+"enum"[ \t]+[[:alnum:]_=]+[ \t]  {
                 debug("E1");
                 printf("%s",endstr);strcpy(endstr,";\n");
-                yyless(strstr(yytext,"enum")-yytext+5);
                 ECHO;printf("{");
                 BEGIN(enu);
                 }
@@ -127,12 +127,28 @@
 <arra>=          ECHO;printf("{");
 <arra>=" "       printf("={");
 <arra,enu>.      ECHO;
+<enu>.*"{".*    {yyless(0);BEGIN(codesection);}
+<enu>[^,][ \t]+[[:alnum:]_]+[ \t]  {
+                debug("E3");
+                ECHO;printf("{");debug("/E3");
+                }
+<enu>[^,][ \t]+[[:alnum:]_=]+[,]  {
+                debug("E4");
+                //~ fprintf(stderr,"%s\n",yytext);
+                yyless(strrchr(yytext,' ')-yytext+1);
+                ECHO;printf("{");
+                }
+<arra,enu>[[:alnum:]_=][ \t][[:alnum:]] {
+                //~ fprintf(stderr,"%s\n",yytext);
+                yyless(1);printf("%s}",yytext);
+                BEGIN(codesection); debug("A4");
+                }
 <arra,enu>[^=,/ \t]"\n"    {
                 /* eat \n */
                 //yytext[yyleng-1]='\0';
                 yyless(1);
                 printf("%s}",yytext);
-                BEGIN(codesection); debug("A4");
+                BEGIN(codesection); debug("A5");
                 }
     
     
@@ -240,7 +256,7 @@
                 /* print comments */
                 if(has_comment) printf("%s",
                     endstr+strspn(endstr+x,"\n")+x);
-                
+                if(!strcmp(yytext,"enum")){yyless(1); BEGIN(enu);}
                 /* print type */
                 printf("%s",yytext);
                 strcpy(endstr,";\n");debug("B2");
@@ -297,8 +313,9 @@ int main(int argc, char **argv ){
                     return 0;
                 }
             } else fname = argv[argc];
-        } if (loud) intro();
+        }
         if (!fname)goto instd;
+        if (loud) intro();
         yyin = fopen(fname,"r");
         if (!yyin) { perror("fopen");
             exit (1);
