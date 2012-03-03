@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -x
+set -x
 : ${1?"Usage: `basename $0` [compiler] [options] file..."}
 ax=($@)
 # assume first file that exists is input source code
@@ -51,6 +51,9 @@ else
     anchor -qp "$in" > "$tmp"
 fi
 
+if [[ "${cflags:0:2}" == '$(' ]]; then
+    cflags=$(${cflags:2:-1})
+fi
 # compile the temp file with options. remove if successful
-$gcc ${cflags[@]} $run $tmp ${args[@]}&&rm "$tmp"
+$gcc ${cflags} $run $tmp ${args[@]}&&rm "$tmp"
 # if build fails, tmp file remains for debugging

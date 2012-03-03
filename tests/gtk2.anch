@@ -1,8 +1,5 @@
-#if 0
-# runnable bash script compiles to c source
-# requires http://anch.org/anchor.html (anchor)
-anch -run $(pkg-config --cflags --libs gtk+-2.0) "$0" "$@";exit
-#endif
+#!/usr/local/bin/anch $(pkg-config --cflags --libs gtk+-2.0) -run
+
 #include <gtk/gtk.h>
 #define IMAGE "../images/anchor.jpg"
 static gboolean delete_event  GtkWidget * widget,
