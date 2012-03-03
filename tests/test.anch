@@ -1,6 +1,7 @@
-#!/usr/local/bin/anch -run
-/* uncomment the above line to make Anchor executable */
+#!/usr/local/bin/anch -lm -run
 /* test.anch is hereby released into the Public Domain
+ *
+ * intentionally bad code
  *
  * This program can be compiled by anch
  * and your regular compiler like so:
@@ -13,6 +14,7 @@
  */
 /* These defines shouldn't be touched  */
 #include <stdio.h>
+#include <math.h>
 #define test_define(x) printf( \
     "x%s\n",x)
 /* This enum will have brackets {} put around it */
@@ -20,10 +22,12 @@ enum food bacon, cheese, bread,
 lettuce, onions foods
 /* like this one */
 enum iLike {food,drink};
-enum iLike likes=food
+/* to declare variable of type enum iLike */
+/* add a space at the end to prevent brackets */
+enum iLike asdf=drink 
 int flav
-/* automatically fixes missing semicolons and brackets */
-struct foo
+/* automatically fix missing semicolons and brackets */
+struct foo {
     int a
     int b;
 *foo
@@ -43,13 +47,8 @@ void test_func  int val
         int b
     bar = {5,4} 
 #ifndef nothing
-    for  i=5;i--;
-        for  j=5;j--;
-            if  j==4  printf  "Hi!"
-            else printf  " test"
-        printf  "\n"
-    printf  "struct test %i %i\n" 
-        "be //careful {/* with *//*); \"this  string\"",bar.a,bar.b
+    for  i=val+1;i--;
+        printf  "%*s\n",(int)(val*1.5+val*sinf(i*6.28/val)),"sine"
 #endif
     goto inzx
     do
@@ -66,10 +65,9 @@ int main  int argc,
     char name[]="Anchor"
     printf  "%s is C.\n",name  /* test */
     /* nice */
-    for  i=5;i--;
-        printf  "%i\n",i  /* can comments go here? */
+    for  i=5;i--;  printf  "%i\n",i  /* can comments go here? */
     /* How about here? */
-    test_func  1
+    test_func  8
     printf  "done!\n"
     return 0 /*test*/
 /* and we're done! */

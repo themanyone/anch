@@ -68,7 +68,7 @@ anch gcc example.anch -o example</pre><p>
 
 Optional TinyCC integration</a></h3><p>
 
-The latest version of TinyCC may be obtained from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or the <a href="http://repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob branch</a> if living dangerously. A mob-release Linux (RPM) version of TCC may be found <a href="http://thenerdshow.com/rpm/tinycc-0.9.26-0.1.20101029git.fc14.src.rpm">here</a>.</p><p>
+The latest version of TinyCC may be obtained from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or the <a href="http://repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob branch</a>, if living dangerously.</p><p>
 
 With TinyCC (<a href="http://bellard.org/tcc/">TCC</a>) installed, Anchor can execute pseudocode directly from the command line.</p>
 <pre>
@@ -76,10 +76,10 @@ anch -run example.anch
 </pre><p>
 Or put the following line</p>
 
-<pre><span class="S9">#!/usr/local/bin/anch -run [args]</span></pre><p>
+<pre><span class="S9">#!/usr/local/bin/anch [linker args] -run [program args]</span></pre><p>
 
 at the top of files to make executable C scripts:</p>
-<pre><span class="S9">#!/usr/local/bin/anch -run</span>
+<pre><span class="S9">#!/usr/local/bin/anch -run test args</span>
 <span class="S9">#include &lt;stdio.h&gt;</span>
 <span class="S5">int</span><span class="S0"> </span>main<span class="S0">  </span><span class="S5">int</span><span class="S0"> </span>c<span class="S10">,</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">**</span>v
 <span class="S0">    </span><span class="S5">while</span><span class="S0">  </span>c<span class="S10">--</span>
@@ -90,11 +90,11 @@ Direct execution</h3><p>
 
 The anch script can use <a href="http://bellard.org/tcc/">TCC</a> to execute through a pipe. For example, if both <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> and <a href="http://bellard.org/tcc/">TCC</a> are installed, the above code may be highlighted with the mouse and executed directly from the selection buffer, with arguments (and without even saving to disk).</p>
 <pre>
-xsel | anch -run - [args]</pre><p>
+xsel | anch [linker args] -run - [program args]</pre><p>
 
-Other compilers or interpreters may be invoked through pipes as well:</p>
+Other compilers or interpreters may be invoked through pipes as well (the -q option silences info messages):</p>
 <pre>
-xsel|anchor|gcc -Wall -g -xc -
+xsel|anchor -q|gcc -Wall -g -xc -
    -or-
 anchor some_file|tcc -run -</pre><h3>
 
