@@ -1,47 +1,56 @@
 #!/bin/bash
 #set -x
 : ${1?"Usage: `basename $0` [compiler] [options] file..."}
-#integration with tcc -run [args]
-if [[ "${1:0:4}" == -run ]]; then
-    gcc="tcc"
-else
-	#create tmp file and invoke other compiler
-	gcc=$1
-	shift
-fi
-ax=("$@");c=0;nofile=1
-# expects a command line like -fPIC -m32 foo.c -o foo
-# cxx is first argument without a "-" (is foo.c)
-for x in "$@"; do
-    # "-" by itself is a signal to pipe stdin on through
-    if [[ $x == - ]]; then
-	anchor -qp | $gcc "${ax[@]}"
-	exit 0
-    fi
-    # skip any target following the "-o" option
-    if [[ $x == -o ]]; then ((c++))
-    # otherwise look for a valid file to compile=cxx
-    elif [[ -f "$x" && $nofile == 1 ]]; then
-        cxx="${ax[$c]#./}" #cxx=foo.c
-        replace=$c
-        nofile=0
-    fi
-    ((c++))
+ax=($@)
+# assume first file that exists is input source code
+for x in "${ax[@]}"; do
+    if [[ -f "$x" ]]; then in="$x"; fi
 done
-if [[ $nofile == 1 ]]; then
-    echo `basename $0` ERROR: No input file!
-    #exit $nofile
+# search function echos position in array or nothing
+pos() {
+    c=0
+    local hay needle=$1
+    shift
+    for hay; do
+        if [[ $hay == $needle ]]; then echo $c; return 0;fi
+    ((c++))
+    done; return 1
+}
+run=$(pos "-run" $@)
+end=$(pos $in $@)
+#integration with tcc -run [args]
+if [[ "$run" && "$end" ]]; then
+    cflags=${ax[@]:0:$run}
+    args=${ax[@]:$run+1:$end-$run-1}
+    args+=" "${ax[@]:$end+1}
+    gcc='tcc '
+    run='-run '
+# if not tcc, assume $1 is compiler to use
+elif [[ "$in" ]]; then
+    opt=$(pos "-o" $@)
+    gcc=$1
+    args+=${ax[@]:$opt}
+    cflags=${ax[@]:1:$(pos $in $@)-1}
+else
+    if [[ -z $(pos "tcc" $@) ]]; then
+# who knows? maybe it came from a pipe
+        gcc='tcc '
+    fi
+        anchor -qp | $gcc "$@"
+    exit 0
 fi
-
-# make a tmp file with same extension as blah.c
-tmp=".${cxx%%.*}.c"
-
-# replace blah.c in the command line with temp file
-ax[$replace]=$tmp
+src="${in##./}"
+tmp=".${src%.*}.c"
 
 # precompile and dump contents into temp file
-anchor -qp "$cxx" > "$tmp"
+# get rid of shebang if not tcc compiler
+s=($(<$in)[0])
+if [[ $gcc != "tcc " && ${s:0:2} == "#!" ]]; then
+    anchor -qp "$in" | tail -n +2 > $tmp
+else
+    anchor -qp "$in" > "$tmp"
+fi
 
 # compile the temp file with options. remove if successful
-$gcc "${ax[@]}" && rm "$tmp"
+$gcc ${cflags[@]} $run $tmp ${args[@]}&&rm "$tmp"
 # if build fails, tmp file remains for debugging

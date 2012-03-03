@@ -82,8 +82,7 @@ anch.org: Anchor
   Optional TinyCC integration
 
    The latest version of TinyCC may be obtained from the git repo or the mob
-   branch if living dangerously. A mob-release Linux (RPM) version of TCC may
-   be found here.
+   branch, if living dangerously.
 
    With TinyCC (TCC) installed, Anchor can execute pseudocode directly from
    the command line.
@@ -92,11 +91,11 @@ anch.org: Anchor
 
    Or put the following line
 
- #!/usr/local/bin/anch -run [args]
+ #!/usr/local/bin/anch [linker args] -run [program args]
 
    at the top of files to make executable C scripts:
 
- #!/usr/local/bin/anch -run
+ #!/usr/local/bin/anch -run test args
  #include <stdio.h>
  int main  int c, char **v
      while  c--
@@ -110,11 +109,12 @@ anch.org: Anchor
    the mouse and executed directly from the selection buffer, with arguments
    (and without even saving to disk).
 
- xsel | anch -run - [args]
+ xsel | anch [linker args] -run - [program args]
 
-   Other compilers or interpreters may be invoked through pipes as well:
+   Other compilers or interpreters may be invoked through pipes as well (the
+   -q option silences info messages):
 
- xsel|anchor|gcc -Wall -g -xc -
+ xsel|anchor -q|gcc -Wall -g -xc -
     -or-
  anchor some_file|tcc -run -
 

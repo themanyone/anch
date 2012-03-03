@@ -102,6 +102,7 @@
 <INITIAL,paren,codesection>^[\t ]*"#"       {
                 debug("D1");
                 BEGIN(define);
+                if(pull)chain=2;//chain exception
                 scat(endstr,yytext);
                 }
 <define>.*"\\\n"   scat(endstr,yytext);
@@ -127,7 +128,9 @@
 <arra>=          ECHO;printf("{");
 <arra>=" "       printf("={");
 <arra,enu>.      ECHO;
-<enu>.*"{".*    {yyless(0);BEGIN(codesection);}
+<arra,enu>.*" "$     {yyless(0);BEGIN(codesection);}
+<arra,enu>.*"{".*    {yyless(0);BEGIN(codesection);}
+
 <enu>[^,][ \t]+[[:alnum:]_]+[ \t]  {
                 debug("E3");
                 ECHO;printf("{");debug("/E3");
@@ -195,8 +198,8 @@
                         for(i=indent;i<lastindent;i++)
                             printf("%s",tabs?"\t}":"   }");
                     }
-                    if (pull) chain = 1;
-                    else { printf("\n");
+                    if (pull&&chain<2) chain = 1;
+                    else { printf("\n");chain = 0;
                     }
                     if(has_comment) { printf("%s",
                         strspn(endstr+x,"\n")+endstr+x);

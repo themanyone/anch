@@ -1,16 +1,8 @@
-#if 0
-# runnable bash script compiles to c source
-# requires http://anch.org/anchor.html (anchor)
-if [[ $1 ]]; then
-    anch -run "$0" "$@"
-else
-    anch -run "$0" "try running this program with arguments" "Args test"
-fi
-exit
-#endif
+#!/usr/local/bin/anch -run test
 #include <stdio.h>
 /* Print command line arguments and exit. */
 int main  int c, char **v
+    if  c<2  puts  "Try running this program with arguments."
     while  c--
         printf  "Argument %i is \"%s\"\n",c,v[c]
     return 0
