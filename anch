@@ -10,7 +10,7 @@ pos() {
     ((c++))
     done; return 1
 }
-if [[ !$1 || $(pos "-h" $@) ]]; then
+if [[ -z $1 || $(pos "-h" $@) ]]; then
 cat <<EOF
 Usage: `basename $0` [CC] [cflags] [libs] [-run] source.anch [program args]
 
