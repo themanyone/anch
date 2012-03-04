@@ -59,16 +59,20 @@ Removing brackets from existing code is made possible with "unanchor." Install <
 unanchor -i example.c #see how it might look
 unanchor -i example.c > editme.anch # create a file</pre><p>
 
-Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> like <a href="http://win-bash.sourceforge.net/">win bash</a> to interpret the included &quot;anch&quot; script.</p>
-<pre>
-make example
-anch gcc example.anch -o example</pre><p>
+<a href="windows.a.html">see an unanchored C windows program</a></p><p>
 
-<a href="windows.a.html">see an unanchored C windows program</a></p><h3><a href="http://bellard.org/tcc/">
+Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> like <a href="http://win-bash.sourceforge.net/">win bash</a> to interpret the included &quot;anch&quot; script.</p><h3>
+
+Makefile Rule</h3><p>
+
+Add this rule to a Makefile to generate .c source from .anch source when needed.</p><pre>
+#~ make foo.c
+%.c : %.anch
+	anchor -pq "$<" > "$@"</pre><h3><a href="http://bellard.org/tcc/">
 
 Optional TinyCC integration</a></h3><p>
 
-The latest version of TinyCC may be obtained from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or the <a href="http://repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob branch</a>, if living dangerously.</p><p>
+The latest version of TinyCC may be obtained from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or the unstable <a href="http://repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob branch</a> for user-contributed patches.</p><p>
 
 With TinyCC (<a href="http://bellard.org/tcc/">TCC</a>) installed, Anchor can execute pseudocode directly from the command line.</p>
 <pre>
@@ -76,7 +80,7 @@ anch -run example.anch
 </pre><p>
 Or put the following line</p>
 
-<pre><span class="S9">#!/usr/local/bin/anch [linker args] -run [program args]</span></pre><p>
+<pre><span class="S9">#!/usr/local/bin/anch [cflags] [libs] -run [program args]</span></pre><p>
 
 at the top of files to make executable C scripts:</p>
 <pre><span class="S9">#!/usr/local/bin/anch -run test args</span>
@@ -90,7 +94,7 @@ Direct execution</h3><p>
 
 The anch script can use <a href="http://bellard.org/tcc/">TCC</a> to execute through a pipe. For example, if both <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> and <a href="http://bellard.org/tcc/">TCC</a> are installed, the above code may be highlighted with the mouse and executed directly from the selection buffer, with arguments (and without even saving to disk).</p>
 <pre>
-xsel | anch [linker args] -run - [program args]</pre><p>
+xsel | anch -run -</pre><p>
 
 Other compilers or interpreters may be invoked through pipes as well (the -q option silences info messages):</p>
 <pre>
