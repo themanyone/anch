@@ -10,14 +10,14 @@ pos() {
     ((c++))
     done; return 1
 }
-if [[ -z $1 || $(pos "-h" $@) ]]; then
+if [[ -z $1 || $(pos "-h" "$@") ]]; then
 cat <<EOF
 Usage: `basename $0` [CC] [cflags] [libs] [-run] source.anch [program args]
 
 Examples, -run
 $ `basename $0` -lm -std=c99 -run test.anch arg1 arg2
 
-Static builds
+Compilation with gcc
 $ `basename $0` gcc -c mylib1.anch -o mylib1.o
 $ `basename $0` gcc -c myprog.anch -o myprog.o
 $ gcc mylib1.o myprog.o -o myprog
@@ -28,36 +28,47 @@ As a "shebang" line
 Makefiles: See README
 EOF
 exit 0
-fi 
-ax=($@)
+fi
+ax=($(echo "$1"|xargs) "${@:2}") #unquote shebang arguments ~_^
+
+# keep c source?
+k=$(pos "-keep" "${ax[@]}")
+[[ $k ]]&&unset ax[$k]
 # assume first file that exists is input source code
-for x in "${ax[@]}"; do
-    if [[ -f "$x" ]]; then in="$x"; fi
-done
-run=$(pos "-run" $@)
-end=$(pos $in $@)
+# unless it came from a pipe -
+if [[ -z $(pos "-" "${ax[@]}") ]]; then
+    for x in "$@"; do
+        if [[ -f "$x" ]]; then
+            in="$x"; break
+        fi
+    done
+fi
+run=$(pos "-run" "${ax[@]}")
+end=$(pos $in "${ax[@]}")
 #integration with tcc -run [args]
 if [[ "$run" && "$end" ]]; then
     cflags=${ax[@]:0:$run}
-    args=${ax[@]:$run+1:$end-$run-1}
-    args+=" "${ax[@]:$end+1}
+    args=("${ax[@]:$run+1:$end-$run-1}")
+    args+=("${ax[@]:$end+1}")
     gcc='tcc '
     run='-run '
 # if not tcc, assume $1 is compiler to use
 elif [[ "$in" ]]; then
-    opt=$(pos "-o" $@)
+    opt=$(pos "-o" "${ax[@]}")
     gcc=$1
-    args+=${ax[@]:$opt}
-    cflags=${ax[@]:1:$(pos $in $@)-1}
+    args=("${ax[@]:$opt}")
+    cflags=${ax[@]:1:$(pos $in ${ax[@]})-1}
 else
 # who knows? maybe it came from a pipe
-    if [[ -z $(pos "-" $@) ]]; then
+    if [[ -z $(pos "-" "${ax[@]}") ]]; then
         echo No input files.
         exit 1
-    elif [[ -z $(pos "tcc" $@) ]]; then
+    # it did, it did come from a pipe!
+    elif [[ -n $(pos "-run" "${ax[@]}") && \
+        -z $(pos "tcc" "${ax[@]}") ]]; then
         gcc='tcc '
     fi
-        anchor -qp | $gcc "$@"
+        anchor -qp | $gcc "${ax[@]}"
     exit 0
 fi
 src="${in##./}"
@@ -75,6 +86,7 @@ fi
 if [[ "${cflags:0:2}" == '$(' ]]; then
     cflags=$(${cflags:2:-1})
 fi
+
 # compile the temp file with options. remove if successful
-$gcc ${cflags} $run "$tmp" ${args[@]}&&rm "$tmp"
+$gcc ${cflags} $run "$tmp" "${args[@]}"&&[[ -z $k || -z $run ]]&&rm "$tmp"
 # if build fails, tmp file remains for debugging
