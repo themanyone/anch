@@ -1,4 +1,4 @@
-#!/usr/local/bin/anch -run test
+#!/usr/local/bin/anch -g -run test1 test2
 #include <stdio.h>
 /* Print command line arguments and exit. */
 int main  int c, char **v
