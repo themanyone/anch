@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 # search function echos position in array or nothing
 pos() {
     c=0
