@@ -1,4 +1,4 @@
-#!/usr/local/bin/anch -lm -run
+#!/usr/local/bin/anch -keep -lm -run
 /* test.anch is hereby released into the Public Domain
  *
  * intentionally bad code

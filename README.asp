@@ -61,7 +61,7 @@ unanchor -i example.c > editme.anch # create a file</pre><p>
 
 <a href="windows.a.html">see an unanchored C windows program</a></p><p>
 
-Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users would need to install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> like <a href="http://win-bash.sourceforge.net/">win bash</a> to interpret the included &quot;anch&quot; script.</p><h3>
+Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users may optionally install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> like <a href="http://win-bash.sourceforge.net/">win bash</a> to interpret the included &quot;anch&quot; convenience script.</p><h3>
 
 Makefile Rule</h3><p>
 

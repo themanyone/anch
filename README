@@ -72,14 +72,14 @@ anch.org: Anchor
    will most likely work with little or no change on C++, Java, .NET, PHP,
    Perl, awk and other types of configuration files or scripts. Programs may
    be compiled on Linux or unix by putting "anch" in front of the existing
-   compiler or interpreter. Windows users would need to install something
+   compiler or interpreter. Windows users may optionally install something
    like MingW, cygwin, or some other unix-like bourne shell like win bash to
-   interpret the included "anch" script.
+   interpret the included "anch" convenience script.
 
   Makefile Rule
 
    Add this rule to a Makefile to generate .c source from .anch source when
-   needed. See the tests folder for an example.
+   needed.
 
  #~ make foo.c
  %.c : %.anch
