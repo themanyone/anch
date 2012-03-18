@@ -17,13 +17,11 @@
 
 Why Anchor?</h3><p>
 
-<a>If</a> (code == indented) {brackets = redundant}. Refactoring with Anchor saves typing and makes programs easier to read. Best of all, it's free!</p><p>
-
-Techies might refer to it as a language-independent pseudocode compiler or code decorator but all it does is fix missing brackets and punctuation.</p><h3>
+Anchor automatically adds curly braces and semicolons to code written in various programming languages, saving typing and making programs easier to read. It lets programmers pretend to be coding in Python or Lua while actually writing standard C, Java, PHP, C++, .NET, C#, or D. An example bash script integrates with the <a href="http://bellard.org/tcc/">TCC</a> compiler to make runnable "scripts" with the speed of C.</p><h3>
 
 Where to get it</h3><p>
 
-Anchor now is hosted on <a href="http://code.google.com/p/anch/">Google Code</a>. Subversion, user wiki and issue trackers available.</p><h3>
+Anchor is hosted on <a href="http://code.google.com/p/anch/">Google Code</a>. Subversion, user wiki and issue trackers available.</p><h3>
 
 Installation</h3><p>
 
@@ -39,7 +37,7 @@ su -c &apos;make install&apos;</pre><h3>
 
 Programming with Anchor</h3><p>
 
-The rules are very simple. A double-space, &quot;&nbsp; &quot; (tells anchor to enclose the rest of the line in parenthesis). Indentation of 4 spaces {controls the placement of curly brackets}. The remaining lines are automatically terminated with semicolons; any of these rules may be overridden by placing a space at the end of the line, causing the precompiler to skip the line in question. Conversely, if the output is not what is expected there is probably extra whitespace at the end of a line somewhere. Comments are ignored, but it is a good idea to put them on a separate line.</p><h3>
+The rules are very simple. A double-space, &quot;&nbsp; &quot; (tells anchor to enclose the rest of the line in parenthesis). Indentation of 4 spaces {controls the placement of curly brackets}. The remaining lines are automatically terminated with semicolons; any of these rules may be circumvented by placing a space at the end of the line. Conversely, if the output is not what is expected there is probably extra whitespace at the end of a line somewhere. Comments are ignored, but it is a good idea to put them on a separate line.</p><h3>
 Compilation</h3><p>
 
 Example usage: converting example.anch to C:</p>
@@ -50,9 +48,7 @@ Compiling the result with gcc (or any C compiler).</p>
 <pre>
 gcc example.c -o example.exe</pre><p>
 
-If the indent style Anchor produces is undesirable for some reason, simply run <a href="http://www.gnu.org/software/indent/">GNU indent</a> on it. The default <a href="http://www.gnu.org/software/indent/">GNU indent</a> style works for most people. See <a href="http://www.linuxmanpages.com/man1/indent.1.php">man indent</a> for more <a href="http://www.gnu.org/software/indent/">GNU indent</a> styles.</p>
-<pre>
-indent example.c</pre><p>
+If the indent style Anchor produces is undesirable for some reason, simply pipe the output through one of many <a href="#scf">other source code formatters</a>.</p><p>
 
 Removing brackets from existing code is made possible with "unanchor." Install <a href="http://www.gnu.org/software/indent/">GNU indent</a> and use use the -i or -indent option for best results.</p>
 <pre>
@@ -63,16 +59,16 @@ unanchor -i example.c > editme.anch # create a file</pre><p>
 
 Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users may optionally install something like <a href="http://sourceforge.net/projects/mingw/files/">MingW</a>, <a href="http://www.cygwin.com/">cygwin</a>, or some other unix-like <a href="http://en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> like <a href="http://win-bash.sourceforge.net/">win bash</a> to interpret the included &quot;anch&quot; convenience script.</p><h3>
 
-Makefile Rule</h3><p>
+GNU Makefiles</h3><p>
 
-Add this rule to a Makefile to generate .c source from .anch source when needed.</p><pre>
+Add this rule to a <a href="http://www.gnu.org/software/make/manual/make.html">GNU Makefile</a> to make .c sources from .anch as needed.</p><pre>
 #~ make foo.c
 %.c : %.anch
-	anchor -pq "$<" > "$@"</pre><h3><a href="http://bellard.org/tcc/">
+	anchor -q "$<" > "$@"</pre><h3><a href="http://bellard.org/tcc/">
 
 Optional TinyCC integration</a></h3><p>
 
-The latest version of TinyCC may be obtained from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a> or the unstable <a href="http://repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob branch</a> for user-contributed patches.</p><p>
+The latest version of TinyCC may be obtained from the <a href="http://repo.or.cz/w/tinycc.git">git repo</a>, but we recommend the unstable <a href="http://repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob branch</a> for the latest user-contributed patches.</p><p>
 
 With TinyCC (<a href="http://bellard.org/tcc/">TCC</a>) installed, Anchor can execute pseudocode directly from the command line.</p>
 <pre>
@@ -89,32 +85,52 @@ at the top of files to make executable C scripts:</p>
 <span class="S0">    </span><span class="S5">while</span><span class="S0">  </span>c<span class="S10">--</span>
 <span class="S0">        </span><span class="S16">printf</span><span class="S0">  </span><span class="S6">"Argument %i is \"%s\"\n"</span><span class="S10">,</span>c<span class="S10">,</span>v<span class="S10">[</span>c<span class="S10">]</span>
 <span class="S0">    </span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span>
-</pre><h3>
+</pre><p>
+Note: The #!shebang line is pretty limited and it was not intended for passing arguments, so they may not work at all. For something more powerful, use this:</p>
+
+<pre><span class="S1">//usr/local/bin/anch -run  "$0" "$@";exit</span>
+   -or-
+<span class="S1">//usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit</span></pre><p>
+
+By turning the executable line into a C comment, BASH will execute it, but compilers will ignore it. Clever, huh? Don't forget to run chmod +x on the source code to mark it executable and then it will work like any other bash script. Passing arguments to a program this way is convenient for testing and demonstrations, but not much else. You should write your programs so they will run without arguments. Still, we like the way an IDE can be set up so that pressing F5 will run our program with arguments defined in the source!</p><h3>
+
 Direct execution</h3><p>
 
-The anch script can use <a href="http://bellard.org/tcc/">TCC</a> to execute through a pipe. For example, if both <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> and <a href="http://bellard.org/tcc/">TCC</a> are installed, the above code may be highlighted with the mouse and executed directly from the selection buffer, with arguments (and without even saving to disk).</p>
+The anch script can use <a href="http://bellard.org/tcc/">TCC</a> to execute through a pipe from stdin. For example, if both <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> and <a href="http://bellard.org/tcc/">TCC</a> are installed, the above code may be highlighted with the mouse and executed directly from the selection buffer, with arguments (and without even saving to disk).</p>
 <pre>
-xsel | anch -run -</pre><p>
+xsel | anch -run - arg1 arg2</pre><p>
 
-Other compilers or interpreters may be invoked through pipes as well (the -q option silences info messages):</p>
+Other compilers or interpreters may be invoked through pipes as well (the -q option silences Anchor's advertising message):</p>
 <pre>
 xsel|anchor -q|gcc -Wall -g -xc -
    -or-
-anchor some_file|tcc -run -</pre><h3>
+anchor -q some_file.anch|tcc -run -</pre><h3>
 
 Bugs, wiki, changelog</h3><p>
 
-The bugs, wiki, and changelog have moved to <a href="https://code.google.com/p/anch/">Google Code</a>. Bugs may be reported using the issue tracker. The latest version may be checked out from svn, and the wiki may contain updates, tips, and suggestions from users.</p><h3><a name="legal">
+The bugs, wiki, and changelog have moved to <a href="https://code.google.com/p/anch/">Google Code</a>. Bugs may be reported using the issue tracker. The latest version may be checked out from svn, and the wiki may contain updates, tips, and suggestions from users.</p><h3>
+
+<a name="scf">Other Source Code Formatters</a></h3><ul>
+
+<li><a href="http://astyle.sourceforge.net/">       Artistic Style  </a></li>
+<li><a href="http://invisible-island.net/bcpp/">    BCOO            </a></li>
+<li><a href="http://www.gnu.org/software/indent/">  GNU Indent      </a></li>
+<li><a href="http://uncrustify.sourceforge.net/">   Uncrustify      </a></li>
+<li><a href="http://universalindent.sourceforge.net/">UniversalIndentGUI</a></li></ul>
+<h3>
+Style Guides</h3><ul>
+
+<li><a href="http://en.wikipedia.org/wiki/Indent_style">    Indenting Styles    </a></li>
+<li><a href="http://en.wikipedia.org/wiki/Programming_style">Programming Style  </a></li>
+<li><a href="http://en.wikipedia.org/wiki/Prettyprint">     PrettyPrinting      </a></li>
+
+</ul><h3><a name="legal">
 
 Limitations and Copyright</a></h3><p>
 
-No warrantee! Anchor was created as a learning toy for hobbies and fun; it might lack the swagger of commercial projects. The algorithm is potentially lossy and subject to change, so don't distribute important software that depends on it (convert it to the target language first). Programming is a difficult task and Anchor is not guaranteed to make it easier. These tools may be freely adapted under the terms of the <a href="http://www.gnu.org/licenses/gpl.html">Gnu Public License</a>.</p>
+No warrantee! Anchor is a learning toy for hobbies and fun; it might lack the swagger of commercial projects. The algorithm is potentially lossy and subject to change, so don't distribute important software that depends on it (convert it to the target language first). Programming is a difficult task and Anchor is not guaranteed to make it easier.</p><p class="small">
 
-<p class="small">
-
-Anchor and accompanying documentation are Copyright &copy; 2012 Henry Kroll III. This page may be freely modified and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the GPL. Any of the above conditions can be waived by getting permission from the copyright holder.</p>
-
-
+Anchor and accompanying documentation are Copyright &copy; 2012 Henry Kroll III. This page may be adapted and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the <a href="http://www.gnu.org/licenses/gpl.html">Gnu Public License</a>. Any of the above conditions can be waived by getting permission from the copyright holder.</p>
 
 </div>
 
