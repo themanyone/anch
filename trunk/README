@@ -108,44 +108,52 @@ anch.org: Anchor
          printf  "Argument %i is \"%s\"\n",c,v[c]
      return 0
 
-  Direct execution
+   Note: The shebang line was not obviously not intended for passing
+   arguments, so they might not work correctly or at all. For something more
+   portable, use:
 
-   The anch script can use TCC to execute through a pipe. For example, if
-   both xsel and TCC are installed, the above code may be highlighted with
-   the mouse and executed directly from the selection buffer, with arguments
-   (and without even saving to disk).
+ #if 0
+ anch [cflags] [libs] -run  "$0" [primary args] "$@" [secondary args];exit
+ #endif
+
+
+ Now run chmod +x on the source code to mark it executable and run it like any other bash script.
+
+
+ Direct execution
+
+
+ The anch script can use TCC to execute through a pipe. For example, if both xsel and TCC are installed, the above code may be highlighted with the mouse and executed directly from the selection buffer, with arguments (and without even saving to disk).
 
  xsel | anch -run -
 
-   Other compilers or interpreters may be invoked through pipes as well (the
-   -q option silences info messages):
+
+ Other compilers or interpreters may be invoked through pipes as well (the -q option silences info messages):
 
  xsel|anchor -q|gcc -Wall -g -xc -
     -or-
  anchor some_file|tcc -run -
 
-  Bugs, wiki, changelog
 
-   The bugs, wiki, and changelog have moved to Google Code. Bugs may be
-   reported using the issue tracker. The latest version may be checked out
-   from svn, and the wiki may contain updates, tips, and suggestions from
-   users.
+ Bugs, wiki, changelog
 
-  Limitations and Copyright
 
-   No warrantee! Anchor was created as a learning toy for hobbies and fun; it
-   might lack the swagger of commercial projects. The algorithm is
-   potentially lossy and subject to change, so don't distribute important
-   software that depends on it (convert it to the target language first).
-   Programming is a difficult task and Anchor is not guaranteed to make it
-   easier. These tools may be freely adapted under the terms of the Gnu
-   Public License.
+ The bugs, wiki, and changelog have moved to Google Code. Bugs may be reported using the issue tracker. The latest version may be checked out from svn, and the wiki may contain updates, tips, and suggestions from users.
 
-   Anchor and accompanying documentation are Copyright (c) 2012 Henry Kroll
-   III. This page may be freely modified and shared under the terms of the
-   Creative Commons SA license inasmuch as it agrees with the terms of the
-   GPL. Any of the above conditions can be waived by getting permission from
-   the copyright holder.
+
+ Limitations and Copyright
+
+
+ No warrantee! Anchor was created as a learning toy for hobbies and fun; it might lack the swagger of commercial projects. The algorithm is potentially lossy and subject to change, so don't distribute important software that depends on it (convert it to the target language first). Programming is a difficult task and Anchor is not guaranteed to make it easier. These tools may be freely adapted under the terms of the Gnu Public License.
+
+
+
+
+ Anchor and accompanying documentation are Copyright (c) 2012 Henry Kroll III. This page may be freely modified and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the GPL. Any of the above conditions can be waived by getting permission from the copyright holder.
+
+
+
+
 
    Anchor
    CONTACT
