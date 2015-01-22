@@ -1,30 +1,32 @@
 NAME=anchor
-INCLUDES=-I.
+BUILD=anchor unanchor
 DOCDIR=/usr/share/$(NAME)
 INSTALLDIR=/usr/local/bin
-LDFLAGS=
-BUILD=anchor.o
+
 CFLAGS=-std=c99
-MINGW=/usr/bin/i686-pc-mingw32-gcc
-EXE=.exe
+ifneq (,$(findstring mingw,$(CC)))
+	EXT=.exe
+endif
+TARGETS=$(foreach a,$(BUILD),$a$(EXT))
 LEX=flex
 
 %.o : %.c clean
-	$(CC) $(CFLAGS) -c $< -o "$@" $(INCLUDES)
+	$(CC) $(CFLAGS) -c $< -o "$@"
 
-test: $(BUILD) un$(BUILD)
-	$(CC) "$(BUILD)" -o "$(NAME)$(EXT)" $(LDFLAGS)
-	$(CC) "un$(BUILD)" -o "un$(NAME)$(EXT)" $(LDFLAGS)
+%$(EXT) : %.o
+	$(CC) $< -o "$@"
+
+test: $(TARGETS)
 
 s:
 	scite Makefile README.asp *.l&
-	
+
 install:
 	install -D README "$(DOCDIR)/README"
 	install -D COPYING "$(DOCDIR)/COPYING"
 	install -D "$(NAME)" "$(INSTALLDIR)/$(NAME)"
 	install -D anch "un$(NAME)" "$(INSTALLDIR)/"
-	
+
 uninstall:
 	$(RM) "$(DOCDIR)/*"
 	$(RM) "$(INSTALLDIR)/$(NAME)"
@@ -32,12 +34,7 @@ uninstall:
 	$(RM) "$(INSTALLDIR)/un$(NAME)"
 
 clean:
-	$(RM) "$(BUILD)" "un$(BUILD)" "$(NAME)" "un$(NAME)"
-	$(RM) tmp.* lex* *.o
-	$(RM) example
-
-win:
-	$(MAKE) CC=$(MINGW) EXT=$(EXE)
+	$(RM) $(BUILD) $(LINK)
 
 example:
 	@./anchor tests/example.anch | $(CC) -xc -o example -
@@ -47,4 +44,3 @@ example:
 html:	     
 	links -dump README.asp > README
 	cp -l README.asp $(NAME).html
-

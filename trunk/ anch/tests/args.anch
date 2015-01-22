@@ -1,8 +1,0 @@
-#!/usr/local/bin/anch -g -run test1 test2
-#include <stdio.h>
-/* Print command line arguments and exit. */
-int main  int c, char **v
-    if  c<2  puts  "Try running this program with arguments."
-    while  c--
-        printf  "Argument %i is \"%s\"\n",c,v[c]
-    return 0

@@ -27,8 +27,10 @@
     int i;
     char *p;
     /* suppress some flex warnings */
+#ifndef popen
     FILE *popen(const char *command, const char *type);
     int pclose(FILE *stream);
+#endif
 %}
 
 %%
