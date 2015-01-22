@@ -1,0 +1,74 @@
+#!/usr/local/bin/anch -keep -lm -run
+/* test.anch is hereby released into the Public Domain
+ *
+ * intentionally bad code
+ *
+ * This program can be compiled by anch
+ * and your regular compiler like so:
+ *
+ * anch gcc test.anch -o test
+ 
+    This should be ignored by the parser.
+        puts  "hi"
+    while  0
+ */
+/* These defines shouldn't be touched  */
+#include <stdio.h>
+#include <math.h>
+#define test_define(x) printf( \
+    "x%s\n",x)
+/* This enum will have brackets {} put around it */
+enum food bacon, cheese, bread,
+lettuce, onions
+/* like this one */
+enum iLike {food,drink};
+/* declare variable of type enum iLike */
+enum iLike asdf = drink
+int flav
+/* automatically fix missing semicolons and brackets */
+struct foo {
+    int a
+    int b;
+*foo
+char shifted[] = "~!@#$%^&*()_+|\":?><ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+/* Now automatically encloses these arrays in brackets { } */
+char pig[6]= 'b','a','c','o','n',0
+/* ignore this definition that ends in a space */
+char pig2[2][6]={
+{'b','a','c','o','n',0},
+{'W','H','A','T',0}}; 
+char fool[] ='2', '0', '1', '0', ' ', 'H', 'e', 'n', 'r', 'y', ' ', 'K', 'r', 'o', 'l', 'l',
+    ' ', 'I', 'I', 'I', '\n', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 'w', 'w', '.', 'T', 'h', 'e',
+    'N', 'e', 'r', 'd', 'S', 'h', 'o', 'w', '.', 'c', 'o', 'm', 0
+void test_func  int val
+    int i,j
+    struct bar
+        int a;
+        int b
+    bar = {5,4} 
+#ifndef nothing
+    for  i=val+1;i--;
+        printf  "%*s\n",(int)(val*1.5+val*sinf(i*6.28/val)),"sine"
+#endif
+    goto inzx
+    do
+inzx:   printf("\n%s\n",fool);
+    while  0
+
+#ifndef GEOMETRY
+/* This should be ignored
+ */
+int main  int argc,
+    char **argv
+    int i
+    /* test */
+    char name[]="Anchor"
+    printf  "%s is C.\n",name  /* test */
+    /* nice */
+    for  i=5;i--;  printf  "%i\n",i  /* can comments go here? */
+    /* How about here? */
+    test_func  8
+    printf  "done!\n"
+    return 0 /*test*/
+/* and we're done! */
+#endif

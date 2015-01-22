@@ -1,0 +1,91 @@
+#!/bin/bash
+#set -x
+# search function echos position in array or nothing
+pos() {
+    c=0
+    local hay needle=$1
+    shift
+    for hay; do
+        if [[ $hay == $needle ]]; then echo $c; return 0;fi
+    ((c++))
+    done; return 1
+}
+if [[ -z $1 || $(pos "-h" "$@") ]]; then
+cat <<EOF
+Usage: `basename $0` [CC] [cflags] [libs] [-keep] [-run] source.anch [program args]
+
+CC   : compiler to use (tcc)
+-run : run as c script with tcc compiler
+-keep: leave temporary .source.c for debugging
+
+Examples, -run
+$ `basename $0` -lm -std=c99 -run test.anch arg1 arg2
+
+Or make executable script with "shebang" line
+#!/usr/local/bin/anch [cflags] [ldflags] -run [args]
+
+Compilation with gcc
+$ `basename $0` gcc -c mylib1.anch -o mylib1.o
+$ `basename $0` gcc -c myprog.anch -o myprog.o
+$ gcc mylib1.o myprog.o -o myprog
+
+Makefiles: See README
+EOF
+exit 0
+fi
+ax=($(echo "$1"|xargs) "${@:2}") #unquote shebang arguments ~_^
+k=$(pos "-keep" "${ax[@]}")
+# get input file name $in
+if [[ -z $(pos "-" "${ax[@]}") ]]; then
+    for x in "$@"; do
+        if [[ -f "$x" ]]; then
+            in="$x"; break
+        fi
+    done
+fi
+run=$(pos "-run" "${ax[@]}")
+end=$(pos "$in" "${ax[@]}")
+#integration with tcc -run [args]
+if [[ "$run" && "$end" ]]; then
+    cflags=${ax[@]:0:$run}
+    args=("${ax[@]:$run+1:$end-$run-1}")
+    args+=("${ax[@]:$end+1}")
+    gcc='tcc '
+    run='-run '
+# if not tcc, assume $1 is compiler to use
+elif [[ "$in" ]]; then
+    opt=$(pos "-o" "${ax[@]}")
+    gcc=$1
+    args=("${ax[@]:$opt}")
+    cflags=${ax[@]:1:$(pos $in ${ax[@]})-1}
+else
+# who knows? maybe it came from a pipe
+    if [[ -z $(pos "-" "${ax[@]}") ]]; then
+        echo No input files.
+        exit 1
+    # it did, it did come from a pipe!
+    elif [[ -n $(pos "-run" "${ax[@]}") && \
+        -z $(pos "tcc" "${ax[@]}") ]]; then
+        gcc='tcc '
+    fi
+        anchor -qp | $gcc "${ax[@]}"
+    exit 0
+fi
+src="${in##./}"
+tmp=".${src%.*}.c"
+
+# make a hidden .temp.c file
+# get rid of shebang if not tcc compiler
+s=($(<"$in"))
+if [[ $gcc != "tcc " && ${s:0:2} == "#!" ]]; then
+    anchor -qp "$in" | tail -n +2 > "$tmp"
+else
+    anchor -qp "$in" > "$tmp"
+fi
+
+#~ expand $(cflags) and do not pass -keep option
+cflags=$(eval "echo $cflags"|sed 's/-keep\s*//')
+
+# compile the temp file with options. remove if successful
+$gcc ${cflags} $run "$tmp" "${args[@]}"&&[[ -z $k ]]&&rm "$tmp"
+# if build fails or -keep tmp file remains for debugging

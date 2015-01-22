@@ -1,0 +1,8 @@
+#!/bin/bash
+anchor <<"EOF"|php -a
+for  $i = 3; $i--;
+    echo  "outer loop $i\n"
+    for  $x = 0;$x < 3; $x++
+        echo("    inner loop $x\n");
+
+EOF
