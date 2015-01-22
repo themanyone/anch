@@ -113,47 +113,52 @@
                 }
 
     /* enum fun */
-^[\t ]+"enum"[ \t]+[[:alnum:]_=]+[ \t]  {
+[\t ]*("typedef ")?"enum"[ \t\n]+[[:alnum:]_=]+[ \t\n]  {
                 debug("E1");
                 printf("%s",endstr);strcpy(endstr,";\n");
-                ECHO;printf("{");
+                ECHO;//printf("{");
                 BEGIN(enu);
                 }
 
     /* put brackets around arrays */
-[\t ]+[[:alnum:]_*]+[\t ]*(\[[^\]]*\])+[\t ]*[=][^{;,\n]*, {
+[\t ]*\**[[:alnum:]_]+([\t ]*\[[^\]]*\][\t ]*)+=[^{;,\n]*, {
                 debug("A1");BEGIN(arra);
                 yyless(0);
                 }
-<arra>=          ECHO;printf("{");
-<arra>=" "       printf("={");
+
+<arra>=          printf("={");
 <arra,enu>.      ECHO;
-<arra,enu>.*" "$     {yyless(0);BEGIN(codesection);}
+<arra,enu>.*[; ]$     {yyless(0);BEGIN(codesection);}
 <arra,enu>.*"{".*    {yyless(0);BEGIN(codesection);}
 
-<enu>[^,][ \t]+[[:alnum:]_]+[ \t]  {
+<enu>([ \t\n]*[[:alnum:]_]+[ \t\n]*,)+([ \t\n]*[[:alnum:]_]+[ \t]*,?)  {
                 debug("E3");
-                ECHO;printf("{");debug("/E3");
+                if(yytext[0]==' '){
+                    yytext+=1;
+                    printf("{%s",yytext);
+                } else printf("{%s}",yytext);
+                debug("/E3");strcpy(endstr,";\n");
                 }
-<enu>[^,][ \t]+[[:alnum:]_=]+[,]  {
-                debug("E4");
-                //~ fprintf(stderr,"%s\n",yytext);
-                yyless(strrchr(yytext,' ')-yytext+1);
-                ECHO;printf("{");
+<enu>([ \t\n]*[[:alnum:]_]+[ \t\n]*=[ \t\n]*[[:alnum:]_]+[ \t]*,?)+ {
+                debug("E2");
+                printf("%s",yytext);
+                debug("/E2");strcpy(endstr,";\n");
+                BEGIN(codesection);
                 }
-<arra,enu>[[:alnum:]_=][ \t][[:alnum:]] {
-                //~ fprintf(stderr,"%s\n",yytext);
-                yyless(1);printf("%s}",yytext);
-                BEGIN(codesection); debug("A4");
+<enu>"\n"[[:alnum:]_=]+$ {
+                debug("E4");strcpy(endstr,";");
+                printf("\n}%s",yytext);BEGIN(codesection);
+                }
+<arra>[[:alnum:]_=][ \t][[:alnum:]] {
+                yyless(1);printf("%s",yytext); debug("A4");
+                BEGIN(codesection);
                 }
 <arra,enu>[^=,/ \t]"\n"    {
                 /* eat \n */
-                //yytext[yyleng-1]='\0';
                 yyless(1);
-                printf("%s}",yytext);
-                BEGIN(codesection); debug("A5");
+                printf("(%s)}",yytext); debug("A5");
+                BEGIN(codesection);
                 }
-    
     
     /* add parens if 2 spaces found between text */
 [[:alnum:]_\)]"  "[^=, \t] {
@@ -176,7 +181,7 @@
     /* get last char */
 .$              {strcpy(last,yytext);
                 if(!strpbrk(yytext,";}")){
-                    if (!strcmp(yytext,":"))
+                    if (strpbrk(yytext,":,"))
                         strcpy(endstr,"\n");
                     ECHO;
                 }
@@ -226,11 +231,11 @@
                     debug("R2");
                     
                 /* No indent */
-                }else {debug("N1");
-                printf("%s",endstr);
-                
-                if(!indent)printf("%c",yytext[yyleng-1]);
-                    debug("N3");
+                }else {
+                    debug("N1");
+                    printf("%s",endstr);
+                    if(!indent)printf("%c",yytext[yyleng-1]);
+                        debug("N3");
                 }
                 /* pull up next line } after brace? */
                 if(chain){
