@@ -1,6 +1,6 @@
 a,h1,h2,h3,h4,b {color:#6000c0;text-decoration:none;}
 img {border:0px;}
-span {color:red;}
+tt {color:purple;}
 #main {
         margin-left:10.2em;
         margin-right:0em;
@@ -16,30 +16,29 @@ span {color:red;}
         right:0;
 }
 .b {
-        
-	height: 36px; 
-	min-height: 36px; 
-	max-height: 36px;
+	height:		22px; 
+	min-height: 22px; 
+	max-height: 22px;
 	cursor: pointer;
 	font-weight: bold;
 }
-.b a{font-size: .8em; top:0px;
-	display: block;
-	
-	color:black;
-	width: 152px;
-	height: 32px;
+.b a{display: block;
+	top: 5px;
+	font-size: 12pt;
+	font-family: arial, sans-serif, helvetica;
+	color: white;
+	width: 150px;
+	height: 20px;
+	font-weight: bold;
 	text-decoration: none;
 	text-align: center;
-	background: url('images/button.gif');
+	background: url('images/button_bp.png');
     background-position: 0px 0;
 }
 .b a:hover {
-	background-position: -152px 0;
-	color:blue;
+	background-position: -150px 0;
 }
 .b span {color: #40ff80;
-	
 	display:block;
 	text-align:center;
 	width: 150px;
