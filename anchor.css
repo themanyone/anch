@@ -1,6 +1,7 @@
 a,h1,h2,h3,h4,b {color:#6000c0;text-decoration:none;}
 img {border:0px;}
 tt {color:purple;}
+iframe {border: 0;}
 #main {
         margin-left:10.2em;
         margin-right:0em;
@@ -16,29 +17,30 @@ tt {color:purple;}
         right:0;
 }
 .b {
-	height:		22px; 
-	min-height: 22px; 
-	max-height: 22px;
+        
+	height: 36px; 
+	min-height: 36px; 
+	max-height: 36px;
 	cursor: pointer;
 	font-weight: bold;
 }
-.b a{display: block;
-	top: 5px;
-	font-size: 12pt;
-	font-family: arial, sans-serif, helvetica;
-	color: white;
-	width: 150px;
-	height: 20px;
-	font-weight: bold;
+.b a{font-size: .8em; top:0px;
+	display: block;
+	
+	color:black;
+	width: 152px;
+	height: 32px;
 	text-decoration: none;
 	text-align: center;
-	background: url('images/button_bp.png');
+	background: url('images/button.gif');
     background-position: 0px 0;
 }
 .b a:hover {
-	background-position: -150px 0;
+	background-position: -152px 0;
+	color:blue;
 }
 .b span {color: #40ff80;
+	
 	display:block;
 	text-align:center;
 	width: 150px;
