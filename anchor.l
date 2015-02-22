@@ -156,7 +156,7 @@
 <arra,enu>[^=,/ \t]"\n"    {
                 /* eat \n */
                 yyless(1);
-                printf("(%s)}",yytext); debug("A5");
+                printf("%s}",yytext); debug("A5");
                 BEGIN(codesection);
                 }
     

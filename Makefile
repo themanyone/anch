@@ -34,7 +34,7 @@ uninstall:
 	$(RM) "$(INSTALLDIR)/un$(NAME)"
 
 clean:
-	$(RM) $(BUILD) $(LINK)
+	$(RM) $(BUILD)
 
 example:
 	@./anchor tests/example.anch | $(CC) -xc -o example -
@@ -42,5 +42,4 @@ example:
 	@$(RM) example
 
 html:	     
-	links -dump README.asp > README
-	cp -l README.asp $(NAME).html
+	links -dump README.html > README
