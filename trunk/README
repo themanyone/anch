@@ -1,4 +1,4 @@
-anch.org: Anchor
+anch.org: Anchor Pseudocode Compiler
 
    Advanced Negative Compilation Heuristic Ontological Refactorer
 
@@ -6,16 +6,31 @@ anch.org: Anchor
 
   Why Anchor?
 
-   If (code == indented) {brackets = redundant}. Refactoring with Anchor
-   saves typing and makes programs easier to read. Best of all, it's free!
-
-   Techies might refer to it as a language-independent pseudocode compiler or
-   code decorator but all it does is fix missing brackets and punctuation.
+   Anchor is a code decorator and "pseudocode" compiler. Anchor automatically
+   adds curly braces and semicolons to pseudocode written in various
+   programming languages. The goal is to save typing and perhaps even make
+   programs easier to read, or debug. Anchor lets programmers use a Python or
+   Lua-like indentation style while actually composing some other language
+   like C, Java, PHP, C++, .NET, C#, or D. An example bash script integrates
+   with the TCC compiler to make small, executable C scripts.
 
   Where to get it
 
-   Anchor now is hosted on Google Code. Subversion, user wiki and issue
-   trackers available.
+   Anchor is hosted on Google Code. Subversion is recommended.
+
+   svn checkout http://anch.googlecode.com/svn/trunk/ anch-read-only
+
+  What uses it?
+
+   Paper Dragon uses Anchor. It generates APA-formatted papers from text
+   documents.
+
+   A template is available to cross-compile a DLL for Windows and Linux using
+   Anchor. This 1-hour video demonstrates the build process and explains the
+   template line-by-line.
+
+   IFrame
+   https://www.youtube.com/watch?v=K_xeRN_yGIw
 
   Installation
 
@@ -33,15 +48,12 @@ anch.org: Anchor
 
   Programming with Anchor
 
-   The rules are very simple. A double-space, "  " (tells anchor to enclose
-   the rest of the line in parenthesis). Indentation of 4 spaces {controls
-   the placement of curly brackets}. The remaining lines are automatically
-   terminated with semicolons; any of these rules may be overridden by
-   placing a space at the end of the line, causing the precompiler to skip
-   the line in question. Conversely, if the output is not what is expected
-   there is probably extra whitespace at the end of a line somewhere.
-   Comments are ignored, but it is a good idea to put them on a separate
-   line.
+   The rules are very simple. Two spaces, "  " may be optionally used in
+   place of one level of parenthesis (left or right). This has only limited
+   use. Indentation using tabs or 4 spaces {controls the placement of curly
+   brackets}. The remaining lines are automatically terminated with
+   semicolons. Comments are ignored, but it is a good idea to put them on a
+   separate line.
 
   Compilation
 
@@ -54,13 +66,11 @@ anch.org: Anchor
  gcc example.c -o example.exe
 
    If the indent style Anchor produces is undesirable for some reason, simply
-   run GNU indent on it. The default GNU indent style works for most people.
-   See man indent for more GNU indent styles.
+   pipe the output through one of many other source code formatters.
 
- indent example.c
-
-   Removing brackets from existing code is made possible with "unanchor."
-   Install GNU indent and use use the -i or -indent option for best results.
+   For testing purposes, removing brackets from existing code may be assisted
+   with "unanchor." Install GNU indent and use use the -i or -indent option
+   for best results. The resulting file may need further editing.
 
  unanchor -i example.c #see how it might look
  unanchor -i example.c > editme.anch # create a file
@@ -76,19 +86,20 @@ anch.org: Anchor
    like MingW, cygwin, or some other unix-like bourne shell like win bash to
    interpret the included "anch" convenience script.
 
-  Makefile Rule
+  GNU Makefiles
 
-   Add this rule to a Makefile to generate .c source from .anch source when
+   Add a rule like this to a GNU Makefile to make .c sources from .anch as
    needed.
 
  #~ make foo.c
  %.c : %.anch
-         anchor -pq "$<" > "$@"
+         anchor -q "$<" > "$@"
 
   Optional TinyCC integration
 
-   The latest version of TinyCC may be obtained from the git repo or the
-   unstable mob branch for user-contributed patches.
+   The latest version of TinyCC may be obtained from the git repo, and there
+   is also an unstable mob branch to try out with unreviewed patches. Be
+   careful!
 
    With TinyCC (TCC) installed, Anchor can execute pseudocode directly from
    the command line.
@@ -108,52 +119,64 @@ anch.org: Anchor
          printf  "Argument %i is \"%s\"\n",c,v[c]
      return 0
 
-   Note: The shebang line was not obviously not intended for passing
-   arguments, so they might not work correctly or at all. For something more
-   portable, use:
+   Note: The #!shebang line is pretty limited and it was not intended for
+   passing arguments, so they may not work at all. For something more
+   powerful, use a comment:
 
- #if 0
- anch [cflags] [libs] -run  "$0" [primary args] "$@" [secondary args];exit
- #endif
+ //usr/local/bin/anch -run  "$0" "$@";exit
+    -or-
+ //usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit
 
+   By turning the executable line into a C comment, BASH will execute it, but
+   compilers will ignore it. Clever, huh? Don't forget to run chmod +x on the
+   source code to mark it executable and then it will work like any other
+   bash script. Arguments may be passed within the comment string, so
+   pressing F5 in most any IDE will run the program with pre-defined
+   arguments for testing.
 
- Now run chmod +x on the source code to mark it executable and run it like any other bash script.
+  Direct execution
 
+   The anch script can use TCC to execute through a pipe from stdin. For
+   example, if both xsel and TCC are installed, the above code may be
+   highlighted with the mouse and executed directly from the selection
+   buffer, with arguments (and without even saving to disk).
 
- Direct execution
+ xsel | anch -run - arg1 arg2
 
-
- The anch script can use TCC to execute through a pipe. For example, if both xsel and TCC are installed, the above code may be highlighted with the mouse and executed directly from the selection buffer, with arguments (and without even saving to disk).
-
- xsel | anch -run -
-
-
- Other compilers or interpreters may be invoked through pipes as well (the -q option silences info messages):
+   Other compilers or interpreters may be invoked through pipes as well (the
+   -q option silences Anchor's advertising message):
 
  xsel|anchor -q|gcc -Wall -g -xc -
     -or-
- anchor some_file|tcc -run -
+ anchor -q some_file.anch|tcc -run -
 
+  Other Source Code Formatters
 
- Bugs, wiki, changelog
+     * Artistic Style
+     * BCOO
+     * GNU Indent
+     * Uncrustify
+     * UniversalIndentGUI
 
+  Style Guides
 
- The bugs, wiki, and changelog have moved to Google Code. Bugs may be reported using the issue tracker. The latest version may be checked out from svn, and the wiki may contain updates, tips, and suggestions from users.
+     * Indenting Styles
+     * Programming Style
+     * PrettyPrinting
 
+  Limitations and Copyright
 
- Limitations and Copyright
+   No warrantee! Anchor is a learning toy for hobbies and fun; it might lack
+   the swagger of commercial projects. The code is somewhat stable, but
+   changes could be made that break builds. This happens with other lexers
+   and compilers as well. Programming is a difficult task and Anchor is not
+   guaranteed to make it easier.
 
-
- No warrantee! Anchor was created as a learning toy for hobbies and fun; it might lack the swagger of commercial projects. The algorithm is potentially lossy and subject to change, so don't distribute important software that depends on it (convert it to the target language first). Programming is a difficult task and Anchor is not guaranteed to make it easier. These tools may be freely adapted under the terms of the Gnu Public License.
-
-
-
-
- Anchor and accompanying documentation are Copyright (c) 2012 Henry Kroll III. This page may be freely modified and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the GPL. Any of the above conditions can be waived by getting permission from the copyright holder.
-
-
-
-
+   Anchor and accompanying documentation are Copyright (c) 2015 Henry Kroll
+   III. This page may be adapted and shared under the terms of the Creative
+   Commons SA license inasmuch as it agrees with the terms of the Gnu Public
+   License. Any of the above conditions can be waived by getting permission
+   from the copyright holder.
 
    Anchor
    CONTACT
@@ -162,7 +185,7 @@ anch.org: Anchor
    LISCENSE
    FAVORITE
    [ PayPal - The safer, easier way to pay online! ]
-   Follow me on Twitter, YouTube Blogspot
+   Follow on Twitter, YouTube Blogspot
 
    Announce to:
 
