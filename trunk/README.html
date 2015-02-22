@@ -6,7 +6,21 @@
 <meta name="keywords" content="c programming fix missing brackets refactoring refactor anchor pseudocode api compiler anch run other make windows tinycc terms linux line like input editor ide" />
 <link rel="StyleSheet" HREF="anchor.css" TYPE="text/css" />
 </head>
-<body bgcolor="#FFFFFF"><div id="main"><h2>
+<body bgcolor="#FFFFFF"><div id="main">
+
+<div style="float:right;">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Large rectangle -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:336px;height:280px"
+         data-ad-client="ca-pub-6719667455972380"
+         data-ad-slot="2379412116"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
+<h2>
 
 <a href="//anch.org">anch.org</a>: Anchor Pseudocode Compiler</h2><p>
 
@@ -22,19 +36,21 @@ Where to get it</h3><p>
 
 Anchor is hosted on <a href="//code.google.com/p/anch/">Google Code</a>. <a href="//tortoisesvn.net">Subversion</a> is recommended.</p><p>
 
-svn checkout http://anch.googlecode.com/svn/trunk/ anch-read-only</p><h3>
+svn checkout http://anch.googlecode.com/svn/trunk/ anch-read-only</p><p>
+
+A package <a href="https://anch.org/downloads/anchor.zip">download</a> is available as of 2/22/2015.</p><h3>
 
 What uses it?</h3><p>
 
-<a href="http://anch.org/pd.html">Paper Dragon</a> uses Anchor. It generates APA-formatted papers from text documents.</p><p>
+<a href="http://anch.org/pd.html">Paper Dragon</a> uses Anchor to generate APA-formatted papers from text documents.</p><p>
 
-A <a href="//anch.org/downloads/dll-crossbuild-template.zip">template is available</a> to cross-compile a DLL for Windows and Linux using Anchor. This 1-hour video demonstrates the build process and explains the template line-by-line.</p><p>
+A <a href="https://anch.org/downloads/dll-crossbuild-template.zip">template is available</a> to cross-compile a DLL for Windows and Linux using Anchor. This 1-hour video demonstrates the build process and explains the template line-by-line.</p><p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/K_xeRN_yGIw" frameborder="0" allowfullscreen>https://www.youtube.com/watch?v=K_xeRN_yGIw</iframe></p><h3>
 
 Installation</h3><p>
 
-A windows .exe is provided already. Just copy it somewhere in the computer&apos;s path. Compilation on Linux and other systems requires <a href="//flex.sourceforge.net/">flex</a> and a C compiler. <a href="//code.google.com/p/anch/">Download</a> and extract the archive.</p>
+A windows .exe is provided already. Just copy it somewhere in the computer&apos;s path. Compilation on Linux and other systems requires <a href="//flex.sourceforge.net/">flex</a> and a C compiler. Extract the archive.</p>
 <pre>
 unzip anchor.zip
 cd anchor
@@ -46,7 +62,7 @@ su -c &apos;make install&apos;</pre><h3>
 
 Programming with Anchor</h3><p>
 
-The rules are very simple. Two spaces, &quot;&nbsp; &quot; may be optionally used in place of one level of parenthesis (left or right). This has only limited use. Indentation using tabs or 4 spaces {controls the placement of curly brackets}. The remaining lines are automatically terminated with semicolons. Comments are ignored, but it is a good idea to put them on a separate line.</p><h3>
+The rules are very simple. Indentation using tabs or 4 spaces {controls the placement of curly brackets}. Function arguments may optionally be set off by two spaces instead of parenthesis such that <tt>puts  "hi"  </tt> becomes <tt>puts ("hi")</tt> (not intended for nested parenthesis). The remaining lines are automatically terminated with semicolons. Comments are ignored.</p><h3>
 
 Compilation</h3><p>
 
@@ -102,7 +118,7 @@ Note: The #!shebang line is pretty limited and it was not intended for passing a
    -or-
 <span class="S1">//usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit</span></pre><p>
 
-By turning the executable line into a C comment, BASH will execute it, but compilers will ignore it. Clever, huh? Don't forget to run chmod +x on the source code to mark it executable and then it will work like any other bash script. Arguments may be passed within the comment string, so pressing F5 in most any IDE will run the program with pre-defined arguments for testing.</p><h3>
+By turning the executable line into a C99 comment, BASH will execute it, but almost all compilers will ignore it. Clever, huh? Don't forget to run chmod +x on the source code to mark it executable and then it will work like any other bash script. Arguments may be passed within the comment string, so pressing F5 in most any IDE will run the program with pre-defined arguments for testing.</p><h3>
 
 Direct execution</h3><p>
 
@@ -163,31 +179,28 @@ LISCENSE</a></div>
 FAVORITE</a></div>
 
     <div style="text-align:center; width:150px;">
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-    <input type="hidden" name="cmd" value="_s-xclick" />
-    <input type="hidden" name="hosted_button_id" value="9TX9RXWDZKVQY" />
-    <input style="border: 0" type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" />
-    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-    </form></div><div>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="9TX9RXWDZKVQY">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div><div>
 
     <div style="width:150px;">
     Follow on <a href="//twitter.com/TheManyOne">Twitter</a>, <a href="//YouTube.com/TheManyOne">YouTube</a>
-    <a href="//themanyone.blogspot.com/">Blogspot</a></div><p>
+    <a href="//themanyone.blogspot.com/">Blogspot</a></div>
 
-    Announce to:</p>
-        <div>
-            <a href="//www.blinklist.com/index.php?Action=Blink/addblink.php">BlinkList</a>
-            <br />  <a href="//del.icio.us/post">del.icio.us</a>
-            <br />  <a href="//digg.com/submit?phase=2">Digg it</a>
-            <br />  <a href="//www.furl.net/storeIt.jsp">Furl</a>
-            <br />  <a href="//www.netvouz.com/action/submitBookmark?popup=no">Netvouz</a>
-            <br />  <a href="//www.shadows.com/features/tcr.htm">Shadows</a>
-            <br />  <a href="//www.spurl.net/spurl.php">Spurl</a>
-            <br />  <a href="//myweb2.search.yahoo.com/myresults/bookmarklet">Yahoo MyWeb</a>
-            <br />  <a href="//www.google.com/bookmarks/mark?op=edit">Google</a>
-            <br />  <a href="//www.dzone.com/links/add.html">DZone</a>
-            <br />  <a href="//www.stumbleupon.com/submit">StumbleUpon</a>
-            <br />  <div><a href="//www.ifeedreaders.com/social-creator/" style="font:9px Verdana, Arial, Helvetica, sans-serif; width:100px;">Create Social Bookmark Links</a></div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 120x600, created 10/11/10 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:120px;height:600px"
+     data-ad-client="ca-pub-6719667455972380"
+     data-ad-slot="1811468473"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
         </div>
     </div>
 </div>
