@@ -1,0 +1,29 @@
+Most of the time Anchor does a good job, but there are exceptions. Here is how to use "an extra space" to trick it into accepting an extra semicolon.
+
+```
+struct list_e
+    struct list_e *next
+    char *data
+ ;
+```
+Notice that there is a space before the ";" in the above code.
+
+The extra space prevents Anchor from seeing the extra semicolon and removing it.
+
+You could also create a variable "mylist" of type "struct list\_e" instead:
+
+```
+struct list_e
+    struct list_e *next
+    char *data
+mylist
+```
+
+The extra semicolon and space are not necessary anymore because Anchor automatically puts a semicolon after what it thinks might be variable declarations. The output looks like this:
+
+```
+struct list_e{
+    struct list_e *next;
+    char *data;
+} mylist;
+```
