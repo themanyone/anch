@@ -16,17 +16,18 @@ anch.org: Anchor Pseudocode Compiler
 
   Where to get it
 
-   Anchor is hosted on Google Code. Subversion is recommended.
+   Anchor is hosted on Github
 
-   svn checkout http://anch.googlecode.com/svn/trunk/ anch-read-only
+   git clone https://github.com/themanyone/anch.git
 
   What uses it?
 
-   Paper Dragon uses Anchor. It generates APA-formatted papers from text
+   Paper Dragon uses Anchor to generate APA-formatted papers from text
    documents.
 
-   A template is available to cross-compile a DLL for Windows and Linux using
-   Anchor. This 1-hour video demonstrates the build process and explains the
+   ListLib relies on Anchor to generate the C sources from pseudocode. A
+   template is available to cross-compile a DLL for Windows and Linux using
+   Anchor. The 1-hour video demonstrates the build process and explains the
    template line-by-line.
 
    IFrame
@@ -35,8 +36,8 @@ anch.org: Anchor Pseudocode Compiler
   Installation
 
    A windows .exe is provided already. Just copy it somewhere in the
-   computer`s path. Compilation on Linux and other systems requires flex and
-   a C compiler. Download and extract the archive.
+   computerʼs path. Compilation on Linux and other systems requires flex and
+   a C compiler. Extract the archive.
 
  unzip anchor.zip
  cd anchor
@@ -44,16 +45,15 @@ anch.org: Anchor Pseudocode Compiler
    Run "make" from within the newly extracted directory.
 
  make
- su -c `make install`
+ su -c ʼmake installʼ
 
   Programming with Anchor
 
-   The rules are very simple. Two spaces, "  " may be optionally used in
-   place of one level of parenthesis (left or right). This has only limited
-   use. Indentation using tabs or 4 spaces {controls the placement of curly
-   brackets}. The remaining lines are automatically terminated with
-   semicolons. Comments are ignored, but it is a good idea to put them on a
-   separate line.
+   The rules are very simple. Indentation using tabs or 4 spaces {controls
+   the placement of curly brackets}. Function arguments may optionally be set
+   off by two spaces instead of parenthesis such that puts "hi" becomes puts
+   ("hi") (not intended for nested parenthesis). The remaining lines are
+   automatically terminated with semicolons. Comments are ignored.
 
   Compilation
 
@@ -127,12 +127,12 @@ anch.org: Anchor Pseudocode Compiler
     -or-
  //usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit
 
-   By turning the executable line into a C comment, BASH will execute it, but
-   compilers will ignore it. Clever, huh? Don't forget to run chmod +x on the
-   source code to mark it executable and then it will work like any other
-   bash script. Arguments may be passed within the comment string, so
-   pressing F5 in most any IDE will run the program with pre-defined
-   arguments for testing.
+   By turning the executable line into a C99 comment, BASH will execute it,
+   but almost all compilers will ignore it. Clever, huh? Don't forget to run
+   chmod +x on the source code to mark it executable and then it will work
+   like any other bash script. Arguments may be passed within the comment
+   string, so pressing F5 in most any IDE will run the program with
+   pre-defined arguments for testing.
 
   Direct execution
 
@@ -172,7 +172,7 @@ anch.org: Anchor Pseudocode Compiler
    and compilers as well. Programming is a difficult task and Anchor is not
    guaranteed to make it easier.
 
-   Anchor and accompanying documentation are Copyright (c) 2015 Henry Kroll
+   Anchor and accompanying documentation are Copyright © 2015 Henry Kroll
    III. This page may be adapted and shared under the terms of the Creative
    Commons SA license inasmuch as it agrees with the terms of the Gnu Public
    License. Any of the above conditions can be waived by getting permission
@@ -186,18 +186,3 @@ anch.org: Anchor Pseudocode Compiler
    FAVORITE
    [ PayPal - The safer, easier way to pay online! ]
    Follow on Twitter, YouTube Blogspot
-
-   Announce to:
-
-   BlinkList
-   del.icio.us
-   Digg it
-   Furl
-   Netvouz
-   Shadows
-   Spurl
-   Yahoo MyWeb
-   Google
-   DZone
-   StumbleUpon
-   Create Social Bookmark Links
