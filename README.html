@@ -1,208 +1,361 @@
 <!DOCTYPE html>
+
+<html>
 <head>
-<title>Anchor Pseudocode Compiler</title>
-<meta name="Generator" content="SciTE - www.Scintilla.org" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="c programming fix missing brackets refactoring refactor anchor pseudocode api compiler anch run other make windows tinycc terms linux line like input editor ide" />
-<link rel="StyleSheet" HREF="css/anchor.css" TYPE="text/css" />
+  <title>Anchor Pseudocode Compiler</title>
+  <meta name="Generator" content="SciTE - www.Scintilla.org">
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8">
+  <meta name="keywords" content=
+  "c programming fix missing brackets refactoring refactor anchor pseudocode api compiler anch run other make windows tinycc terms linux line like input editor ide">
+  <link rel="StyleSheet" href="css/anchor.css" type="text/css">
 </head>
-<body bgcolor="#FFFFFF"><div id="main">
 
-<div style="float:right;">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Large rectangle -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:336px;height:280px"
-         data-ad-client="ca-pub-6719667455972380"
-         data-ad-slot="2379412116"></ins>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
+<body>
+  <div id="main">
+    <div style="float:right; border:1px;">
+      <script async="" src=
+      "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+</script> <!-- Large rectangle -->
+       <ins class="adsbygoogle" style=
+      "display:inline-block;width:336px;height:280px"
+      data-ad-client="ca-pub-6719667455972380" data-ad-slot=
+      "2379412116"></ins> <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
 
-<h2>
+    <h2><a href="//anch.org">anch.org</a>: Anchor Pseudocode
+    Compiler</h2>
 
-<a href="//anch.org">anch.org</a>: Anchor Pseudocode Compiler</h2><p>
+    <p><a>A</a>dvanced <a>N</a>egative <a>C</a>ompilation
+    <a>H</a>euristic <a>O</a>ntological
+    <a>R</a>efactorer</p><img src="images/anchorcode.gif" alt=
+    "Anchor: for i=5;i--; C: for (i=5;i--;){">
 
-<a>A</a>dvanced <a>N</a>egative <a>C</a>ompilation <a>H</a>euristic <a>O</a>ntological <a>R</a>efactorer</p>
+    <h3>Why Anchor?</h3>
 
-<img src="images/anchorcode.gif" alt="Anchor: for  i=5;i--;  C: for (i=5;i--;){"/><h3>
+    <p>Anchor is a code decorator and "pseudocode" compiler. Anchor
+    automatically adds curly braces and semicolons to pseudocode
+    written in various programming languages. The goal is to save
+    typing and perhaps even make programs easier to read, or debug.
+    Anchor lets programmers use a Python or Lua-like indentation
+    style while actually composing some other language like C,
+    Java, PHP, C++, .NET, C#, or D. An example bash script
+    integrates with the <a href="//bellard.org/tcc/">TCC</a>
+    compiler to make small, executable C scripts.</p>
 
-Why Anchor?</h3><p>
+    <h3>Where to get it</h3>
 
-Anchor is a code decorator and &quot;pseudocode&quot; compiler. Anchor automatically adds curly braces and semicolons to pseudocode written in various programming languages. The goal is to save typing and perhaps even make programs easier to read, or debug. Anchor lets programmers use a Python or Lua-like indentation style while actually composing some other language like C, Java, PHP, C++, .NET, C#, or D. An example bash script integrates with the <a href="//bellard.org/tcc/">TCC</a> compiler to make small, executable C scripts.</p><h3>
+    <p>Anchor is hosted on <a href="//github.com/themanyone/anch">Github</a></p>
 
-Where to get it</h3><p>
+    <p>git clone https://github.com/themanyone/anch.git</p>
 
-Anchor is hosted on <a href="//github.com/themanyone/anch">Github</a></p><p>
+    <p><em>Paid support is available! </em> <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="FUJ88EPYFUVKG">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</p>
 
-git clone https://github.com/themanyone/anch.git</p><h3>
+    <h3>What uses it?</h3>
 
-What uses it?</h3><p>
+    <p><a href="http://anch.org/pd.html">Paper Dragon</a> uses
+    Anchor to generate APA-formatted papers from text
+    documents.</p>
 
-<a href="http://anch.org/pd.html">Paper Dragon</a> uses Anchor to generate APA-formatted papers from text documents.</p><p>
+    <p><a href="https://github.com/themanyone/listlib">ListLib</a> relies on Anchor to generate the C sources from pseudocode.</p>
 
-<a href="https://github.com/themanyone/listlib">ListLib</a> relies on Anchor to generate the C sources from pseudocode.
+    <p>A <a href=
+    "https://anch.org/downloads/dll-crossbuild-template.zip">template
+    is available</a> to cross-compile a DLL for Windows and Linux
+    using Anchor. This 1-hour video demonstrates the build process
+    and explains the template line-by-line.</p>
 
-A <a href="https://anch.org/downloads/dll-crossbuild-template.zip">template is available</a> to cross-compile a DLL for Windows and Linux using Anchor. The 1-hour video demonstrates the build process and explains the template line-by-line.</p><p>
+    <p><iframe width="560" height="315" src=
+    "https://www.youtube.com/embed/K_xeRN_yGIw" allowfullscreen=
+    "">https://www.youtube.com/watch?v=K_xeRN_yGIw</iframe></p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/K_xeRN_yGIw" frameborder="0" allowfullscreen>https://www.youtube.com/watch?v=K_xeRN_yGIw</iframe></p><h3>
+    <h3>Development Build</h3>
 
-Installation</h3><p>
-
-A windows .exe is provided already. Just copy it somewhere in the computer&apos;s path. Compilation on Linux and other systems requires <a href="//flex.sourceforge.net/">flex</a> and a C compiler. Extract the archive.</p>
-<pre>
+    <p>A windows .exe is provided in the supported, pre-built download. Just copy it somewhere
+    in the computer's path. Compilation of the Development Build requires <a href="//flex.sourceforge.net/">flex</a> and a C
+    compiler. Extract the archive.</p>
+    <pre>
 unzip anchor.zip
 cd anchor
-</pre><p>
-Run &quot;make&quot; from within the newly extracted directory.</p>
-<pre>
+</pre>
+
+    <p>Run "make" from within the newly extracted directory.</p>
+    <pre>
 make
-su -c &apos;make install&apos;</pre><h3>
+su -c 'make install'
+</pre>
 
-Programming with Anchor</h3><p>
+    <h3>Programming with Anchor</h3>
 
-The rules are very simple. Indentation using tabs or 4 spaces {controls the placement of curly brackets}. Function arguments may optionally be set off by two spaces instead of parenthesis such that <tt>puts  "hi"  </tt> becomes <tt>puts ("hi")</tt> (not intended for nested parenthesis). The remaining lines are automatically terminated with semicolons. Comments are ignored.</p><h3>
+    <p>Just like C, make a text file such as "test.anch" and
+    compile it. The rules are very simple. Indentation using tabs or 4
+    spaces {controls the placement of curly brackets}. Function
+    arguments may optionally be set off by two spaces instead of
+    parenthesis such that <tt>puts "hi"</tt> becomes <tt>puts
+    ("hi")</tt> (not intended for nested parenthesis). The
+    remaining lines are automatically terminated with semicolons.
+    Comments are ignored.</p>
 
-Compilation</h3><p>
+    <h3>Compilation</h3>
 
-Example usage: converting example.anch to C:</p>
-<pre>
-anchor example.anch > example.c</pre><p>
+    <p>Example usage: converting example.anch to C:</p>
+    <pre>
+anchor example.anch &gt; example.c
+</pre>
 
-Compiling the result with gcc (or any C compiler).</p>
-<pre>
-gcc example.c -o example.exe</pre><p>
+    <p>Compiling the resulting .c file with gcc (or any C compiler).</p>
+    <pre>
+gcc example.c -o example.exe
+</pre>
 
-If the indent style Anchor produces is undesirable for some reason, simply pipe the output through one of many <a href="#scf">other source code formatters</a>.</p><p>
+    <p>If the indent style Anchor produces is undesirable for some
+    reason, simply pipe the output through one of many <a href=
+    "#scf">other source code formatters</a>.</p>
 
-For testing purposes, removing brackets from existing code may be assisted with "unanchor." Install <a href="//www.gnu.org/software/indent/">GNU indent</a> and use use the -i or -indent option for best results. The resulting file may need further editing.</p>
-<pre>
+    <p>For testing purposes, removing brackets from existing code
+    may be assisted with "unanchor." Install <a href=
+    "//www.gnu.org/software/indent/">GNU indent</a> and use use the
+    -i or -indent option for best results. The resulting file may
+    need further editing.</p>
+    <pre>
 unanchor -i example.c #see how it might look
-unanchor -i example.c > editme.anch # create a file</pre><p>
+unanchor -i example.c &gt; editme.anch # create a file
+</pre>
 
-<a href="windows.a.html">see an unanchored C windows program</a></p><p>
+    <p><a href="windows.a.html">see an unanchored C windows
+    program</a></p>
 
-Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting &quot;anch&quot; in front of the existing compiler or interpreter. Windows users may optionally install something like <a href="//sourceforge.net/projects/mingw/files/">MingW</a>, <a href="//www.cygwin.com/">cygwin</a>, or some other unix-like <a href="//en.wikipedia.org/wiki/Bourne_shell">bourne shell</a> like <a href="//win-bash.sourceforge.net/">win bash</a> to interpret the included &quot;anch&quot; convenience script.</p><h3>
+    <p>Anchor knows nothing about the underlying language, so it
+    processes a variety of curly bracket languages. The author uses
+    it on C code, but it will most likely work with little or no
+    change on C++, Java, .NET, PHP, Perl, awk and other types of
+    configuration files or scripts. Programs may be compiled on
+    Linux or unix by putting "anch" in front of the existing
+    compiler or interpreter. Windows users may optionally install
+    something like <a href=
+    "//sourceforge.net/projects/mingw/files/">MingW</a>, <a href=
+    "//www.cygwin.com/">cygwin</a>, or some other unix-like
+    <a href="//en.wikipedia.org/wiki/Bourne_shell">bourne shell</a>
+    like <a href="//win-bash.sourceforge.net/">win bash</a> to
+    interpret the included "anch" convenience script.</p>
 
-GNU Makefiles</h3><p>
+    <h3>GNU Makefiles</h3>
 
-Add a rule like this to a <a href="//www.gnu.org/software/make/manual/make.html">GNU Makefile</a> to make .c sources from .anch as needed.</p><pre>
+    <p>Add a rule like this to a <a href=
+    "//www.gnu.org/software/make/manual/make.html">GNU Makefile</a>
+    to make .c sources from .anch as needed.</p>
+    <pre>
 #~ make foo.c
 %.c : %.anch
-	anchor -q "$<" > "$@"</pre><h3><a href="//bellard.org/tcc/">
+        anchor -q "$&lt;" &gt; "$@"
+</pre>
 
-Optional TinyCC integration</a></h3><p>
+    <h3><a href="//bellard.org/tcc/">Optional TinyCC
+    integration</a></h3>
 
-The latest version of TinyCC may be obtained from the <a href="//repo.or.cz/w/tinycc.git">git repo</a>, and there is also an unstable <a href="//repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob branch</a> to try out with unreviewed patches. Be careful!</p><p>
+    <p>The latest version of TinyCC may be obtained from the
+    <a href="//repo.or.cz/w/tinycc.git">git repo</a>, and there is
+    also an unstable <a href=
+    "//repo.or.cz/w/tinycc.git/shortlog/refs/heads/mob">mob
+    branch</a> to try out with unreviewed patches. Be careful!</p>
 
-With TinyCC (<a href="//bellard.org/tcc/">TCC</a>) installed, Anchor can execute pseudocode directly from the command line.</p>
-<pre>
+    <p>With TinyCC (<a href="//bellard.org/tcc/">TCC</a>)
+    installed, Anchor can execute pseudocode directly from the
+    command line.</p>
+    <pre>
 anch -run example.anch
-</pre><p>
-Or put the following line</p>
+</pre>
 
-<pre><span class="S9">#!/usr/local/bin/anch [cflags] [libs] -run [program args]</span></pre><p>
+    <p>Or put the following line</p>
+    <pre>
+<span class=
+"S9">#!/usr/local/bin/anch [cflags] [libs] -run [program args]</span>
+</pre>
 
-at the top of files to make executable C scripts:</p>
-<pre><span class="S9">#!/usr/local/bin/anch -run test args</span>
+    <p>at the top of files to make executable C scripts:</p>
+    <pre>
+<span class="S9">#!/usr/local/bin/anch -run test args</span>
 <span class="S9">#include &lt;stdio.h&gt;</span>
-<span class="S5">int</span><span class="S0"> </span>main<span class="S0">  </span><span class="S5">int</span><span class="S0"> </span>c<span class="S10">,</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">**</span>v
-<span class="S0">    </span><span class="S5">while</span><span class="S0">  </span>c<span class="S10">--</span>
-<span class="S0">        </span><span class="S16">printf</span><span class="S0">  </span><span class="S6">"Argument %i is \"%s\"\n"</span><span class="S10">,</span>c<span class="S10">,</span>v<span class="S10">[</span>c<span class="S10">]</span>
-<span class="S0">    </span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span>
-</pre><p>
-Note: The #!shebang line is pretty limited and it was not intended for passing arguments, so they may not work at all. For something more powerful, use a comment:</p>
+<span class="S5">int</span><span class=
+"S0"> </span>main<span class="S0">  </span><span class=
+"S5">int</span><span class="S0"> </span>c<span class=
+"S10">,</span><span class="S0"> </span><span class=
+"S5">char</span><span class="S0"> </span><span class=
+"S10">**</span>v
+<span class="S0">    </span><span class=
+"S5">while</span><span class="S0">  </span>c<span class=
+"S10">--</span>
+<span class="S0">        </span><span class=
+"S16">printf</span><span class="S0">  </span><span class=
+"S6">"Argument %i is \"%s\"\n"</span><span class=
+"S10">,</span>c<span class="S10">,</span>v<span class=
+"S10">[</span>c<span class="S10">]</span>
+<span class="S0">    </span><span class=
+"S5">return</span><span class="S0"> </span><span class=
+"S4">0</span>
+</pre>
 
-<pre><span class="S1">//usr/local/bin/anch -run  "$0" "$@";exit</span>
+    <p>Note: The #!shebang line is pretty limited and it was not
+    intended for passing arguments, so they may not work at all.
+    For something more powerful, use a comment:</p>
+    <pre>
+<span class="S1">//usr/local/bin/anch -run  "$0" "$@";exit</span>
    -or-
-<span class="S1">//usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit</span></pre><p>
+<span class=
+"S1">//usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit</span>
+</pre>
 
-By turning the executable line into a C99 comment, BASH will execute it, but almost all compilers will ignore it. Clever, huh? Don't forget to run chmod +x on the source code to mark it executable and then it will work like any other bash script. Arguments may be passed within the comment string, so pressing F5 in most any IDE will run the program with pre-defined arguments for testing.</p><h3>
+    <p>By turning the executable line into a C99 comment, BASH will
+    execute it, but almost all compilers will ignore it. Clever,
+    huh? Don't forget to run chmod +x on the source code to mark it
+    executable and then it will work like any other bash script.
+    Arguments may be passed within the comment string, so pressing
+    F5 in most any IDE will run the program with pre-defined
+    arguments for testing.</p>
 
-Direct execution</h3><p>
+    <h3>Direct execution</h3>
 
-The anch script can use <a href="//bellard.org/tcc/">TCC</a> to execute through a pipe from stdin. For example, if both <a href="//www.vergenet.net/~conrad/software/xsel/">xsel</a> and <a href="//bellard.org/tcc/">TCC</a> are installed, the above code may be highlighted with the mouse and executed directly from the selection buffer, with arguments (and without even saving to disk).</p>
-<pre>
-xsel | anch -run - arg1 arg2</pre><p>
+    <p>The anch script can use <a href="//bellard.org/tcc/">TCC</a>
+    to execute through a pipe from stdin. For example, if both
+    <a href="//www.vergenet.net/~conrad/software/xsel/">xsel</a>
+    and <a href="//bellard.org/tcc/">TCC</a> are installed, the
+    above code may be highlighted with the mouse and executed
+    directly from the selection buffer, with arguments (and without
+    even saving to disk).</p>
+    <pre>
+xsel | anch -run - arg1 arg2
+</pre>
 
-Other compilers or interpreters may be invoked through pipes as well (the -q option silences Anchor's advertising message):</p>
-<pre>
+    <p>Other compilers or interpreters may be invoked through pipes
+    as well (the -q option silences Anchor's advertising
+    message):</p>
+    <pre>
 xsel|anchor -q|gcc -Wall -g -xc -
    -or-
-anchor -q some_file.anch|tcc -run -</pre><h3>
+anchor -q some_file.anch|tcc -run -
+</pre>
 
-<a name="scf">Other Source Code Formatters</a></h3><ul>
+    <h3><a name="scf" id="scf">Other Source Code
+    Formatters</a></h3>
 
-<li><a href="//astyle.sourceforge.net/">       Artistic Style  </a></li>
-<li><a href="//invisible-island.net/bcpp/">    BCOO            </a></li>
-<li><a href="//www.gnu.org/software/indent/">  GNU Indent      </a></li>
-<li><a href="//uncrustify.sourceforge.net/">   Uncrustify      </a></li>
-<li><a href="//universalindent.sourceforge.net/">UniversalIndentGUI</a></li></ul>
-<h3>
-Style Guides</h3><ul>
+    <ul>
+      <li>
+        <a href="//astyle.sourceforge.net/">Artistic Style</a>
+      </li>
 
-<li><a href="//en.wikipedia.org/wiki/Indent_style">    Indenting Styles    </a></li>
-<li><a href="//en.wikipedia.org/wiki/Programming_style">Programming Style  </a></li>
-<li><a href="//en.wikipedia.org/wiki/Prettyprint">     PrettyPrinting      </a></li>
+      <li>
+        <a href="//invisible-island.net/bcpp/">BCOO</a>
+      </li>
 
-</ul><h3><a name="legal">
+      <li>
+        <a href="//www.gnu.org/software/indent/">GNU Indent</a>
+      </li>
 
-Limitations and Copyright</a></h3><p>
+      <li>
+        <a href="//uncrustify.sourceforge.net/">Uncrustify</a>
+      </li>
 
-No warrantee! Anchor is a learning toy for hobbies and fun; it might lack the swagger of commercial projects. The code is somewhat stable, but changes could be made that break builds. This happens with other lexers and compilers as well. Programming is a difficult task and Anchor is not guaranteed to make it easier.</p><p class="small">
+      <li>
+        <a href=
+        "//universalindent.sourceforge.net/">UniversalIndentGUI</a>
+      </li>
+    </ul>
 
-Anchor and accompanying documentation are Copyright &copy; 2015 Henry Kroll III. This page may be adapted and shared under the terms of the Creative Commons SA license inasmuch as it agrees with the terms of the <a href="//www.gnu.org/licenses/gpl.html">Gnu Public License</a>. Any of the above conditions can be waived by getting permission from the copyright holder.</p>
+    <h3>Style Guides</h3>
 
-</div>
+    <ul>
+      <li>
+        <a href="//en.wikipedia.org/wiki/Indent_style">Indenting
+        Styles</a>
+      </li>
 
+      <li>
+        <a href=
+        "//en.wikipedia.org/wiki/Programming_style">Programming
+        Style</a>
+      </li>
 
-<!-- begin LEFT BAR -->
+      <li>
+        <a href=
+        "//en.wikipedia.org/wiki/Prettyprint">PrettyPrinting</a>
+      </li>
+    </ul>
 
-<div id="list1" ><a href="//anch.org">
-    <img id="anchor" style="padding-left:20px;border:0px;" src="images/anchor.jpg" alt=
+    <h3><a name="legal" id="legal">Limitations and
+    Copyright</a></h3>
 
-    " Anchor " onmouseover="moveObjRight();" onmouseout="moveObjLeft();" /></a>
-    <div class="b" style="top:9em;"> <a href="mailto:nospam&#64;thenerdshow.com?subject=Anchor" title="Feedback">
-CONTACT</a></div>
-     
-     <div class="b" style="top:11em;"> <a href="//anch.org/" title="Main Page">
-AUTHOR</a></div>
+    <p>No warrantee! Anchor is a learning toy for hobbies and fun;
+    it might lack the swagger of commercial projects. The code is
+    somewhat stable, but changes could be made that break builds.
+    This happens with other lexers and compilers as well.
+    Programming is a difficult task and Anchor is not guaranteed to
+    make it easier.</p>
 
-    <div class="b" style="top:13em;"> <a href="//code.google.com/p/anch/" title="Get Anchor">
-DOWNLOAD</a></div>
+    <p class="small">Anchor and accompanying documentation are
+    Copyright &copy; 2016 Henry Kroll III. This page may be adapted and
+    shared under the terms of the Creative Commons SA license
+    inasmuch as it agrees with the terms of the <a href=
+    "//www.gnu.org/licenses/gpl.html">Gnu Public License</a>. Any
+    of the above conditions can be waived by getting permission
+    from the copyright holder.</p>
+  </div><!-- begin LEFT BAR -->
 
-    <div class="b" style="top:13em;"> <a href="#legal" title="License">
-LISCENSE</a></div>
+  <div id="list1">
+    <a href="//anch.org"><img id="anchor" style=
+    "padding-left:20px;border:0px;" src="images/anchor.jpg" alt=
+    " Anchor " onmouseover="moveObjRight();" onmouseout=
+    "moveObjLeft();"></a>
 
-    <div class="b" style="top:15em;"><a href="#" onclick="javascript:bookmarksite('Anchor', 'http://thenerdshow.com/anchor.html')">
-FAVORITE</a></div>
+    <div class="b" style="top:9em;">
+      <a href="/" title=
+      "Home">Home</a>
+    </div>
 
-    <div style="text-align:center; width:150px;">
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <div class="b" style="top:9em;">
+      <a href="mailto:nospam@thenerdshow.com?subject=Anchor" title=
+      "Feedback">Contact</a>
+    </div>
+
+    <div class="b" style="top:11em;">
+      <a href="//anch.org/" title="Main Page">Author</a>
+    </div>
+
+    <div class="b" style="top:13em;">
+      <a href="#legal" title="License">License</a>
+    </div>
+
+    <div class="b" style="top:15em;">
+      <a href="#" onclick=
+      "javascript:bookmarksite('Anchor', 'http://anch.org/anchor.html')">
+      Favorite</a>
+    </div>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="9TX9RXWDZKVQY">
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
-</div><div>
 
-    <div style="width:150px;">
-    Follow on <a href="//twitter.com/TheManyOne">Twitter</a>, <a href="//YouTube.com/TheManyOne">YouTube</a>
-    <a href="//themanyone.blogspot.com/">Blogspot</a></div>
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 120x600, created 10/11/10 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:120px;height:600px"
-     data-ad-client="ca-pub-6719667455972380"
-     data-ad-slot="1811468473"></ins>
-<script>
+    <div>
+      <script async="" src=
+      "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+</script> <!-- 120x600, created 10/11/10 -->
+      <ins class="adsbygoogle" style=
+      "display:inline-block;width:120px;height:600px"
+      data-ad-client="ca-pub-6719667455972380" data-ad-slot=
+      "1811468473"></ins> <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-        </div>
+      </script>
     </div>
-</div>
+  </div>
 </body>
 </html>

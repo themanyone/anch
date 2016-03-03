@@ -2,7 +2,7 @@ anch.org: Anchor Pseudocode Compiler
 
    Advanced Negative Compilation Heuristic Ontological Refactorer
 
-   Anchor: for  i=5;i--;  C: for (i=5;i--;){
+   Anchor: for i=5;i--; C: for (i=5;i--;){
 
   Why Anchor?
 
@@ -20,24 +20,28 @@ anch.org: Anchor Pseudocode Compiler
 
    git clone https://github.com/themanyone/anch.git
 
+   Paid support is available!
+   [ PayPal - The safer, easier way to pay online! ]
+
   What uses it?
 
    Paper Dragon uses Anchor to generate APA-formatted papers from text
    documents.
 
-   ListLib relies on Anchor to generate the C sources from pseudocode. A
-   template is available to cross-compile a DLL for Windows and Linux using
-   Anchor. The 1-hour video demonstrates the build process and explains the
+   ListLib relies on Anchor to generate the C sources from pseudocode.
+
+   A template is available to cross-compile a DLL for Windows and Linux using
+   Anchor. This 1-hour video demonstrates the build process and explains the
    template line-by-line.
 
    IFrame
    https://www.youtube.com/watch?v=K_xeRN_yGIw
 
-  Installation
+  Development Build
 
-   A windows .exe is provided already. Just copy it somewhere in the
-   computerʼs path. Compilation on Linux and other systems requires flex and
-   a C compiler. Extract the archive.
+   A windows .exe is provided in the supported, pre-built download. Just copy
+   it somewhere in the computer's path. Compilation of the Development Build
+   requires flex and a C compiler. Extract the archive.
 
  unzip anchor.zip
  cd anchor
@@ -45,13 +49,14 @@ anch.org: Anchor Pseudocode Compiler
    Run "make" from within the newly extracted directory.
 
  make
- su -c ʼmake installʼ
+ su -c 'make install'
 
   Programming with Anchor
 
-   The rules are very simple. Indentation using tabs or 4 spaces {controls
-   the placement of curly brackets}. Function arguments may optionally be set
-   off by two spaces instead of parenthesis such that puts "hi" becomes puts
+   Just like C, make a text file such as "test.anch" and compile it. The
+   rules are very simple. Indentation using tabs or 4 spaces {controls the
+   placement of curly brackets}. Function arguments may optionally be set off
+   by two spaces instead of parenthesis such that puts "hi" becomes puts
    ("hi") (not intended for nested parenthesis). The remaining lines are
    automatically terminated with semicolons. Comments are ignored.
 
@@ -61,7 +66,7 @@ anch.org: Anchor Pseudocode Compiler
 
  anchor example.anch > example.c
 
-   Compiling the result with gcc (or any C compiler).
+   Compiling the resulting .c file with gcc (or any C compiler).
 
  gcc example.c -o example.exe
 
@@ -172,17 +177,16 @@ anch.org: Anchor Pseudocode Compiler
    and compilers as well. Programming is a difficult task and Anchor is not
    guaranteed to make it easier.
 
-   Anchor and accompanying documentation are Copyright © 2015 Henry Kroll
+   Anchor and accompanying documentation are Copyright © 2016 Henry Kroll
    III. This page may be adapted and shared under the terms of the Creative
    Commons SA license inasmuch as it agrees with the terms of the Gnu Public
    License. Any of the above conditions can be waived by getting permission
    from the copyright holder.
 
    Anchor
-   CONTACT
-   AUTHOR
-   DOWNLOAD
-   LISCENSE
-   FAVORITE
+   Home
+   Contact
+   Author
+   License
+   Favorite
    [ PayPal - The safer, easier way to pay online! ]
-   Follow on Twitter, YouTube Blogspot
