@@ -89,3 +89,4 @@ cflags=$(eval "echo $cflags"|sed 's/-keep\s*//')
 # compile the temp file with options. remove if successful
 $gcc ${cflags} $run "$tmp" "${args[@]}"&&[[ -z $k ]]&&rm "$tmp"
 # if build fails or -keep tmp file remains for debugging
+exit 0
