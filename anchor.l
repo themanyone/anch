@@ -121,7 +121,7 @@
                 }
 
     /* put brackets around arrays */
-[\t ]*\**[[:alnum:]_]+([\t ]*\[[^\]]*\][\t ]*)+=[^{;,\n]*, {
+[\t ]*\**[[:alnum:]_]+([\t ]*\[[^\]]*\][\t ]*)+=[^(){;,\n]*, {
                 debug("A1");BEGIN(arra);
                 yyless(0);
                 }
