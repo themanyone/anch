@@ -88,5 +88,7 @@ cflags=${cflags/-keep/}
 
 # compile the temp file with options. remove if successful
 $gcc ${cflags} $run "$tmp" "${args[@]}"
-if [[ $? == 0 ]] && [[ -z $k ]]; then rm "$tmp"; fi
+ret=$?
+if [[ $ret == 0 ]] && [[ -z $k ]]; then rm "$tmp"; fi
+exit $ret
 # if build fails or -keep tmp file remains for debugging
