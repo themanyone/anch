@@ -83,10 +83,10 @@ else
     anchor -qp "$in" > "$tmp"
 fi
 
-#~ expand $(cflags) and do not pass -keep option
-cflags=$(eval "echo $cflags"|sed 's/-keep\s*//')
+#~ remove -keep option
+cflags=${cflags/-keep/}
 
 # compile the temp file with options. remove if successful
-$gcc ${cflags} $run "$tmp" "${args[@]}"&&[[ -z $k ]]&&rm "$tmp"
+$gcc ${cflags} $run "$tmp" "${args[@]}"
+if [[ $? == 0 ]] && [[ -z $k ]]; then rm "$tmp"; fi
 # if build fails or -keep tmp file remains for debugging
-exit 0

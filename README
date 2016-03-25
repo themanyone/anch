@@ -2,7 +2,7 @@ anch.org: Anchor Pseudocode Compiler
 
    Advanced Negative Compilation Heuristic Ontological Refactorer
 
-   Anchor: for i=5;i--; C: for (i=5;i--;){
+   Anchor: for  i=5;i--;  C: for (i=5;i--;){
 
   Why Anchor?
 
