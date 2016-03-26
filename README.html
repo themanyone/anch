@@ -207,10 +207,10 @@ anch -run example.anch
     intended for passing arguments, so they may not work at all.
     For something more powerful, use a comment:</p>
     <pre>
-<span class="S1">//usr/local/bin/anch -run  "$0" "$@";exit</span>
+<span class="S1">//usr/local/bin/anch -run  "$0" "$@";exit $?</span>
    -or-
 <span class=
-"S1">//usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit</span>
+"S1">//usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit $?</span>
 </pre>
 
     <p>By turning the executable line into a C99 comment, BASH will

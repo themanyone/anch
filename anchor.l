@@ -24,7 +24,7 @@
 #define DEBUG 0
 #define debug(...) if(DEBUG)printf(__VA_ARGS__)
 #define MAX_STRING 8192
-#include <strings.h>
+    //#include <strings.h>
     int i,x,indent=0,lastindent=0,pull=0,drop=0,tabs=0,chain=0;
     char *ss,last[2],endstr[MAX_STRING+1]="";
 

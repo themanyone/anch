@@ -2,7 +2,7 @@ anch.org: Anchor Pseudocode Compiler
 
    Advanced Negative Compilation Heuristic Ontological Refactorer
 
-   Anchor: for  i=5;i--;  C: for (i=5;i--;){
+   Anchor: for i=5;i--; C: for (i=5;i--;){
 
   Why Anchor?
 
@@ -128,9 +128,9 @@ anch.org: Anchor Pseudocode Compiler
    passing arguments, so they may not work at all. For something more
    powerful, use a comment:
 
- //usr/local/bin/anch -run  "$0" "$@";exit
+ //usr/local/bin/anch -run  "$0" "$@";exit $?
     -or-
- //usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit
+ //usr/bin/env anch [cflags] [libs] -run  "$0" [some args] "$@" [more args];exit $?
 
    By turning the executable line into a C99 comment, BASH will execute it,
    but almost all compilers will ignore it. Clever, huh? Don't forget to run

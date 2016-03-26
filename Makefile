@@ -3,7 +3,7 @@ BUILD=anchor unanchor
 DOCDIR=/usr/share/$(NAME)
 INSTALLDIR=/usr/local/bin
 
-CFLAGS=-std=c99
+CFLAGS+=-std=c99
 ifneq (,$(findstring mingw,$(CC)))
 	EXT=.exe
 endif
