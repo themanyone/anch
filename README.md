@@ -2,7 +2,7 @@
 
 Write real C programs without braces using a Python-like style with the Advanced Negative Compilation Heuristic Ontological Refactorer (ANCHOR).
 
-Visit the Anchor Website
+[Visit the Anchor Website](http://anch.org/anchor.html)
 
 <img src="http://anch.org/images/anchorcode.gif" alt="for i=5;i--; C: for (i=5;i--;){" title="A new style of C"></a>
 
