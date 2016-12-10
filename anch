@@ -31,7 +31,7 @@ $ gcc mylib1.o myprog.o -o myprog
 
 Makefiles: See README
 EOF
-exit 0
+exit $?
 fi
 ax=($(echo "$1"|xargs) "${@:2}") #unquote shebang arguments ~_^
 k=$(pos "-keep" "${ax[@]}")
@@ -69,7 +69,7 @@ else
         gcc='tcc '
     fi
         anchor -qp | $gcc "${ax[@]}"
-    exit 0
+    exit $?
 fi
 src="${in##./}"
 tmp=".${src%.*}.c"
