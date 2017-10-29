@@ -10,7 +10,7 @@ endif
 TARGETS=$(foreach a,$(BUILD),$a$(EXT))
 LEX=flex
 
-%.o : %.c clean
+%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o "$@"
 
 %$(EXT) : %.o
@@ -22,13 +22,15 @@ s:
 	scite Makefile README.asp *.l&
 
 install:
-	install -D README "$(DOCDIR)/README"
-	install -D COPYING "$(DOCDIR)/COPYING"
-	install -D "$(NAME)" "$(INSTALLDIR)/$(NAME)"
-	install -D anch "un$(NAME)" "$(INSTALLDIR)/"
+	install -D README.md   "$(DOCDIR)/README.md"
+	install -D COPYING     "$(DOCDIR)/COPYING"
+	install -D "$(NAME)"   "$(INSTALLDIR)/$(NAME)"
+	install -D anch        "$(INSTALLDIR)/anch"
+	install -D "un$(NAME)" "$(INSTALLDIR)/un$(NAME)"
 
 uninstall:
-	$(RM) "$(DOCDIR)/*"
+	$(RM) "$(DOCDIR)/README.md"
+	$(RM) "$(DOCDIR)/COPYING"
 	$(RM) "$(INSTALLDIR)/$(NAME)"
 	$(RM) "$(INSTALLDIR)/anch"
 	$(RM) "$(INSTALLDIR)/un$(NAME)"
