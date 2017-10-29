@@ -1,4 +1,4 @@
-#!/usr/local/bin/anch $(pkg-config --cflags --libs gtk+-2.0) -run
+//usr/local/bin/anch -lgtk $(pkg-config --cflags --libs gtk+-2.0) -run "$0" "$@" ;exit
 #include <gtk/gtk.h>
 #define IMAGE "../images/anchor.jpg"
 static gboolean delete_event  GtkWidget * widget,

@@ -1,6 +1,4 @@
-/* #!/usr/local/bin/anch -run */
-/* uncomment the above line to make "executable source" */
-
+//usr/local/bin/anch -keep -run -lm "$0" "$@" ;exit
 /* unanchored */
 #include <stdio.h>
 
