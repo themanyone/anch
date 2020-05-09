@@ -2,11 +2,11 @@
 
 Write real C programs without braces using a Python-like style with the Advanced Negative Compilation Heuristic Ontological Refactorer (ANCHOR).
 
-[Visit the Anchor Website](http://anch.org/anchor.html)
+<img src="https://github.com/themanyone/anch/blob/master/images/anchorcode.gif" alt="for i=5;i--; C: for (i=5;i--;){" title="A new style of C"></a>
 
-<img src="http://anch.org/images/anchorcode.gif" alt="for i=5;i--; C: for (i=5;i--;){" title="A new style of C"></a>
+## What is Anchor?
 
-## Why Anchor?
+Anchor is [CRAP](https://github.com/themanyone/crap). It is no longer supported. We have published a much smaller and more-elegant solution, called [CRAP](https://github.com/themanyone/crap), that supports macros and everything. All new [CRAP](https://github.com/themanyone/crap) coding should proceed using [CRAP](https://github.com/themanyone/crap).
 
 Anchor is a code decorator and "pseudocode" compiler. Anchor automatically adds curly braces and semicolons to pseudocode written in various programming languages. The goal is to save typing and perhaps even make programs easier to read, or debug. Anchor lets programmers use a Python or Lua-like indentation style while actually composing some other language like C, Java, PHP, C++, .NET, C#, or D. An example bash script integrates with the [TCC](http://bellard.org/tcc/) compiler to make small, executable C scripts.
 
@@ -62,7 +62,7 @@ unanchor -i example.c #see how it might look
 unanchor -i example.c > editme.anch # create a file
 ```
 
-[see an unanchored C windows program](http://anch.org/windows.a.html)
+[see an unanchored C windows program](https://github.com/themanyone/anch/blob/master/windows.a.html)
 
 Anchor knows nothing about the underlying language, so it processes a variety of curly bracket languages. The author uses it on C code, but it will most likely work with little or no change on C++, Java, .NET, PHP, Perl, awk and other types of configuration files or scripts. Programs may be compiled on Linux or unix by putting "anch" in front of the existing compiler or interpreter. Windows users may optionally install something like [MingW](http://sourceforge.net/projects/mingw/files/), [cygwin](http://www.cygwin.com/), or some other unix-like [bourne shell](http://en.wikipedia.org/wiki/Bourne_shell) like [win bash](http://win-bash.sourceforge.net/) to interpret the included "anch" convenience script.
 
