@@ -1,6 +1,6 @@
 /* Anchor
  *
- * Copyright (C) 2012 by Henry Kroll III, henry@anch.org
+ * Copyright (C) 2012-2020 by Henry Kroll III, henry@anch.org
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -286,7 +286,7 @@
 
 %%
 void intro(){
-    fprintf (stderr,"Anchor (C) 2010 Henry Kroll www.anch.org\n");
+    fprintf (stderr,"Anchor (C) 2012-2020 Henry Kroll www.anch.org\n");
     fprintf (stderr,"See anchor -h for help.\n\n");
 }
 void help(){ printf(

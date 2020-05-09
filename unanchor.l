@@ -1,6 +1,6 @@
 /* Anchor
  *
- * Copyright (C) 2012 by Henry Kroll III, henry@anch.org
+ * Copyright (C) 2012-2020 by Henry Kroll III, henry@anch.org
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
